@@ -1,0 +1,60 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  next:
+    container_name: nextjs_container
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ${TARGET:-dev}  # Choisit le stage de build (dev par défaut)
+    ports:
+      - "3000:3000"
+    networks:
+      - postgres
+    environment:
+      HOSTNAME: "0.0.0.0"
+      NODE_ENV: ${NODE_ENV:-development}  # Définit le mode
+      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-changeme}@postgres_container:5432/${POSTGRES_DB:-postgres}
+    volumes:
+      - .:/app  # Monte le code source pour hot-reload en mode développement
+      - /app/node_modules  # Pour éviter les conflits de dépendances
+    command: ["pnpm", "dev"]  # Utilise la commande pnpm pour démarrer en dev
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge 
+
+volumes:
+  postgres:
+  pgadmin:
