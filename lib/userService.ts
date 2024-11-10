@@ -6,7 +6,6 @@ export interface User {
     verif: string;
 }
 
-
 export const getUserByCredentials = async (username:string,password:string,verif:string) : Promise<User | null> => {
     return await prisma.user.findUnique({
         where:  {
