@@ -1,16 +1,18 @@
-import pino, { Logger } from "pino";
+import { createLogger, format, transports } from 'winston';
 
-export const logger: Logger =
-  process.env["NODE_ENV"] === "production"
-    ? // JSON in production
-      pino({ level: "warn" })
-    : // Pretty print in development
-      pino({
-        transport: {
-          target: "pino-pretty",
-          options: {
-            colorize: true,
-          },
-        },
-        level: "debug",
-      });
+const logger = createLogger({
+  level: 'info', // Log messages with 'info' level or higher
+  format: format.combine(
+    format.colorize(),
+    format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+    format.printf(({ timestamp, level, message }) => {
+      return `${timestamp} ${level}: ${message}`;
+    })
+  ),
+  transports: [
+    new transports.Console(),
+    new transports.File({ filename: 'logs/app.log' })
+  ]
+});
+
+export default logger;

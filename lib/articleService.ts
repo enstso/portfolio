@@ -1,5 +1,6 @@
 import { prisma } from "@/prisma/client";
 import { Category } from "@/lib/categoryService";
+
 interface Article {
     id: number;
     content: string;

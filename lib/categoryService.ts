@@ -29,4 +29,3 @@ export const getAllCategoryByProject = async () : Promise<Category | null> => {
         }
     })
 }
-
