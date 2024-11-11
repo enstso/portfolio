@@ -4,7 +4,7 @@ enum Type {
     Article,
     Project
 }
-export interface Category {
+interface Category {
     id: number,
     name: String,
     type: Type.Article | Type.Project
