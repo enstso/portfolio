@@ -1,31 +1,23 @@
 import { prisma } from "@/prisma/client";
 
-enum Type {
+export enum Type {
     Article,
     Project
 }
-interface Category {
-    id: number,
+export interface ICategory {
+    id?: number,
     name: String,
     type: Type.Article | Type.Project
 }
 
-export const getAllCategoryByArticle = async () : Promise<Category | null> => {
-    return await prisma.category.findMany({
-        where: {
-            equals: {
-                type:'Article'
-            }
-        }
-    })
+export class Category implements ICategory {
+    constructor(public id:number,public name:string, public type:Type){};
 }
 
-export const getAllCategoryByProject = async () : Promise<Category | null> => {
+export const getAllCategoryByType= async (type:string) : Promise<ICategory[]> => {
     return await prisma.category.findMany({
         where: {
-            equals: {
-                type:'Project'
-            }
+                type:type
         }
     })
 }

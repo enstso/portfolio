@@ -1,30 +1,23 @@
 import { prisma } from "@/prisma/client";
 
-export interface User {
-    id: number;
+export interface IUser {
+    id?: number;
     username: string;
     password: string;
     verif: string;
 }
 
-export const getUserByCredentials = async (username:string,password:string,verif:string) : Promise<User | null> => {
+export class User implements IUser{
+    constructor(public username:string, public password:string, public verif:string){}
+}
+
+export const getUserByCredentials = async (user:IUser) : Promise<IUser> => {
     return await prisma.user.findUnique({
         where:  {
-            username: {
-                equals: {
-                    username,
-                },
-            },
-            password: {
-                equals: {
-                    password,
-                },
-            },
-            verif: {
-                equals: {
-                    verif,
-                },
-            },
+            username:user.username,
+            password:user.password,
+            verif:user.verif
+                    
         }
     })
 }

@@ -1,23 +1,37 @@
 import { prisma } from "@/prisma/client";
-import { Category } from "@/lib/categoryService";
+import { Category, ICategory } from "@/lib/categoryService";
 
-interface Article {
-    id: number;
+export interface IArticle {
+    id?: number;
     content: string;
     date: Date;
-    categoryId: number;
+    category: ICategory;
 }
 
-export const getAllArticleByCategory = async (category:Category) : Promise<Article[] | null> => {
+export class Article implements IArticle {
+    constructor(public id:number,public content:string,public date:Date,public category:ICategory){}
+}
+
+export const getAllArticleByCategory = async (category:ICategory) : Promise<IArticle[] | null> => {
     return await prisma.article.findMany({
         where: {
-            equals: {
-                category: category.id
-            }
+                categoryId: category.id
         }
     })
 }
 
-export const getAllArticle = async () : Promise<Article[] | null> => {
+export const getArticleById = async (id:number): Promise<IArticle> => {
+    return await prisma.article.findUnique({
+        where: {
+            id:id
+        }
+    })
+}
+
+export const getAllArticle = async () : Promise<IArticle[]> => {
     return await prisma.article.findMany();
+}
+
+export const createArticle =  async (article:IArticle) : Promise<void> =>  {
+    const articleInsert = await prisma.article.create(article); 
 }
