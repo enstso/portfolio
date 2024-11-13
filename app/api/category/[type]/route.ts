@@ -1,11 +1,9 @@
-import { Factory } from "@/lib/factory";
 import { getAllCategoryByType, ICategory } from "@/lib/categoryService";
 import { NextRequest, NextResponse } from "next/server";
 
-// à définir mettre en place la factory
-async function GET({ params }: { params: Promise<{ type: string }> }) {
+async function GET({ params }: { params: { type: string } }) {
   try {
-    const type = (await params).type;
+    const type = params.type;
     let categories: ICategory[] = [];
 
     switch (type) {
@@ -21,9 +19,11 @@ async function GET({ params }: { params: Promise<{ type: string }> }) {
         break;
       }
     }
-   return NextResponse.json(
-      { message: "success", data: categories });
+    if (!categories) {
+      return NextResponse.json({ message: "Not found" }, { status: 401 });
+    }
+    return NextResponse.json({ message: "success", data: categories });
   } catch (error) {
-    return NextResponse.json({error: "An error occurred"},{status:500});
+    return NextResponse.json({ error: "An error occurred" }, { status: 500 });
   }
 }

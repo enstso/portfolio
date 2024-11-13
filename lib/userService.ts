@@ -7,10 +7,6 @@ export interface IUser {
     verif: string;
 }
 
-export class User implements IUser{
-    constructor(public username:string, public password:string, public verif:string){}
-}
-
 export const getUserByCredentials = async (user:IUser) : Promise<IUser> => {
     return await prisma.user.findUnique({
         where:  {
