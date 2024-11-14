@@ -4,8 +4,7 @@ import { deleteArticle, getArticleById, IArticle, updateArticle } from "@/lib/ar
 async function GET({ params }: { params: { id: number } }) {
   try {
     const id = params.id;
-    const article: IArticle = await getArticleById(id);
-
+    const article:IArticle = await getArticleById(id);
     if (!article) {
       return NextResponse.json({ message: "Not found" }, { status: 401 });
     }
@@ -17,7 +16,6 @@ async function GET({ params }: { params: { id: number } }) {
 
 async function UPDATE(req:NextRequest,{params}:{params:{id:number}}){
     try{
-
         const article:IArticle = await req.json();
         article.id = params.id;
         await updateArticle(article);
@@ -32,6 +30,5 @@ async function DELETE({params}:{params:{id:number}}){
         await deleteArticle(id);
     }catch(error){
     return NextResponse.json({ error: "An error occurred" }, { status: 500 });
-
     }
 }

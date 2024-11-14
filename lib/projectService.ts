@@ -1,21 +1,16 @@
 import { prisma } from "@/prisma/client";
-import { ICategory,Category } from "@/lib/categoryService";
 export interface IProject {
     id?: number;
     introduction: string;
     url: string;
     date: Date;
-    category: ICategory;
+    categoryId: number;
 }
 
-export class Project implements IProject {
-    constructor(public introduction:string,public url:string,public date:Date,public category:ICategory){}
-}
-
-export const getAllProjectByCategory = async (category:ICategory) : Promise<IProject[] | null> => {
+export const getAllProjectByCategory = async (categoryId:number) : Promise<IProject[]> => {
     return await prisma.project.findMany({
         where: {
-                categoryId: category.id
+                categoryId: categoryId
         }
     })
 }
@@ -28,7 +23,7 @@ export const getProjectById = async (id:number) : Promise<IProject> => {
     })
 }
 
-export const getAllProject = async () : Promise<IProject[] | null> => {
+export const getAllProject = async () : Promise<IProject[]> => {
     return await prisma.project.findMany();
 }
 

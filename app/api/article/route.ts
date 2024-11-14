@@ -7,12 +7,11 @@ async function GET(){
         if(!articles){
             return NextResponse.json({message:"Not Found"},{status:404})
         }
-        return NextResponse.json({message:"success",articles})
+        return NextResponse.json({message:"success",articles});
     }catch(error){
         return NextResponse.json({error: "An error occurred"},{status:500});
     }
 }
-
 
 async function POST(req:NextRequest){
     try{
@@ -20,7 +19,6 @@ async function POST(req:NextRequest){
         if(!article){
             return NextResponse.json({message:"Bad Request"},{status:401});
         }
-        return NextResponse.json({message:"Not Found"},{status:404});
     }catch(error){
         return NextResponse.json({error:"An error occurred"},{status: 500});
     }

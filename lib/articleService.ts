@@ -1,6 +1,4 @@
 import { prisma } from "@/prisma/client";
-import { Category, ICategory } from "@/lib/categoryService";
-
 export interface IArticle {
     id?: number;
     content: string;
@@ -8,11 +6,10 @@ export interface IArticle {
     categoryId: number;
 }
 
-
-export const getAllArticleByCategory = async (category:ICategory) : Promise<IArticle[] | null> => {
+export const getAllArticleByCategory = async (categoryId:number) : Promise<IArticle[]> => {
     return await prisma.article.findMany({
         where: {
-                categoryId: category.id
+                categoryId: categoryId
         }
     })
 }
