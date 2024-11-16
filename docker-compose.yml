@@ -30,27 +30,7 @@ services:
     networks:
       - postgres
     restart: unless-stopped
-
-  next:
-    container_name: nextjs_container
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: ${TARGET:-dev}  # Choisit le stage de build (dev par défaut)
-    ports:
-      - "3000:3000"
-    networks:
-      - postgres
-    environment:
-      HOSTNAME: "0.0.0.0"
-      NODE_ENV: ${NODE_ENV:-development}  # Définit le mode
-      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-changeme}@postgres_container:5432/${POSTGRES_DB:-postgres}
-    volumes:
-      - .:/app  # Monte le code source pour hot-reload en mode développement
-      - /app/node_modules  # Pour éviter les conflits de dépendances
-    command: ["pnpm", "dev"]  # Utilise la commande pnpm pour démarrer en dev
-    restart: unless-stopped
-
+    
 networks:
   postgres:
     driver: bridge 

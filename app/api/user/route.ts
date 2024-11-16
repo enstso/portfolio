@@ -4,7 +4,7 @@ import { IUser, getUserByCredentials } from "@/lib/userService";
  async function POST(req: NextRequest) {
     try {
         const userData:IUser= await req.json(); 
-        const user: IUser = await getUserByCredentials(userData);
+        const user: IUser | null = await getUserByCredentials(userData);
         if (!user) {
             return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
         }

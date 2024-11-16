@@ -1,16 +1,17 @@
 import { prisma } from "@/prisma/client";
+import { $Enums, Prisma } from "@prisma/client";
 
-export enum Type {
-    Article,
-    Project
-}
+type typesEnum = $Enums.Type;
+
 export interface ICategory {
     id?: number,
     name: String,
-    type: Type.Article | Type.Project
+    type: typesEnum
 }
 
-export const getAllCategoryByType= async (type:string) : Promise<ICategory[]> => {
+
+
+export const getAllCategoryByType= async (type:typesEnum) : Promise<ICategory[]> => {
     return await prisma.category.findMany({
         where: {
                 type:type

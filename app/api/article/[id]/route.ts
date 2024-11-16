@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { deleteArticle, getArticleById, IArticle, updateArticle } from "@/lib/articleService";
 
-async function GET({ params }: { params: { id: number } }) {
+export async function GET(req:NextRequest,{ params }: { params: { id: number } }) {
   try {
     const id = params.id;
-    const article:IArticle = await getArticleById(id);
+    const article:IArticle | null = await getArticleById(id);
     if (!article) {
       return NextResponse.json({ message: "Not found" }, { status: 401 });
     }
@@ -14,7 +14,7 @@ async function GET({ params }: { params: { id: number } }) {
   }
 }
 
-async function UPDATE(req:NextRequest,{params}:{params:{id:number}}){
+export async function UPDATE(req:NextRequest,{params}:{params:{id:number}}){
     try{
         const article:IArticle = await req.json();
         article.id = params.id;
@@ -24,7 +24,7 @@ async function UPDATE(req:NextRequest,{params}:{params:{id:number}}){
     }
 }
 
-async function DELETE({params}:{params:{id:number}}){
+export async function DELETE(req:NextRequest,{params}:{params:{id:number}}){
     try{
         const id = params.id;
         await deleteArticle(id);

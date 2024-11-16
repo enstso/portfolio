@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { IProject,getAllProject } from "@/lib/projectService";
 
-async function GET(){
+async function GET(req:NextRequest){
     try{
         const projects: IProject[] = await getAllProject();
         if(!projects){

@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { deleteProject, IProject, updateProject, getProjectById } from "@/lib/projectService";
 
-async function GET({ params }: { params: { id: number } }) {
+async function GET(req:NextRequest,{ params }: { params: { id: number } }) {
     try {
       const id = params.id;
-      const project:IProject = await getProjectById(id);
+      const project:IProject | null = await getProjectById(id);
       if (!project) {
         return NextResponse.json({ message: "Not found" }, { status: 401 });
       }

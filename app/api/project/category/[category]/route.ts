@@ -1,7 +1,7 @@
 import { IProject, getAllProjectByCategory } from "@/lib/projectService";
 import { NextRequest, NextResponse } from "next/server";
 
-async function GET({params}:{params:{category:number}}){
+async function GET(req:NextRequest,{params}:{params:{category:number}}){
     try{
         const categoryId = params.category;
         const projects:IProject[] = await getAllProjectByCategory(categoryId);

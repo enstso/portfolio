@@ -7,8 +7,8 @@ export interface IUser {
     verif: string;
 }
 
-export const getUserByCredentials = async (user:IUser) : Promise<IUser> => {
-    return await prisma.user.findUnique({
+export const getUserByCredentials = async (user:IUser) : Promise<IUser | null> => {
+    return await prisma.user.findFirst({
         where:  {
             username:user.username,
             password:user.password,

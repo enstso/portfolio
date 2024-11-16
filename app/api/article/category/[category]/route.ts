@@ -1,7 +1,7 @@
 import { IArticle, getAllArticleByCategory } from "@/lib/articleService";
 import { NextRequest, NextResponse } from "next/server";
 
-async function GET({params}:{params: {category:number}} ){
+export async function GET(req:NextRequest, {params}:{params: {category:number}} ){
     try{
         const categoryId = params.category;
         const articles:IArticle[] = await getAllArticleByCategory(categoryId); 
