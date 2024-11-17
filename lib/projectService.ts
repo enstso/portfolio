@@ -1,7 +1,8 @@
 import { prisma } from "@/prisma/client";
 export interface IProject {
     id?: number;
-    introduction: string;
+    name:string;
+    description: string;
     url: string;
     date: Date;
     categoryId: number;

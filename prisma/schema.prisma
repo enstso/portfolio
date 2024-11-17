@@ -30,7 +30,10 @@ model Category {
 
 model Article {
   id Int @id @default(autoincrement())
+  name String
+  description String
   content String
+  photo String
   date DateTime 
   category Category @relation(fields:[categoryId],references:[id])
   categoryId Int
@@ -40,7 +43,8 @@ model Article {
 
 model Project {
   id Int @id @default(autoincrement())
-  introduction String
+  name String
+  description String
   url String
   date DateTime
   category Category @relation(fields:[categoryId],references:[id])

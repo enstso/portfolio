@@ -1,7 +1,10 @@
 import { prisma } from "@/prisma/client";
 export interface IArticle {
     id?: number;
+    name: string;
+    description: string;
     content: string;
+    photo: string;
     date: Date;
     categoryId: number;
 }
@@ -18,6 +21,14 @@ export const getArticleById = async (id:number): Promise<IArticle | null> => {
     return await prisma.article.findFirst({
         where: {
             id:id
+        }
+    })
+}
+
+export const getArticlesBySubject =  async (subject:string): Promise<IArticle[]> => {
+    return await prisma.article.findMany({
+        where:{
+           description:{contains:subject} 
         }
     })
 }
