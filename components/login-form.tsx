@@ -14,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import { postData, urls } from "@/lib/utils";
 import { useState } from "react";
 import { LoaderCircle } from "lucide-react";
+import { createSession } from "@/app/session";
+import { redirect } from "next/navigation";
 
 const loginFormSchema = z.object({
   username: z
@@ -44,8 +46,10 @@ export function LoginForm() {
   async function onSubmit(data: LoginFormValues) {
     try {
       setIsLoading(true);
-      await postData(urls.user, data);
+      const res = await postData(urls.user, data);
       form.reset();
+      //await createSession(res.user.username);
+      redirect('/')
     } catch (error) {
       console.error("Login failed:", error);
     } finally {
