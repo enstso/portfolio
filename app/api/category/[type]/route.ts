@@ -20,7 +20,7 @@ async function GET(req:NextRequest,{ params }: { params: { type: string } }) {
         break;
       }
     }
-    if (!categories) {
+    if (categories.length==0) {
       return NextResponse.json({ message: "Not found" }, { status: 401 });
     }
     return NextResponse.json({ message: "success", data: categories });

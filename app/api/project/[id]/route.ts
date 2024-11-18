@@ -5,7 +5,7 @@ async function GET(req:NextRequest,{ params }: { params: { id: number } }) {
     try {
       const id = params.id;
       const project:IProject | null = await getProjectById(id);
-      if (!project) {
+      if (project==null) {
         return NextResponse.json({ message: "Not found" }, { status: 401 });
       }
       return NextResponse.json({ message: "success", data: project });

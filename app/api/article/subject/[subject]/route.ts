@@ -5,7 +5,7 @@ export async function GET(req: NextRequest, { params }: { params: { subject: str
   try {
     const subject = params.subject;
     const articles: IArticle[] = await getArticlesBySubject(subject);
-    if (!articles) {
+    if (articles.length==0) {
       return NextResponse.json({ message: "Not Found" }, { status: 401 });
     }
     return NextResponse.json({ message: "success", data: articles });

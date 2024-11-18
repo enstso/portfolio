@@ -6,13 +6,12 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const urls = {
-  login:"http://localhost:3333/api/login",
-  logout:"http://localhost:3333/api/logout",
-  article:"http://localhost:3333/api/article/",
-  project:"http://localhost:3333/api/project/",
+  user:"http://localhost:3000/api/user",
+  logout:"http://localhost:3000/api/logout",
+  article:"http://localhost:3000/api/article",
+  project:"http://localhost:3000/api/project",
 
 }
-
 
 export async function getData(url: string) {
   return fetch(url, {

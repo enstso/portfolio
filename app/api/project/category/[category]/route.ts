@@ -5,7 +5,7 @@ async function GET(req:NextRequest,{params}:{params:{category:number}}){
     try{
         const categoryId = params.category;
         const projects:IProject[] = await getAllProjectByCategory(categoryId);
-        if(!projects){
+        if(projects.length==0){
             return NextResponse.json({message:"Not found"},{status:401});
         }
         return NextResponse.json({message:"success",data:projects});

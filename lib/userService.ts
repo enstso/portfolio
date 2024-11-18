@@ -13,7 +13,6 @@ export const getUserByCredentials = async (user:IUser) : Promise<IUser | null> =
             username:user.username,
             password:user.password,
             verif:user.verif
-                    
         }
     })
 }

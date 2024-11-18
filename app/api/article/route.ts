@@ -4,7 +4,7 @@ import {  IArticle, getAllArticle } from "@/lib/articleService";
 export async function GET(req:NextRequest){
     try{
         const articles: IArticle[]  = await getAllArticle();
-        if(!articles){
+        if(articles.length==0){
             return NextResponse.json({message:"Not Found"},{status:404})
         }
         return NextResponse.json({message:"success",articles});
