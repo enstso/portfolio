@@ -44,11 +44,12 @@ export function LoginForm() {
   });
 
   async function onSubmit(data: LoginFormValues) {
+    'use server';
     try {
       setIsLoading(true);
       const res = await postData(urls.user, data);
       form.reset();
-      //await createSession(res.user.username);
+      await createSession(res.user.username);
       redirect('/')
     } catch (error) {
       console.error("Login failed:", error);

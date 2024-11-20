@@ -13,6 +13,41 @@ export const urls = {
 
 }
 
+export type NavItems = {
+  title:string;
+  href:string
+}
+
+export const componentsAdminRoutes: NavItems[] = [
+  {
+    title: "Projects",
+    href: "/projects",
+  },
+  {
+    title: "Articles",
+    href: "/articles",
+  },
+  {
+    title:"Logout",
+    href:"/logout"
+  }
+];
+
+export const componentsRoutes:NavItems[] = [
+    {
+      title: "Homepage",
+      href: "/homepage",
+    },
+    {
+      title: "Blog",
+      href: "/blog",
+    },
+    {
+      title: "Resume",
+      href:"/resume"
+    }
+];
+
 export async function getData(url: string) {
   return fetch(url, {
     method: "GET", headers: {
