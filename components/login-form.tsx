@@ -44,7 +44,6 @@ export function LoginForm() {
   });
 
   async function onSubmit(data: LoginFormValues) {
-    'use server';
     try {
       setIsLoading(true);
       const res = await postData(urls.user, data);

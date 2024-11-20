@@ -1,4 +1,4 @@
-import 'server-only'
+"use server";
 import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 
@@ -46,7 +46,7 @@ export async function deleteSession() {
     const payload = await decrypt(session)
    
     if (!session || !payload) {
-      return null
+      return null 
     }
    
     const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
