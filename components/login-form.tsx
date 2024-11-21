@@ -15,7 +15,7 @@ import { postData, urls } from "@/lib/utils";
 import { useState } from "react";
 import { LoaderCircle } from "lucide-react";
 import { createSession } from "@/app/session";
-import { redirect } from "next/navigation";
+
 
 const loginFormSchema = z.object({
   username: z
@@ -49,7 +49,9 @@ export function LoginForm() {
       const res = await postData(urls.user, data);
       form.reset();
       await createSession(res.user.username);
-      redirect('/')
+      setTimeout(()=>{
+        window.location.href = '/admin';
+      },1500);
     } catch (error) {
       console.error("Login failed:", error);
     } finally {

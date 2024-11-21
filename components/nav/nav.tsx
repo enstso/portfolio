@@ -6,15 +6,17 @@ import { cn } from "@/lib/utils";
 import { NavItems } from "@/lib/utils";
 import { ModeToggle } from "@/components/toggle-mode";
 import { deleteSession } from "@/app/session";
-import { redirect } from "next/navigation";
+
 
 interface NavProps {
   items: NavItems[];
 }
 
-async function logout(){
-    await deleteSession();
-    redirect('/homepage');
+async function logout() {
+  await deleteSession();
+  setTimeout(()=>{
+    window.location.href = '/homepage';
+  },1500);
 }
 
 export function Nav({ items }: NavProps) {
@@ -33,7 +35,7 @@ export function Nav({ items }: NavProps) {
           (item, index) =>
             item.href && (
               <Link
-              key={index}
+                key={index}
                 href={item.href}
                 className={cn(
                   "flex items-center text-sm font-medium text-muted-foreground"
@@ -43,7 +45,14 @@ export function Nav({ items }: NavProps) {
               </Link>
             )
         )}
-        <button onClick={logout} className={cn("flex items-center text-sm font-medium text-muted-foreground")}></button>
+        <button
+          onClick={logout}
+          className={cn(
+            "flex items-center text-sm font-medium text-muted-foreground"
+          )}
+        >
+          Logout
+        </button>
       </nav>
       <div className="me-8">
         <ModeToggle></ModeToggle>

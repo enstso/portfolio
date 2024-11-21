@@ -8,7 +8,8 @@ export interface IUser {
 }
 
 export const getUserByCredentials = async (user:IUser) : Promise<IUser | null> => {
-    return await prisma.user.findFirst({
+    console.log(user);
+    return await prisma.user.findFirstOrThrow({
         where:  {
             username:user.username,
             password:user.password,

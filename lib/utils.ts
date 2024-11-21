@@ -7,9 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 
 export const urls = {
   user:"http://localhost:3000/api/user",
-  logout:"http://localhost:3000/api/logout",
   article:"http://localhost:3000/api/article",
   project:"http://localhost:3000/api/project",
+  category:"http://localhost:3000/api/category"
 
 }
 
@@ -27,10 +27,7 @@ export const componentsAdminRoutes: NavItems[] = [
     title: "Articles",
     href: "/articles",
   },
-  {
-    title:"Logout",
-    href:"/logout"
-  }
+  
 ];
 
 export const componentsRoutes:NavItems[] = [
