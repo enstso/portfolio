@@ -17,7 +17,7 @@ export const getAllProjectByCategory = async (categoryId:number) : Promise<IProj
 }
 
 export const getProjectById = async (id:number) : Promise<IProject | null> => {
-    return await prisma.project.findFirst({
+    return await prisma.project.findFirstOrThrow({
         where: {
             id:id
         }

@@ -33,7 +33,7 @@ type LoginFormValues = z.infer<typeof loginFormSchema>;
 const defaultValues: Partial<LoginFormValues> = {
   username: "",
   password: "",
-  verif: "",
+  verif: ""
 };
 
 export function LoginForm() {

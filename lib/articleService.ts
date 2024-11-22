@@ -18,7 +18,7 @@ export const getAllArticleByCategory = async (categoryId:number) : Promise<IArti
 }
 
 export const getArticleById = async (id:number): Promise<IArticle | null> => {
-    return await prisma.article.findFirst({
+    return await prisma.article.findFirstOrThrow({
         where: {
             id:id
         }
