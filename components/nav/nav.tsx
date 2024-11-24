@@ -23,7 +23,7 @@ export function Nav({ items }: NavProps) {
   const pathname = usePathname();
 
   return (
-    <div className="flex justify-between w-full gap-6 md:gap-10 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-black py-4">
+    <div className="flex justify-between items-center w-full gap-6 md:gap-10 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-black py-4">
       {/* Logo et navigation */}
       <nav className="flex ms-8 gap-6 items-center">
         {/* Logo */}
@@ -39,7 +39,7 @@ export function Nav({ items }: NavProps) {
                 key={index}
                 href={item.href}
                 className={cn(
-                  "relative px-3 py-2 text-sm font-medium transition-all duration-200",
+                  "relative px-3 py-2 text-sm font-medium transition-all duration-300",
                   pathname === item.href
                     ? "text-black dark:text-white"
                     : "text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white"
@@ -50,7 +50,7 @@ export function Nav({ items }: NavProps) {
                 {/* Indicateur actif */}
                 {pathname === item.href && (
                   <span
-                    className="absolute inset-x-1 bottom-0 h-0.5 bg-black dark:bg-white rounded transition-all duration-200"
+                    className="absolute inset-x-1 bottom-0 h-0.5 bg-black dark:bg-white rounded transition-all duration-300"
                     aria-hidden="true"
                   />
                 )}
@@ -62,7 +62,7 @@ export function Nav({ items }: NavProps) {
         {pathname == "/admin" && (
           <button
             onClick={logout}
-            className="px-3 py-2 text-sm font-medium text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-all duration-200"
+            className="px-3 py-2 text-sm font-medium text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-all duration-300"
           >
             Logout
           </button>
