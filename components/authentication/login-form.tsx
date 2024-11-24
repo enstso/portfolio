@@ -1,4 +1,5 @@
 "use client";
+
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,7 +16,7 @@ import { postData, urls } from "@/lib/utils";
 import { useState } from "react";
 import { LoaderCircle } from "lucide-react";
 import { createSession } from "@/app/session";
-
+import { PasswordInput } from "@/components/authentication/password-input";
 
 const loginFormSchema = z.object({
   username: z
@@ -49,9 +50,9 @@ export function LoginForm() {
       const res = await postData(urls.user, data);
       form.reset();
       await createSession(res.user.username);
-      setTimeout(()=>{
+      setTimeout(() => {
         window.location.href = '/admin';
-      },1500);
+      }, 1500);
     } catch (error) {
       console.error("Login failed:", error);
     } finally {
@@ -61,7 +62,7 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
-      <form className="flex flex-col space-y-2" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="flex flex-col space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
         <div>
           <FormField
             control={form.control}
@@ -69,7 +70,10 @@ export function LoginForm() {
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} placeholder="Enter your username" />
+                  <Input
+                    {...field}
+                    placeholder="Enter your username"
+                  />
                 </FormControl>
                 {fieldState.error && (
                   <FormMessage>{fieldState.error.message}</FormMessage>
@@ -78,6 +82,7 @@ export function LoginForm() {
             )}
           />
         </div>
+        
         <div>
           <FormField
             control={form.control}
@@ -85,9 +90,8 @@ export function LoginForm() {
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormControl>
-                  <Input
+                  <PasswordInput
                     {...field}
-                    type="password"
                     placeholder="Enter your password"
                   />
                 </FormControl>
@@ -98,6 +102,7 @@ export function LoginForm() {
             )}
           />
         </div>
+
         <div>
           <FormField
             control={form.control}
@@ -105,7 +110,10 @@ export function LoginForm() {
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} placeholder="Enter verification" />
+                  <Input
+                    {...field}
+                    placeholder="Enter verification"
+                  />
                 </FormControl>
                 {fieldState.error && (
                   <FormMessage>{fieldState.error.message}</FormMessage>
@@ -114,6 +122,7 @@ export function LoginForm() {
             )}
           />
         </div>
+
         <Button type="submit" disabled={isLoading}>
           {isLoading ? (
             <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />

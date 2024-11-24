@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button"
 
-export default function Blog() {
+export default function Article({id}:number) {
   return (
     <div>
-      <h1>Blog</h1>
+      <h1>Article</h1>
       <Button>Click me</Button>
     </div>
   )

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { IProject,getAllProject } from "@/lib/projectService";
 
-async function GET(req:NextRequest){
+export async function GET(req:NextRequest){
     try{
         const projects: IProject[] = await getAllProject();
         if(projects.length==0){
@@ -13,7 +13,7 @@ async function GET(req:NextRequest){
     }
 }
 
-async function POST(req:NextRequest){
+export async function POST(req:NextRequest){
     try{
         const project:IProject = await req.json();
         if(project==null){

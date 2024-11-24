@@ -1,57 +1,59 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export const urls = {
-  user:"http://localhost:3000/api/user",
-  article:"http://localhost:3000/api/article",
-  project:"http://localhost:3000/api/project",
-  category:"http://localhost:3000/api/category"
-
-}
+  userApi: "api/user",
+  articleApi: "api/article",
+  projectApi: "api/project",
+  categoryApi: "api/category",
+  user: "user/",
+  article: "article/",
+  project: "project/",
+  blog: "blog/",
+};
 
 export type NavItems = {
-  title:string;
-  href:string
-}
+  title: string;
+  href: string;
+};
 
 export const componentsAdminRoutes: NavItems[] = [
   {
-    title: "Projects",
-    href: "/projects",
+    title: "Admin",
+    href: "/admin",
   },
-  {
-    title: "Articles",
-    href: "/articles",
-  },
-  
 ];
 
-export const componentsRoutes:NavItems[] = [
-    {
-      title: "Homepage",
-      href: "/homepage",
-    },
-    {
-      title: "Blog",
-      href: "/blog",
-    },
-    {
-      title: "Resume",
-      href:"/resume"
-    }
+export const componentsRoutes: NavItems[] = [
+  {
+    title: "Home",
+    href: "/",
+  },
+  {
+    title: "About",
+    href: "/about",
+  },
+  {
+    title: "Projects",
+    href: "/project",
+  },
+  {
+    title: "Blog",
+    href: "/blog",
+  },
 ];
 
 export async function getData(url: string) {
   return fetch(url, {
-    method: "GET", headers: {
+    method: "GET",
+    headers: {
       "Content-Type": "application/json",
-    }
-  },
-  ).then((res) => res.json())
+    },
+  }).then((res) => res.json());
 }
 
 export async function postData(url: string, data: any, options?: RequestInit) {
@@ -63,11 +65,14 @@ export async function postData(url: string, data: any, options?: RequestInit) {
     },
 
     body: JSON.stringify(data),
-  }).then((res) => res.json())
+  }).then((res) => res.json());
 }
 
-
-export async function postDataV2(url: string, data: any, options?: RequestInit) {
+export async function postDataV2(
+  url: string,
+  data: any,
+  options?: RequestInit
+) {
   return fetch(url, {
     ...options,
     method: "POST",
@@ -76,6 +81,5 @@ export async function postDataV2(url: string, data: any, options?: RequestInit) 
     },
 
     body: JSON.stringify(data),
-  })
+  });
 }
-
