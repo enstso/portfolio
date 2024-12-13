@@ -3,7 +3,6 @@ import {
     FaBootstrap,
     FaCss3,
     FaDocker,
-    FaFlask,
     FaGithub,
     FaHtml5,
     FaLaravel,
@@ -18,8 +17,7 @@ import {
     FaWordpress,
   } from "react-icons/fa";
   import { FaJs } from "react-icons/fa";
-  import { IconType } from "react-icons/lib";
-  import { TbBrandCSharp, TbSql } from "react-icons/tb";
+  import { TbBrandCSharp } from "react-icons/tb";
   import {
     SiAdonisjs,
     SiAnsible,
@@ -32,6 +30,7 @@ import {
     SiContabo,
     SiDotnet,
     SiExpress,
+    SiFlask,
     SiKubernetes,
     SiMacos,
     SiMariadb,
@@ -56,7 +55,7 @@ import {
     RiNotionFill,
   } from "react-icons/ri";
   import { VscAzure } from "react-icons/vsc";
-  import { AiOutlineAudit, AiOutlineBorderOuter } from "react-icons/ai";
+  import { AiOutlineAudit } from "react-icons/ai";
 import { ReactNode } from "react";
 
 export type SkillsItems = {
@@ -95,7 +94,7 @@ export type SkillsItems = {
         { icon: <SiCodeigniter />, name: "CodeIgniter" },
         { icon: <SiAdonisjs />, name: "Adonis.js" },
         { icon: <SiExpress />, name: "Express" },
-        { icon: <FaFlask />, name: "Flask" },
+        { icon: <SiFlask />, name: "Flask" },
         { icon: <SiTailwindcss />, name: "Tailwind CSS" },
         { icon: <FaBootstrap />, name: "Bootstrap" },
       ],
