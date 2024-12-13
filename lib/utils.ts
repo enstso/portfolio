@@ -2,39 +2,6 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
-import { icons } from "lucide-react";
-import {
-  FaAngular,
-  FaBootstrap,
-  FaCss3,
-  FaDocker,
-  FaFlask,
-  FaGithub,
-  FaHtml5,
-  FaLaravel,
-  FaPhp,
-  FaPython,
-  FaReact,
-  FaSymfony,
-} from "react-icons/fa";
-import { FaJs } from "react-icons/fa";
-import { IconType } from "react-icons/lib";
-import { TbBrandCSharp, TbSql } from "react-icons/tb";
-import {
-  SiAdonisjs,
-  SiCodeigniter,
-  SiDotnet,
-  SiExpress,
-  SiKubernetes,
-  SiMariadb,
-  SiMongodb,
-  SiMysql,
-  SiPostgresql,
-  SiRedis,
-  SiTailwindcss,
-  SiTypescript,
-} from "react-icons/si";
-import { RiNextjsFill } from "react-icons/ri";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -56,16 +23,6 @@ export type NavItems = {
   href: string;
 };
 
-export type SkillsItems = {
-  icon: IconType;
-  name: string;
-};
-
-export type SkillsList = {
-  domain: string;
-  iconsItems: SkillsItems[];
-};
-
 export type SocialMediaItems = {
   icon: React.ForwardRefExoticComponent<
     IconProps & React.RefAttributes<SVGSVGElement>
@@ -73,137 +30,7 @@ export type SocialMediaItems = {
   url: string;
 };
 
-export const skillsItems: SkillsList[] = [
-  {
-    domain: "Languages",
-    iconsItems: [
-      {
-        icon: FaHtml5,
-        name: "Html",
-      },
-      {
-        icon: FaCss3,
-        name: "Css",
-      },
-      {
-        icon: FaJs,
-        name: "JavaScript",
-      },
-      {
-        icon: SiTypescript,
-        name: "TypeScript",
-      },
-      {
-        icon: FaPython,
-        name: "Python",
-      },
-      {
-        icon: TbBrandCSharp,
-        name: "C#",
-      },
-      {
-        icon: FaPhp,
-        name: "PHP",
-      },
-    ],
-  },
-  {
-    domain: "Frameworks",
-    iconsItems: [
-      {
-        icon: FaReact,
-        name: "React",
-      },
-      {
-        icon: FaAngular,
-        name: "Angular",
-      },
-      {
-        icon: RiNextjsFill,
-        name: "Nextjs",
-      },
-      {
-        icon: SiDotnet,
-        name: ".NET",
-      },
-      {
-        icon: FaSymfony,
-        name: "Symfony",
-      },
-      {
-        icon: FaLaravel,
-        name: "Laravel",
-      },
-      {
-        icon: SiCodeigniter,
-        name: "CodeIgniter",
-      },
-      {
-        icon: SiAdonisjs,
-        name: "Adonis",
-      },
-      {
-        icon: SiExpress,
-        name: "Express",
-      },
-      {
-        icon: FaFlask,
-        name: "Flask",
-      },
-      {
-        icon: SiTailwindcss,
-        name: "TailwindCss",
-      },
-      {
-        icon: FaBootstrap,
-        name: "Bootstrap",
-      },
-    ],
-  },
-  {
-    domain: "Databases",
-    iconsItems: [
-      {
-        icon: SiMysql,
-        name: "MySql",
-      },
-      {
-        icon: SiMariadb,
-        name:"Mariadb"
-      },
-      {
-        icon:SiPostgresql,
-        name:"PostgresSql"
-      },
-      {
-        icon:SiMongodb,
-        name:"Mongodb"
-      },
-      {
-        icon:SiRedis,
-        name:"Redis"
-      }
-    ],
-  },
-  {
-    domain:"Tools and Plateforms",
-    iconsItems:[
-      {
-        icon:FaGithub,
-        name:"Github"
-      },
-      {
-        icon:FaDocker,
-        name:"Docker"
-      },
-      {
-        icon:SiKubernetes,
-        name:"Kubernetes"
-      },
-      
-    ]
-  }
-];
+
 
 export const socialMediaLink: SocialMediaItems[] = [
   {
