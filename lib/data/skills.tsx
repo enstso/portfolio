@@ -24,6 +24,7 @@ import {
     SiAdonisjs,
     SiAnsible,
     SiApache,
+    SiApachespark,
     SiBurpsuite,
     SiCisco,
     SiCloudron,
@@ -117,6 +118,7 @@ export type SkillsItems = {
         { icon: <SiKubernetes />, name: "Kubernetes" },
         { icon: <SiAnsible />, name: "Ansible" },
         { icon: <VscAzure />, name: "Azure" },
+        { icon: <SiApachespark/>, name: "Apache Spark"}
       ],
     },
     {
