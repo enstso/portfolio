@@ -313,5 +313,6 @@ export type SkillsItems = {
         },
       ],
     },
+    
   ];
 
