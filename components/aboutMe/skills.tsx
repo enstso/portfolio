@@ -9,14 +9,13 @@ interface SkillListProps {
 
 export default function Skills({ list }: SkillListProps) {
   return (
-    <div className="flex flex-wrap gap-8 justify-center py-8">
-        
+    <div className="flex flex-wrap gap-6 py-8 mb-8">
       {list?.map((item, index) =>
         item.domain ? (
           <div
             key={index}
             className={cn(
-              "w-full max-w-xs p-6 rounded-xl shadow-lg transition-all",
+              "flex-1 min-w-[250px] p-6 rounded-xl shadow-lg transition-all",
               "bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700"
             )}
           >

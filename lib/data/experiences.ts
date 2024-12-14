@@ -1,4 +1,4 @@
-export type ExperienceItems = {
+export type ExperienceItem = {
     name: string;
     jobOccupation: string;
     place: string;
@@ -7,7 +7,7 @@ export type ExperienceItems = {
     description: string[]; 
 };
 
-export const ExperiencesList: ExperienceItems[] = [
+export const ExperiencesList: ExperienceItem[] = [
     {
         name: "BNP Paribas Asset Management",
         jobOccupation: "Software Engineer",
