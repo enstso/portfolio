@@ -1,6 +1,6 @@
-import Education from "@/components/aboutMe/education";
-import Experiences from "@/components/aboutMe/experiences";
-import Skills from "@/components/aboutMe/skills";
+import Education from "@/components/about/education";
+import Experiences from "@/components/about/experiences";
+import Skills from "@/components/about/skills";
 import { EducationList } from "@/lib/data/education";
 import { ExperiencesList } from "@/lib/data/experiences";
 import { skillsItems } from "@/lib/data/skills";
