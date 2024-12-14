@@ -23,7 +23,7 @@ export default function Education({ items }: EducationProps) {
               <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                 {item.name}
               </h3>
-              <p className="text-xs text-neutral-700 dark:text-neutral-400">
+              <p className="text-xs text-neutral-600 dark:text-neutral-100">
                 {item.degree} in {item.study}
               </p>
             </div>
@@ -32,14 +32,14 @@ export default function Education({ items }: EducationProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Visit ${item.name}`}
-              className="ml-2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition"
+              className="ml-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition"
             >
               <FaExternalLinkAlt className="w-4 h-4" />
             </a>
           </div>
 
           {/* Lieu et période */}
-          <div className="flex justify-between  text-xs text-neutral-700 dark:text-neutral-400  mt-3">
+          <div className="flex justify-between  text-xs text-neutral-500 dark:text-neutral-400  mt-3">
             <span>{item.place}</span>
             <span>
               {formatDate(item.startDate)} -{" "}
