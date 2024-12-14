@@ -13,7 +13,6 @@ export default function About() {
         <h1 className="text-4xl font-extrabold text-center mb-8 transition-all duration-300 ease-in-out transform hover:text-neutral-500 dark:hover:text-neutral-300 cursor-pointer hover:scale-105">
           About Me
         </h1>
-
         {/* Section principale */}
         <div className="space-y-16 mx-auto max-w-[1000px]"> {/* Réduction de la largeur */}
           

@@ -30,7 +30,7 @@ export const EducationList:EducationItem[] =[
     },
     {
         name:"Lycée Jean Jacques Rousseau",
-        degree:"Brevet de technicien supérieur (BTS) degree",
+        degree:"Brevet de technicien supérieur (Advanced Technician Certificate) degree  is a national diploma of higher education in France",
         study:"Computer Science",
         place:"Montmorency, Île-de-France, France",
         startDate:new Date(2021,9),
