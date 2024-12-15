@@ -3,6 +3,7 @@ export interface IProject {
     id?: number;
     name:string;
     description: string;
+    technologies: string[];
     url: string;
     date: Date;
     categoryId: number;

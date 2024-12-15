@@ -47,6 +47,7 @@ import {
     SiTailwindcss,
     SiTypescript,
     SiUbiquiti,
+    SiWireshark,
   } from "react-icons/si";
   import { FaDebian } from "react-icons/fa6";
   import {
@@ -134,6 +135,7 @@ export type SkillsItems = {
         { icon: <SiCisco />, name: "Cisco" },
         { icon: <SiUbiquiti />, name: "Ubiquiti" },
         { icon: <SiPfsense />, name: "Pfsense" },
+        { icon: <SiWireshark/>, name: "Wireshark"}
       ],
     },
     {
