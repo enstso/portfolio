@@ -1,21 +1,27 @@
 "use client";
 import Projects from "@/components/projects/project";
 import { Button } from "@/components/ui/button";
-import { IProject } from "@/lib/projectService";
+import { getAllProjectFromGithub, IProject } from "@/lib/projectService";
 import { getData, urls } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 export default function Project() {
   const [projects, setProjects] = useState<IProject[]>([]);
   const [categories, setCategories] =  useState<string[]>([]);
+
+  const fetchProjects = async () => {
+    const res = await getAllProjectFromGithub();
+    return res;
+  };
+  
   useEffect(() => {
-    const urlEnv = process.env.NEXT_PUBLIC_URL;
-    getData(urlEnv + urls.categoryApi).then((data)=>{
-      setCategories(data.data)
-    }); 
-    getData(urlEnv + urls.projectApi).then((data) => {
-      setProjects(data.projects);
-    })
+    const initializeProjects = async () => {
+      const projectsData = await fetchProjects();
+      setProjects(projectsData);
+    };
+  
+    initializeProjects();
+  
     return () => {
       setProjects([]);
       setCategories([]);

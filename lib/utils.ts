@@ -78,6 +78,18 @@ export async function getData(url: string) {
   }).then((res) => res.json());
 }
 
+export async function getDataGithub(url: string) {
+  return fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization":"Basic " + process.env.NEXT_PUBLIC_GITHUB
+    },
+  }).then((res) => res.json());
+}
+
+
+
 export async function postData(url: string, data: any, options?: RequestInit) {
   return fetch(url, {
     ...options,

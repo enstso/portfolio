@@ -4,9 +4,7 @@ import { IUser, getUserByCredentials } from "@/lib/userService";
 export async function POST(req: NextRequest) {
   try {
     const userData: IUser = await req.json();
-    console.log(userData);
     const user: IUser | null = await getUserByCredentials(userData);
-    console.log(user);
     if (user == null) {
       return NextResponse.json(
         { error: "Invalid credentials" },
