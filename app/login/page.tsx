@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 
 
 export default function AuthenticationPage() {
-    {console.log(process.env.URL)}
     return (
         <div className="container mx-auto max-w-xl p-8">
           <h1 className="text-2xl font-bold text-center mb-6">Login</h1>

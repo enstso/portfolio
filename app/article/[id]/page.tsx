@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button"
 
-export default function Article({id}:number) {
+export default function Article({id}:any) {
   return (
     <div>
       <h1>Article</h1>
-      <Button>Click me</Button>
+      <Button>Click me {id}</Button>
     </div>
   )
 }

@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { IProject,getAllProject } from "@/lib/projectService";
+import { IProject,getAllProjectFromGithub } from "@/lib/projectService";
 
 export async function GET(req:NextRequest){
     try{
-        const projects: IProject[] = await getAllProject();
+        const projects: IProject[] = await getAllProjectFromGithub();
         if(projects.length==0){
             return NextResponse.json({message:"Not Found"},{status:404});
         }
