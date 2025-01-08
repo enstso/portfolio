@@ -1,3 +1,5 @@
+# Next.js Project Portfolio
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -34,3 +36,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## About This Portfolio
+
+This portfolio showcases my professional profile, projects, and blog articles. It serves as a comprehensive platform to highlight my skills, experiences, and accomplishments.
+
+### Features
+
+- **Detailed Project Descriptions**: Offering insights into my technical expertise and problem-solving abilities.
+- **Professional Profile**: Highlighting my skills, experiences, and accomplishments.
+- **Blog Articles**: Sharing knowledge and ideas with the community.
+
+---
+
+Thank you for visiting my portfolio to [Enstso.com](https://Enstso.com/)!
