@@ -46,7 +46,7 @@ export const ExperiencesList: ExperienceItem[] = [
         jobOccupation: "Software Engineer / Desktop Support",
         place: "Sarcelles, Île-de-France, France",
         startDate: new Date(2022, 7),
-        endDate: new Date(2024, 12),
+        endDate: new Date(2022, 12),
         description: [
             "Developed and designed an E-learning front-end (JavaScript, Bootstrap) and back-end (Laravel) with an MVC architecture allowing more than 50 customers to practice English.",
             "Developed a cross-platform Android/IOS mobile application (Flutter) to generate a unique loyalty card for each customer and implemented API with Express and Firebase to interact with the data.",

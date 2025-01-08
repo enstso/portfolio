@@ -1,6 +1,5 @@
 import { useState } from "react";
-import
- { IProject } from "@/lib/projectService";
+import { IProject } from "@/lib/projectService";
 import { cn } from "@/lib/utils";
 
 interface ProjectProps {
@@ -17,15 +16,15 @@ export default function Projects({ items }: ProjectProps) {
           <div
             key={index}
             className={cn(
-              "w-full p-6 rounded-lg shadow-lg border transition-all", 
-              "bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100", 
+              "w-full p-6 rounded-lg shadow-lg border transition-all",
+              "bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100",
               "border-neutral-200 dark:border-neutral-700 hover:shadow-xl"
             )}
           >
             {/* Header Section */}
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
-                <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100">
+                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-neutral-100">
                   {item.name}
                 </h3>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
@@ -51,7 +50,7 @@ export default function Projects({ items }: ProjectProps) {
                 </p>
 
                 {/* Technologies List */}
-                <div className="mt-4 flex flex-wrap gap-3">
+                <div className="mt-4 flex flex-wrap gap-2">
                   {item.technologies.map((tech, idx) => (
                     <span
                       key={idx}
