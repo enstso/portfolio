@@ -1,5 +1,5 @@
 "use client";
-
+import {DownloadResume} from "@/components/home/downloadResume"
 import { SocialMedia } from "@/components/home/socialMedia";
 import { socialMediaLink } from "@/lib/utils";
 
@@ -29,7 +29,7 @@ export default function Home() {
           secure, and grow your digital presence. Let’s collaborate to turn your vision into reality!
         </p>
       </section>
-
+      <DownloadResume/>
       {/* Social Media Links */}
       <section className="mt-12">
         <SocialMedia items={socialMediaLink} />
