@@ -1,8 +1,7 @@
 "use server";
-import { prisma } from "@/prisma/client";
-import { getData, getDataGithub } from "./utils";
-import * as fs from "fs";
-import { projectsData } from "./data/projects";
+import {  getDataGithub } from "./utils";
+import fs from 'fs';
+import path from 'path';import { projectsData } from "./data/projects";
 
 export interface IProject {
   id?: number;
@@ -28,15 +27,29 @@ export const getAllProjectFromGithub = async (): Promise<IProject[]> => {
       );
       projects.push({
         name: project.name,
-        description: project.description,
+        description: project.description ? project.description.replace(/\r?\n/g, " ") : "",
         technologies: techs,
         url: project.html_url,
-        date: formatDateToYearMonthAsDate(project.created_at),
+        date: formatDateToYearMonthAsDate(project.created_at) as unknown as string,
       });
+    }
+    // Vérifier si la liste a changé
+    if (JSON.stringify(projects) !== JSON.stringify(projectsData)) {
+      updateProjectsFile(projects);
     }
   }
   return projects;
 };
+
+function updateProjectsFile(newProjects: IProject[]) {
+  const filePath = path.join(process.cwd(), 'lib/data/projects.ts');
+
+  const fileContent = `import { IProject } from "../projectService";
+
+export const projectsData: IProject[] = ${JSON.stringify(newProjects, null, 2)};`;
+
+  fs.writeFileSync(filePath, fileContent, 'utf-8');
+}
 
 function formatDateToYearMonthAsDate(dateString: string): Date {
   // Conversion de la chaîne en objet Date

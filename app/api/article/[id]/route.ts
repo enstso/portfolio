@@ -14,7 +14,7 @@ export async function GET(req:NextRequest,{ params }: { params: { id: number } }
   }
 }
 
-export async function UPDATE(req:NextRequest,{params}:{params:{id:number}}){
+export async function PUT(req:NextRequest,{params}:{params:{id:number}}){
     try{
         const article:IArticle = await req.json();
         article.id = params.id;
