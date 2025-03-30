@@ -4,6 +4,8 @@ import "./globals.css";
 import { Nav } from "@/components/nav/nav";
 import { componentsRoutes, componentsAdminRoutes } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
+import { executeDbPush } from "@/lib/dbPush"; // Importer la fonction
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -19,12 +21,17 @@ export const metadata: Metadata = {
   title: "Portfolio",
   description: "Portfolio Enstso",
 };
-
-export default function RootLayout({
+// Appel de la fonction d'exécution de db push une seule fois
+async function initializeDatabase() {
+  await executeDbPush(); // Appelle la fonction qui va exécuter npx prisma db push
+}
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await initializeDatabase(); 
+
   return (
     <html lang="en"suppressHydrationWarning={true}>
       <body

@@ -12,8 +12,6 @@ RUN npm install
 # Copier le reste des fichiers
 COPY . .
 
-RUN npx prisma db push
-
 # Build de l'application Next.js
 RUN npm run build
 
