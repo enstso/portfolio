@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nextjs
-          image: enstso/nextjs-app:latest  # Utilisation de l'image Docker depuis GHCR
+          image: enstso/nextjs-app:latest
           ports:
             - containerPort: 3000
           envFrom:
