@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjs-app
+  labels:
+    app: nextjs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextjs
+  template:
+    metadata:
+      labels:
+        app: nextjs
+    spec:
+      containers:
+        - name: nextjs
+          image: ghcr.io/${{ github.repository }}/nextjs-app:latest  # Utilisation de l'image Docker depuis GHCR
+          ports:
+            - containerPort: 3000
+          env:
+        - name: NEXT_PUBLIC_URL
+          value: "https://enstso.com"
+        - name: DATABASE_URL
+          value: "postgresql://postgres:changeme@postgres:5432/postgres?schema=public"  # L'URL de ton service Postgres
+          envFrom:
+        - configMapRef:
+            name: app-config
+        - secretRef:
+            name: app-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextjs-service
+spec:
+  selector:
+    app: nextjs
+  ports:
+    - protocol: TCP
+      port: 80  # Exposé en HTTP sur le port 80
+      targetPort: 3000  # Port interne de l'application Next.js
+  type: ClusterIP  # Service interne

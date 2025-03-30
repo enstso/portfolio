@@ -50,7 +50,11 @@ import {
   SiWireshark,
   SiNestjs,
   SiGraphql,
-  SiK6,
+  SiConfluence,
+  SiJira,
+  SiGrafana,
+  SiJasmine,
+  
   SiSelenium 
 } from "react-icons/si";
 import { FaDebian } from "react-icons/fa6";
@@ -120,6 +124,9 @@ export const skillsItems: SkillsList[] = [
       { icon: <SiAnsible />, name: "Ansible" },
       { icon: <VscAzure />, name: "Azure" },
       { icon: <SiApachespark />, name: "Apache Spark" },
+      { icon: <SiConfluence />, name: "Confluence" },
+      { icon: <SiJira />, name: "Jira" },
+      { icon: <SiGrafana />, name: "Grafana" },
     ],
   },
   {
@@ -161,7 +168,6 @@ export const skillsItems: SkillsList[] = [
     domain: "Tools and Others",
     iconsItems: [
       { icon: <SiN8N />, name: "N8N" },
-      { icon: <SiK6 />, name: "K6" },
       { icon: <SiSelenium />, name: "Selenium" },
       { icon: <SiCloudron />, name: "Cloudron" },
       { icon: <FaWordpress />, name: "WordPress" },

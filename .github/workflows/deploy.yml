@@ -1,0 +1,47 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main  # Branche de déploiement (tu peux changer à ta convenance)
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Étape 1 : Checkout du code source
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Étape 2 : Configurer Docker pour utiliser GitHub Container Registry
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}  # Utilise l'actor GitHub comme nom d'utilisateur
+        password: ${{ secrets.GITHUB_TOKEN }}  # Utilise un token GitHub pour l'authentification
+
+    # Étape 3 : Construire et pousser l'image Docker vers GHCR
+    - name: Build and push Docker image
+      run: |
+        docker build -t ghcr.io/${{ github.repository }}/Portfolio:latest .
+        docker push ghcr.io/${{ github.repository }}/Portfolio:latest
+
+    # Étape 4 : Configurer kubectl pour interagir avec le cluster Kubernetes
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v2
+      with:
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+    # Étape 5 : Appliquer les fichiers de déploiement Kubernetes
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl apply -f k8s/nextjs-deployment.yaml
+        kubectl apply -f k8s/nextjs-service.yaml
+        kubectl apply -f k8s/nextjs-ingress.yaml
+
+    # Optionnel : Attendre que le déploiement soit terminé
+    - name: Wait for Deployment to Complete
+      run: |
+        kubectl rollout status deployment/nextjs-app
