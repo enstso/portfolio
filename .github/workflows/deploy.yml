@@ -30,7 +30,7 @@ jobs:
 
     # Étape 4 : Configurer kubectl pour interagir avec le cluster Kubernetes
     - name: Set up kubectl
-      uses: azure/setup-kubectl@v2
+      uses: azure/setup-kubectl@v1
       with:
         kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
