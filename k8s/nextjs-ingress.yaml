@@ -3,8 +3,9 @@ kind: Ingress
 metadata:
   name: nextjs-ingress
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"  # Seul HTTPS est accepté
-    traefik.ingress.kubernetes.io/router.tls: "true"  # Active TLS
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"  # HTTPS uniquement
+    traefik.ingress.kubernetes.io/router.tls: "true"  # Activer TLS
+    traefik.ingress.kubernetes.io/router.http.middlewares: "redirect-to-https"  # Rediriger HTTP vers HTTPS
 spec:
   rules:
   - host: enstso.com  # Remplace par ton domaine
