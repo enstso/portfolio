@@ -16,19 +16,14 @@ spec:
     spec:
       containers:
         - name: nextjs
-          image: ghcr.io/${{ github.repository }}/nextjs-app:latest  # Utilisation de l'image Docker depuis GHCR
+          image: enstso/nextjs-app:latest  # Utilisation de l'image Docker depuis GHCR
           ports:
             - containerPort: 3000
-          env:
-        - name: NEXT_PUBLIC_URL
-          value: "https://enstso.com"
-        - name: DATABASE_URL
-          value: "postgresql://postgres:changeme@postgres:5432/postgres?schema=public"  # L'URL de ton service Postgres
           envFrom:
-        - configMapRef:
-            name: app-config
-        - secretRef:
-            name: app-secret
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secret
 ---
 apiVersion: v1
 kind: Service

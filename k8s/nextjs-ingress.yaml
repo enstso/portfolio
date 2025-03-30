@@ -3,12 +3,11 @@ kind: Ingress
 metadata:
   name: nextjs-ingress
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"  # Rediriger HTTP vers HTTPS
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"  # Forcer HTTPS
-    nginx.ingress.kubernetes.io/proxy-body-size: "8m"  # Limite la taille des requêtes à 8 Mo
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"  # Seul HTTPS est accepté
+    traefik.ingress.kubernetes.io/router.tls: "true"  # Active TLS
 spec:
   rules:
-  - host: enstso.com  # Remplace par ton domaine Cloudflare
+  - host: enstso.com  # Remplace par ton domaine
     http:
       paths:
       - path: /
@@ -18,3 +17,6 @@ spec:
             name: nextjs-service
             port:
               number: 80
+  tls:
+  - hosts:
+    - enstso.com
