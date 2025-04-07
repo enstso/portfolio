@@ -3,9 +3,9 @@ kind: Ingress
 metadata:
   name: nextjs-ingress
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"  # HTTPS uniquement
-    traefik.ingress.kubernetes.io/router.tls: "true"  # Activer TLS
-    traefik.ingress.kubernetes.io/router.http.middlewares: "redirect-to-https"  # Rediriger HTTP vers HTTPS
+    nginx.ingress.kubernetes.io/rewrite-target: /  # Réécrire le chemin
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"  # Rediriger HTTP vers HTTPS
+  
 spec:
   rules:
   - host: enstso.com  # Remplace par ton domaine
@@ -15,9 +15,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: nextjs-service
+            name: nextjs-service  # Nom de ton service Next.js
             port:
               number: 80
-  tls:
-  - hosts:
-    - enstso.com
