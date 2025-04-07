@@ -5,7 +5,8 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /  # Réécrire le chemin
     nginx.ingress.kubernetes.io/ssl-redirect: "true"  # Rediriger HTTP vers HTTPS
-  
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/secure-backends: "true"  # Force l'utilisation du HTTPS pour la communication backend
 spec:
   ingressClassName: nginx
   rules:
