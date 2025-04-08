@@ -10,7 +10,7 @@ export const projectsData: IProject[] = [
       "JavaScript",
       "HTML"
     ],
-    "url": "https://github.com/Enstso/6iphermail-react",
+    "url": "https://github.com/enstso/6iphermail-react",
     "date": "2024-04-30T22:00:00.000Z"
   },
   {
@@ -20,7 +20,7 @@ export const projectsData: IProject[] = [
       "TypeScript",
       "JavaScript"
     ],
-    "url": "https://github.com/Enstso/6iphermail_api",
+    "url": "https://github.com/enstso/6iphermail_api",
     "date": "2024-02-29T23:00:00.000Z"
   },
   {
@@ -34,7 +34,7 @@ export const projectsData: IProject[] = [
       "CSS",
       "Shell"
     ],
-    "url": "https://github.com/Enstso/6iphermail_api_treatment_mail",
+    "url": "https://github.com/enstso/6iphermail_api_treatment_mail",
     "date": "2024-05-31T22:00:00.000Z"
   },
   {
@@ -44,14 +44,14 @@ export const projectsData: IProject[] = [
       "Rust",
       "Dockerfile"
     ],
-    "url": "https://github.com/Enstso/6ipher_password_rust",
+    "url": "https://github.com/enstso/6ipher_password_rust",
     "date": "2024-07-31T22:00:00.000Z"
   },
   {
     "name": "adStatsSnap",
     "description": "adStatsSnap is a middleware solution designed to provide a comprehensive analysis of Snapchat campaigns, offering businesses and marketers a centralized platform to track and evaluate campaign performance.",
     "technologies": [],
-    "url": "https://github.com/Enstso/adStatsSnap",
+    "url": "https://github.com/enstso/adStatsSnap",
     "date": "2025-01-31T23:00:00.000Z"
   },
   {
@@ -61,7 +61,7 @@ export const projectsData: IProject[] = [
       "PHP",
       "Hack"
     ],
-    "url": "https://github.com/Enstso/AmanozVuln",
+    "url": "https://github.com/enstso/AmanozVuln",
     "date": "2023-12-31T23:00:00.000Z"
   },
   {
@@ -70,7 +70,7 @@ export const projectsData: IProject[] = [
     "technologies": [
       "Shell"
     ],
-    "url": "https://github.com/Enstso/ansible-gitlab-postgres",
+    "url": "https://github.com/enstso/ansible-gitlab-postgres",
     "date": "2024-11-30T23:00:00.000Z"
   },
   {
@@ -82,7 +82,7 @@ export const projectsData: IProject[] = [
       "Dockerfile",
       "CSS"
     ],
-    "url": "https://github.com/Enstso/Api-Users-Symfony-React",
+    "url": "https://github.com/enstso/Api-Users-Symfony-React",
     "date": "2023-12-31T23:00:00.000Z"
   },
   {
@@ -92,7 +92,7 @@ export const projectsData: IProject[] = [
       "JavaScript",
       "Dockerfile"
     ],
-    "url": "https://github.com/Enstso/apiGateway-microservices",
+    "url": "https://github.com/enstso/apiGateway-microservices",
     "date": "2024-11-30T23:00:00.000Z"
   },
   {
@@ -101,7 +101,7 @@ export const projectsData: IProject[] = [
     "technologies": [
       "C#"
     ],
-    "url": "https://github.com/Enstso/CbApp",
+    "url": "https://github.com/enstso/CbApp",
     "date": "2023-12-31T23:00:00.000Z"
   },
   {
@@ -110,7 +110,7 @@ export const projectsData: IProject[] = [
     "technologies": [
       "C#"
     ],
-    "url": "https://github.com/Enstso/CipherApp-Wpf",
+    "url": "https://github.com/enstso/CipherApp-Wpf",
     "date": "2023-12-31T23:00:00.000Z"
   },
   {
@@ -122,7 +122,7 @@ export const projectsData: IProject[] = [
       "Hack",
       "Dockerfile"
     ],
-    "url": "https://github.com/Enstso/CodeManagerPlatform",
+    "url": "https://github.com/enstso/CodeManagerPlatform",
     "date": "2023-12-31T23:00:00.000Z"
   },
   {
@@ -131,7 +131,7 @@ export const projectsData: IProject[] = [
     "technologies": [
       "C#"
     ],
-    "url": "https://github.com/Enstso/ColocationCrous",
+    "url": "https://github.com/enstso/ColocationCrous",
     "date": "2023-12-31T23:00:00.000Z"
   },
   {
@@ -140,7 +140,7 @@ export const projectsData: IProject[] = [
     "technologies": [
       "JavaScript"
     ],
-    "url": "https://github.com/Enstso/CVGenerator-Backend",
+    "url": "https://github.com/enstso/CVGenerator-Backend",
     "date": "2024-10-31T23:00:00.000Z"
   },
   {
@@ -151,21 +151,21 @@ export const projectsData: IProject[] = [
       "HTML",
       "CSS"
     ],
-    "url": "https://github.com/Enstso/CVGenerator-Frontend",
+    "url": "https://github.com/enstso/CVGenerator-Frontend",
     "date": "2024-10-31T23:00:00.000Z"
   },
   {
     "name": "Docs-Admin-Sys",
     "description": "Comprehensive documentation on various networking and system configuration topics.",
     "technologies": [],
-    "url": "https://github.com/Enstso/Docs-Admin-Sys",
+    "url": "https://github.com/enstso/Docs-Admin-Sys",
     "date": "2023-12-31T23:00:00.000Z"
   },
   {
     "name": "Enstso",
     "description": "Config files for my GitHub profile.",
     "technologies": [],
-    "url": "https://github.com/Enstso/Enstso",
+    "url": "https://github.com/enstso/Enstso",
     "date": "2022-08-31T22:00:00.000Z"
   },
   {
@@ -176,7 +176,7 @@ export const projectsData: IProject[] = [
       "HTML",
       "JavaScript"
     ],
-    "url": "https://github.com/Enstso/GitFlow",
+    "url": "https://github.com/enstso/GitFlow",
     "date": "2023-09-30T22:00:00.000Z"
   },
   {
@@ -188,7 +188,7 @@ export const projectsData: IProject[] = [
       "JavaScript",
       "HTML"
     ],
-    "url": "https://github.com/Enstso/graphQlSocialMedia",
+    "url": "https://github.com/enstso/graphQlSocialMedia",
     "date": "2025-01-31T23:00:00.000Z"
   },
   {
@@ -198,7 +198,7 @@ export const projectsData: IProject[] = [
       "C++",
       "Shell"
     ],
-    "url": "https://github.com/Enstso/HID",
+    "url": "https://github.com/enstso/HID",
     "date": "2025-02-28T23:00:00.000Z"
   },
   {
@@ -208,7 +208,7 @@ export const projectsData: IProject[] = [
       "C",
       "Dockerfile"
     ],
-    "url": "https://github.com/Enstso/IP_Catalogue",
+    "url": "https://github.com/enstso/IP_Catalogue",
     "date": "2023-09-30T22:00:00.000Z"
   },
   {
@@ -219,7 +219,7 @@ export const projectsData: IProject[] = [
       "Shell",
       "Dockerfile"
     ],
-    "url": "https://github.com/Enstso/livres-microservices",
+    "url": "https://github.com/enstso/livres-microservices",
     "date": "2024-11-30T23:00:00.000Z"
   },
   {
@@ -230,7 +230,7 @@ export const projectsData: IProject[] = [
       "C",
       "Python"
     ],
-    "url": "https://github.com/Enstso/md5ASM",
+    "url": "https://github.com/enstso/md5ASM",
     "date": "2024-05-31T22:00:00.000Z"
   },
   {
@@ -243,7 +243,7 @@ export const projectsData: IProject[] = [
       "CSS",
       "HTML"
     ],
-    "url": "https://github.com/Enstso/movieBooker",
+    "url": "https://github.com/enstso/movieBooker",
     "date": "2025-01-31T23:00:00.000Z"
   },
   {
@@ -255,7 +255,7 @@ export const projectsData: IProject[] = [
       "CSS",
       "JavaScript"
     ],
-    "url": "https://github.com/Enstso/nextBoilerplate",
+    "url": "https://github.com/enstso/nextBoilerplate",
     "date": "2024-10-31T23:00:00.000Z"
   },
   {
@@ -268,7 +268,7 @@ export const projectsData: IProject[] = [
       "SCSS",
       "CSS"
     ],
-    "url": "https://github.com/Enstso/Pizzafork",
+    "url": "https://github.com/enstso/Pizzafork",
     "date": "2023-12-31T23:00:00.000Z"
   },
   {
@@ -286,18 +286,19 @@ export const projectsData: IProject[] = [
       "Assembly",
       "Batchfile"
     ],
-    "url": "https://github.com/Enstso/population-BigData",
+    "url": "https://github.com/enstso/population-BigData",
     "date": "2024-11-30T23:00:00.000Z"
   },
   {
-    "name": "Portfolio",
+    "name": "portfolio",
     "description": "This portfolio showcases my professional profile, projects, and blog articles. It serves as a comprehensive platform to highlight my skills, experiences, and accomplishments. The app ncludes detailed project descriptions, offering insights into my technical expertise and problem-solving abilities.",
     "technologies": [
       "TypeScript",
+      "Dockerfile",
       "JavaScript",
       "CSS"
     ],
-    "url": "https://github.com/Enstso/Portfolio",
+    "url": "https://github.com/enstso/portfolio",
     "date": "2023-08-31T22:00:00.000Z"
   },
   {
@@ -308,7 +309,7 @@ export const projectsData: IProject[] = [
       "documentation_url",
       "status"
     ],
-    "url": "https://github.com/Enstso/RickandMortyGql",
+    "url": "https://github.com/enstso/RickandMortyGql",
     "date": "2025-01-31T23:00:00.000Z"
   },
   {
@@ -319,7 +320,7 @@ export const projectsData: IProject[] = [
       "documentation_url",
       "status"
     ],
-    "url": "https://github.com/Enstso/RuaCloud",
+    "url": "https://github.com/enstso/RuaCloud",
     "date": "2025-02-28T23:00:00.000Z"
   }
 ];

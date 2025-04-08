@@ -15,6 +15,7 @@ import {
   FaUbuntu,
   FaWindows,
   FaWordpress,
+  FaAws,
 } from "react-icons/fa";
 import { FaJs } from "react-icons/fa";
 import { TbBrandCSharp } from "react-icons/tb";
@@ -53,8 +54,7 @@ import {
   SiConfluence,
   SiJira,
   SiGrafana,
-  SiJasmine,
-  
+  SiJasmine,  
   SiSelenium 
 } from "react-icons/si";
 import { FaDebian } from "react-icons/fa6";
@@ -123,6 +123,7 @@ export const skillsItems: SkillsList[] = [
       { icon: <SiKubernetes />, name: "Kubernetes" },
       { icon: <SiAnsible />, name: "Ansible" },
       { icon: <VscAzure />, name: "Azure" },
+      { icon: <FaAws />, name: "AWS" },
       { icon: <SiApachespark />, name: "Apache Spark" },
       { icon: <SiConfluence />, name: "Confluence" },
       { icon: <SiJira />, name: "Jira" },
@@ -169,6 +170,7 @@ export const skillsItems: SkillsList[] = [
     iconsItems: [
       { icon: <SiN8N />, name: "N8N" },
       { icon: <SiSelenium />, name: "Selenium" },
+      { icon: <SiJasmine />, name: "Jasmine" },
       { icon: <SiCloudron />, name: "Cloudron" },
       { icon: <FaWordpress />, name: "WordPress" },
       { icon: <SiOvh />, name: "OVH" },
