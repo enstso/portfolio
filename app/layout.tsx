@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Nav } from "@/components/nav/nav";
-import { componentsRoutes, componentsAdminRoutes } from "@/lib/utils";
+import { componentsRoutes } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -21,12 +20,11 @@ export const metadata: Metadata = {
   description: "Portfolio Enstso",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en"suppressHydrationWarning={true}>
       <body

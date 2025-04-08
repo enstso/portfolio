@@ -27,21 +27,3 @@ jobs:
       run: |
         docker build -t ghcr.io/${{ github.repository }}/portfolio:latest .
         docker push ghcr.io/${{ github.repository }}/portfolio:latest
-
-    # Étape 4 : Configurer kubectl pour interagir avec le cluster Kubernetes
-    - name: Set up kubectl
-      uses: azure/setup-kubectl@v1
-      with:
-        kubeconfig: ${{ secrets.KUBE_CONFIG }}
-
-    # Étape 5 : Appliquer les fichiers de déploiement Kubernetes
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f k8s/nextjs-deployment.yaml
-        kubectl apply -f k8s/nextjs-service.yaml
-        kubectl apply -f k8s/nextjs-ingress.yaml
-
-    # Optionnel : Attendre que le déploiement soit terminé
-    - name: Wait for Deployment to Complete
-      run: |
-        kubectl rollout status deployment/nextjs-app

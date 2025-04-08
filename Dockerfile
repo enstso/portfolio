@@ -1,5 +1,5 @@
 # Étape 1 : Build de l'application
-FROM node:18.20.5-bullseye AS builder
+FROM node:18.20.8-bullseye AS builder
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ COPY . .
 RUN npm run build
 
 # Étape 2 : Exécuter l'application en production
-FROM node:18.20.5-bullseye
+FROM node:18.20.8-bullseye	
 
 WORKDIR /app
 
