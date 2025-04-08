@@ -21,9 +21,9 @@ spec:
             - containerPort: 3000
           envFrom:
             - configMapRef:
-                name: app-config
+                name: portfolio-configmap
             - secretRef:
-                name: app-secret
+                name: portfolio-secret
 ---
 apiVersion: v1
 kind: Service
