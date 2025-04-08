@@ -17,6 +17,7 @@ spec:
       containers:
         - name: nextjs
           image: enstso/nextjs-app:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           envFrom:
@@ -34,6 +35,6 @@ spec:
     app: nextjs
   ports:
     - protocol: TCP
-      port: 3000  # Exposé en HTTP sur le port 80
-      targetPort: 3000  # Port interne de l'application Next.js
-  type: ClusterIP  # Service interne
+      port: 3000
+      targetPort: 3000
+  type: ClusterIP
