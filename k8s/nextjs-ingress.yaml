@@ -5,8 +5,6 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      real_ip_header CF-Connecting-IP;
     nginx.ingress.kubernetes.io/whitelist-source-range: >
       173.245.48.0/20,
       103.21.244.0/22,
