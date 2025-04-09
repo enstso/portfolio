@@ -1,5 +1,5 @@
 import { getAllCategoryByType, ICategory } from "@/lib/categoryService";
-import { $Enums } from "@prisma/client";
+import { Type } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 async function GET(req:NextRequest,{ params }: { params: { type: string } }) {
@@ -9,11 +9,11 @@ async function GET(req:NextRequest,{ params }: { params: { type: string } }) {
 
     switch (type) {
       case "ARTICLE": {
-        categories = await getAllCategoryByType($Enums.Type.ARTICLE);
+        categories = await getAllCategoryByType(Type.ARTICLE);
         break;
       }
       case "PROJECT": {
-        categories = await getAllCategoryByType($Enums.Type.PROJECT);
+        categories = await getAllCategoryByType(Type.PROJECT);
         break;
       }
       default: {
