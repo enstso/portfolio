@@ -205,8 +205,9 @@ export const projectsData: IProject[] = [
     "name": "IP_Catalogue",
     "description": "IP Catalogue is a console application designed to catalog IPv4 addresses. It offers features like persistent storage, filtering addresses by a mask, displaying addresses in various formats (binary, hexadecimal, decimal), and validating input for IPv4 compliance.",
     "technologies": [
-      "C",
-      "Dockerfile"
+      "message",
+      "documentation_url",
+      "status"
     ],
     "url": "https://github.com/enstso/IP_Catalogue",
     "date": "2023-09-30T22:00:00.000Z"
@@ -215,9 +216,9 @@ export const projectsData: IProject[] = [
     "name": "livres-microservices",
     "description": "Express-based The service provides CRUD functionality for managing books, including operations like adding, updating, deleting, and searching for books, as well as checking their availability.",
     "technologies": [
-      "JavaScript",
-      "Shell",
-      "Dockerfile"
+      "message",
+      "documentation_url",
+      "status"
     ],
     "url": "https://github.com/enstso/livres-microservices",
     "date": "2024-11-30T23:00:00.000Z"
@@ -226,9 +227,9 @@ export const projectsData: IProject[] = [
     "name": "md5ASM",
     "description": "This project is an implementation of the MD5 algorithm in ASMx64. Numerous resources were utilized to understand the algorithm's functioning and to implement the MD5 transformation function.",
     "technologies": [
-      "Assembly",
-      "C",
-      "Python"
+      "message",
+      "documentation_url",
+      "status"
     ],
     "url": "https://github.com/enstso/md5ASM",
     "date": "2024-05-31T22:00:00.000Z"
@@ -237,11 +238,9 @@ export const projectsData: IProject[] = [
     "name": "movieBooker",
     "description": "MovieBooker is a movie reservation system with a NestJS API, featuring user authentication (JWT), TMDB integration, reservation slots, pagination, and secured endpoints. The API will be documented with Swagger, and the frontend will use React and TailwindCSS.",
     "technologies": [
-      "TypeScript",
-      "JavaScript",
-      "Dockerfile",
-      "CSS",
-      "HTML"
+      "message",
+      "documentation_url",
+      "status"
     ],
     "url": "https://github.com/enstso/movieBooker",
     "date": "2025-01-31T23:00:00.000Z"
@@ -250,10 +249,9 @@ export const projectsData: IProject[] = [
     "name": "nextBoilerplate",
     "description": "NextBoilerplate is a lightweight and customizable boilerplate for building fast, scalable web applications with Next.js. It provides a solid foundation for page-based applications, featuring pre-configured setups for routing, dynamic pages, and an optimized development environment.",
     "technologies": [
-      "TypeScript",
-      "Dockerfile",
-      "CSS",
-      "JavaScript"
+      "message",
+      "documentation_url",
+      "status"
     ],
     "url": "https://github.com/enstso/nextBoilerplate",
     "date": "2024-10-31T23:00:00.000Z"
@@ -262,11 +260,9 @@ export const projectsData: IProject[] = [
     "name": "Pizzafork",
     "description": "This web application, built with Laravel, manages pizza orders with multiple user roles, secure authentication, and a user-friendly interface. Customers can order pizzas, track their orders, and manage profiles, while admins and chefs can oversee and manage orders, users, and the menu.",
     "technologies": [
-      "JavaScript",
-      "PHP",
-      "Blade",
-      "SCSS",
-      "CSS"
+      "message",
+      "documentation_url",
+      "status"
     ],
     "url": "https://github.com/enstso/Pizzafork",
     "date": "2023-12-31T23:00:00.000Z"
@@ -275,16 +271,9 @@ export const projectsData: IProject[] = [
     "name": "population-BigData",
     "description": "This project focuses on analyzing the population distribution in France based on data provided by the INSEE (Institut National de la Statistique et des Études Économiques). The goal is to study population trends and disparities across regions, considering  differents variables.",
     "technologies": [
-      "Python",
-      "C",
-      "C++",
-      "Cython",
-      "Fortran",
-      "PowerShell",
-      "Smarty",
-      "Meson",
-      "Assembly",
-      "Batchfile"
+      "message",
+      "documentation_url",
+      "status"
     ],
     "url": "https://github.com/enstso/population-BigData",
     "date": "2024-11-30T23:00:00.000Z"
@@ -293,10 +282,9 @@ export const projectsData: IProject[] = [
     "name": "portfolio",
     "description": "This portfolio showcases my professional profile, projects, and blog articles. It serves as a comprehensive platform to highlight my skills, experiences, and accomplishments. The app ncludes detailed project descriptions, offering insights into my technical expertise and problem-solving abilities.",
     "technologies": [
-      "TypeScript",
-      "Dockerfile",
-      "JavaScript",
-      "CSS"
+      "message",
+      "documentation_url",
+      "status"
     ],
     "url": "https://github.com/enstso/portfolio",
     "date": "2023-08-31T22:00:00.000Z"

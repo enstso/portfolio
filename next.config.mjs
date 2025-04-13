@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone', // ✅ C'est cette ligne qui te manque
   assetPrefix:
     process.env.NODE_ENV === 'production'
       ? process.env.NEXT_PUBLIC_URL
