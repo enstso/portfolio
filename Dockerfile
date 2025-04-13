@@ -25,7 +25,6 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # This will do the trick, use the corresponding env file for each environment.
 RUN npm run build
-RUN ls -la .next
 # 3. Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
@@ -40,7 +39,7 @@ COPY --from=builder /app/public ./public
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./_next/static
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 
 USER nextjs

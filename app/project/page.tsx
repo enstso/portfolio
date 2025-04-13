@@ -16,17 +16,12 @@ export default function Project() {
   const fetchProjects = async () => {
     try {
       const res = await getData(urls.projectApi);
-      if (res && Array.isArray(res.projects)) {
-        return res.projects;
-      }
-      console.error("Invalid response format", res);
-      return []; // Return an empty array if the format is invalid
+      return res.projects;
     } catch (error) {
       console.error("Error fetching projects:", error);
       return [];
     }
   };
-  
 
   useEffect(() => {
     const initializeProjects = async () => {
@@ -39,10 +34,6 @@ export default function Project() {
   }, []);
 
   const filteredProjects = useMemo(() => {
-    if (!Array.isArray(projects)) {
-      return []; // If projects is not an array, return an empty array
-    }
-  
     return projects.sort((a, b) => {
       if (sortOption === "date-asc") {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
