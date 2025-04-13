@@ -2,9 +2,9 @@
 
 import Projects from "@/components/projects/project";
 import { Button } from "@/components/ui/button";
-import { getAllProjectFromGithub, IProject } from "@/lib/projectService";
+import { IProject } from "@/lib/projectService";
 import { getData, urls } from "@/lib/utils";
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 export default function Project() {
   const [projects, setProjects] = useState<IProject[]>([]);
@@ -16,7 +16,7 @@ export default function Project() {
   const fetchProjects = async () => {
     try {
       const res = await getData(urls.projectApi);
-      return res.projects;
+      return res?.projects ?? []; // 👈 Fallback to empty array
     } catch (error) {
       console.error("Error fetching projects:", error);
       return [];
@@ -27,14 +27,21 @@ export default function Project() {
     const initializeProjects = async () => {
       setLoading(true);
       const projectsData = await fetchProjects();
-      setProjects(projectsData);
+      if (Array.isArray(projectsData)) {
+        setProjects(projectsData);
+      } else {
+        console.warn("Invalid data format received:", projectsData);
+        setProjects([]);
+      }
       setLoading(false);
     };
     initializeProjects();
   }, []);
 
   const filteredProjects = useMemo(() => {
-    return projects.sort((a, b) => {
+    if (!Array.isArray(projects)) return [];
+
+    return [...projects].sort((a, b) => {
       if (sortOption === "date-asc") {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
       } else if (sortOption === "date-desc") {
@@ -47,15 +54,26 @@ export default function Project() {
     });
   }, [projects, sortOption]);
 
-  const indexOfFirstItem = useMemo(() => (currentPage - 1) * itemsPerPage, [currentPage, itemsPerPage]);
-  const indexOfLastItem = useMemo(() => currentPage * itemsPerPage, [currentPage, itemsPerPage]);
+  const indexOfFirstItem = useMemo(
+    () => (currentPage - 1) * itemsPerPage,
+    [currentPage, itemsPerPage]
+  );
+  const indexOfLastItem = useMemo(
+    () => currentPage * itemsPerPage,
+    [currentPage, itemsPerPage]
+  );
 
-  const currentProjects = filteredProjects.slice(indexOfFirstItem, indexOfLastItem);
+  const currentProjects = filteredProjects.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   return (
     <div className="min-h-screen text-neutral-900 dark:text-neutral-100">
       <div className="container mx-auto p-8">
-        <h1 className="text-4xl font-extrabold text-center mb-8 transition-all duration-300 ease-in-out transform hover:text-neutral-500 dark:hover:text-neutral-300 cursor-pointer hover:scale-105">Projects</h1>
+        <h1 className="text-4xl font-extrabold text-center mb-8 transition-all duration-300 ease-in-out transform hover:text-neutral-500 dark:hover:text-neutral-300 cursor-pointer hover:scale-105">
+          Projects
+        </h1>
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
           <select
             value={sortOption}
@@ -85,11 +103,23 @@ export default function Project() {
           >
             Previous
           </Button>
-          <span>Page {currentPage} of {Math.ceil(filteredProjects.length / itemsPerPage)}</span>
+          <span>
+            Page {currentPage} of{" "}
+            {Math.ceil(filteredProjects.length / itemsPerPage)}
+          </span>
           <Button
             aria-label="Next Page"
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(filteredProjects.length / itemsPerPage)))}
-            disabled={currentPage === Math.ceil(filteredProjects.length / itemsPerPage)}
+            onClick={() =>
+              setCurrentPage((prev) =>
+                Math.min(
+                  prev + 1,
+                  Math.ceil(filteredProjects.length / itemsPerPage)
+                )
+              )
+            }
+            disabled={
+              currentPage === Math.ceil(filteredProjects.length / itemsPerPage)
+            }
           >
             Next
           </Button>
