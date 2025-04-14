@@ -16,10 +16,9 @@ export const getAllProjectFromGithub = async (): Promise<IProject[]> => {
   let projects: IProject[] = [];
 
   let repos = await getDataGithub("https://api.github.com/users/Enstso/repos");
-  console.log(repos.status);
+  console.log("repos", repos);
   if (repos.status == "403") {
     projects = projectsData ;
-    console.log(repos);
   } else {
     for (const project of repos) {
       const techs = await getDataGithub(project.languages_url).then((t) =>
@@ -33,8 +32,10 @@ export const getAllProjectFromGithub = async (): Promise<IProject[]> => {
         date: formatDateToYearMonthAsDate(project.created_at) as unknown as string,
       });
     }
+  
     // Vérifier si la liste a changé
-    if (JSON.stringify(projects) !== JSON.stringify(projectsData)) {
+    if (JSON.stringify(projects) !== JSON.stringify(projectsData)
+       && process.env.NODE_ENV!="production") {
       updateProjectsFile(projects);
     }
   }
