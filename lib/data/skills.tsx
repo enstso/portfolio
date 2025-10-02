@@ -107,16 +107,6 @@ export const skillsItems: SkillsList[] = [
         ],
     },
     {
-        domain: "Databases",
-        iconsItems: [
-            {icon: <SiMysql/>, name: "MySQL"},
-            {icon: <SiMariadb/>, name: "MariaDB"},
-            {icon: <SiPostgresql/>, name: "PostgreSQL"},
-            {icon: <SiMongodb/>, name: "MongoDB"},
-            {icon: <SiRedis/>, name: "Redis"},
-        ],
-    },
-    {
         domain: "DevOps and Cloud",
         iconsItems: [
             {icon: <FaGithub/>, name: "GitHub"},
@@ -131,6 +121,17 @@ export const skillsItems: SkillsList[] = [
             {icon: <SiGrafana/>, name: "Grafana"},
         ],
     },
+    {
+        domain: "Databases",
+        iconsItems: [
+            {icon: <SiMysql/>, name: "MySQL"},
+            {icon: <SiMariadb/>, name: "MariaDB"},
+            {icon: <SiPostgresql/>, name: "PostgreSQL"},
+            {icon: <SiMongodb/>, name: "MongoDB"},
+            {icon: <SiRedis/>, name: "Redis"},
+        ],
+    },
+
     {
         domain: "Cybersecurity",
         iconsItems: [
