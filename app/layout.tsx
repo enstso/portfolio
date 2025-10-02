@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     keywords: "IT Analyst, Full Stack Developer, Cloud Architecture, Cybersecurity, React, Angular, .NET, NestJS, Paris",
     authors: [{ name: "Enstso JANVIER" }],
     creator: "Enstso JANVIER",
+    viewport: "width=device-width, initial-scale=1",
     openGraph: {
         title: "Enstso JANVIER - IT Analyst Engineer",
         description: "Professional IT solutions and consulting services",
@@ -34,16 +35,18 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
         >
-            <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
-                <div className="flex h-20 items-center">
+            <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
+                <div className="h-16 sm:h-20">
                     <Nav items={componentsRoutes} />
                 </div>
             </header>
             <main className="min-h-screen">
                 {children}
             </main>
-            <footer className="bg-slate-100 dark:bg-slate-800 py-8 text-center text-slate-600 dark:text-slate-400">
-                <p>&copy; 2025 Enstso JANVIER. All rights reserved.</p>
+            <footer className="bg-slate-100 dark:bg-slate-800 py-6 sm:py-8 text-center text-slate-600 dark:text-slate-400">
+                <div className="px-4">
+                    <p className="text-sm sm:text-base">&copy; 2025 Enstso JANVIER. All rights reserved.</p>
+                </div>
             </footer>
         </ThemeProvider>
         </body>
