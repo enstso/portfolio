@@ -15,8 +15,7 @@ export interface IProject {
 export const getAllProjectFromGithub = async (): Promise<IProject[]> => {
   let projects: IProject[] = [];
 
-  let repos = await getDataGithub("https://api.github.com/users/Enstso/repos");
-  console.log("repos", repos);
+  const repos = await getDataGithub("https://api.github.com/users/Enstso/repos");
   if (repos.status == "403") {
     projects = projectsData ;
   } else {
