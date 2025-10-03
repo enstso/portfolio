@@ -1,7 +1,5 @@
 "use server";
 import {getDataGithub} from "./utils";
-import fs from 'fs';
-import path from 'path';
 import {projectsData} from "./data/projects";
 import {prisma} from "@/prisma/client";
 
@@ -119,22 +117,11 @@ export const getAllProjectFromGithub = async (): Promise<any> => {
 const hasProjectsChanged = (newProjects: IProject[], oldProjects: IProject[]): boolean => {
     if (newProjects.length !== oldProjects.length) return true;
 
-    const newHash = newProjects.map(p => `${p.name}-${p.description}-${p.technologies.join(',')}`).sort().join('|');
-    const oldHash = oldProjects.map(p => `${p.name}-${p.description}-${p.technologies.join(',')}`).sort().join('|');
+    const newHash = newProjects.map(p => `${p.name}-${p.description}-${p.technologies.join(',')}`).sort((a, b) => a.localeCompare(b)).join('|');
+    const oldHash = oldProjects.map(p => `${p.name}-${p.description}-${p.technologies.join(',')}`).sort((a, b) => a.localeCompare(b)).join('|');
 
     return newHash !== oldHash;
 };
-
-
-function updateProjectsFile(newProjects: IProject[]) {
-    const filePath = path.join(process.cwd(), 'lib/data/projects.ts');
-
-    const fileContent = `import { IProject } from "../projectService";
-
-export const projectsData: IProject[] = ${JSON.stringify(newProjects, null, 2)};`;
-
-    fs.writeFileSync(filePath, fileContent, 'utf-8');
-}
 
 async function updateProjectsDb(newProjects: IProject[]) {
     await prisma.project.deleteMany();
@@ -158,7 +145,9 @@ function formatDateToYearMonthAsDate(dateString: string): Date {
     // Extraction de l'année et du mois
     const year = date.getFullYear();
     const month = date.getMonth(); // Pas besoin d'ajouter 1 ici car Date() utilise les indices de mois naturels (0 = janvier)
-
+    const day = date.getDate();
     // Création d'un nouvel objet Date avec l'année et le mois
-    return new Date(year, month);
+    return new Date(year, month, day);
 }
+
+

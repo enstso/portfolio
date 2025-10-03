@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Link from "next/link";
-import { NavItems, cn } from "@/lib/utils";
-import { ModeToggle } from "@/components/toggle-mode";
-import { deleteSession } from "@/app/session";
-import { usePathname } from "next/navigation";
-import { Menu, X, Code2, Database, Shield, CloudIcon } from "lucide-react";
+import {NavItems, cn} from "@/lib/utils";
+import {ModeToggle} from "@/components/toggle-mode";
+import {deleteSession} from "@/app/session";
+import {usePathname} from "next/navigation";
+import {Menu, X, Code2} from "lucide-react";
 
 interface NavProps {
     items: NavItems[];
@@ -19,19 +19,21 @@ async function logout() {
     }, 1500);
 }
 
-export function Nav({ items }: Readonly<NavProps>) {
+export function Nav({items}: Readonly<NavProps>) {
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     return (
-        <div className="flex justify-between items-center w-full gap-6 md:gap-10 border-b-2 border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 py-4 shadow-sm">
+        <div
+            className="flex justify-between items-center w-full gap-6 md:gap-10 border-b-2 border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 py-4 shadow-sm">
             <nav className="flex items-center justify-between w-full">
                 {/* Logo Professionnel avec Icon */}
                 <div className="ms-4 md:ms-8 flex items-center gap-3">
-                    <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg shadow-md">
-                        <Code2 className="h-6 w-6 text-white" />
+                    <div
+                        className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg shadow-md">
+                        <Code2 className="h-6 w-6 text-white"/>
                     </div>
                     <div>
                         <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-blue-800 dark:from-white dark:to-blue-400 bg-clip-text text-transparent">
@@ -44,7 +46,8 @@ export function Nav({ items }: Readonly<NavProps>) {
                 </div>
 
                 {/* Navigation Corporate */}
-                <div className="hidden md:flex gap-2 items-center bg-white dark:bg-slate-800 rounded-full px-6 py-2 shadow-lg border border-slate-200 dark:border-slate-700">
+                <div
+                    className="hidden md:flex gap-2 items-center bg-white dark:bg-slate-800 rounded-full px-6 py-2 shadow-lg border border-slate-200 dark:border-slate-700">
                     {items?.map(
                         (item, index) =>
                             item.href && (
@@ -60,7 +63,8 @@ export function Nav({ items }: Readonly<NavProps>) {
                                 >
                                     {item.title}
                                     {pathname === item.href && (
-                                        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
+                                        <div
+                                            className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
                                     )}
                                 </Link>
                             )
@@ -77,7 +81,7 @@ export function Nav({ items }: Readonly<NavProps>) {
                 </div>
 
                 <div className="me-4 md:me-8 flex items-center">
-                    <ModeToggle />
+                    <ModeToggle/>
                 </div>
 
                 {/* Menu Mobile */}
@@ -87,16 +91,17 @@ export function Nav({ items }: Readonly<NavProps>) {
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                 >
                     {isMenuOpen ? (
-                        <X className="h-6 w-6 text-slate-700 dark:text-slate-300" />
+                        <X className="h-6 w-6 text-slate-700 dark:text-slate-300"/>
                     ) : (
-                        <Menu className="h-6 w-6 text-slate-700 dark:text-slate-300" />
+                        <Menu className="h-6 w-6 text-slate-700 dark:text-slate-300"/>
                     )}
                 </button>
             </nav>
 
             {/* Menu Mobile Redesigné */}
             {isMenuOpen && (
-                <div className="absolute top-20 left-4 right-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl z-50 backdrop-blur-sm">
+                <div
+                    className="absolute top-20 left-4 right-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl z-50 backdrop-blur-sm">
                     <div className="flex flex-col gap-2 p-6">
                         {items?.map(
                             (item, index) =>
