@@ -69,7 +69,7 @@ export const getAllProjectFromGithub = async (): Promise<any> => {
     let projects: IProject[] = [];
 
     try {
-        const repos = await getDataGithub("https://api.github.com/users/Enstso/repos");
+        const repos = await getDataGithub("https://api.github.com/users/Enstso/repos?per_page=1000");
 
         if (repos.status === "403") {
             console.warn("GitHub API rate limit exceeded, using cached data");

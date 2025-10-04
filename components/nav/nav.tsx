@@ -49,10 +49,10 @@ export function Nav({items}: Readonly<NavProps>) {
                 <div
                     className="hidden md:flex gap-2 items-center bg-white dark:bg-slate-800 rounded-full px-6 py-2 shadow-lg border border-slate-200 dark:border-slate-700">
                     {items?.map(
-                        (item, index) =>
+                        (item) =>
                             item.href && (
                                 <Link
-                                    key={index}
+                                    key={item.title}
                                     href={item.href}
                                     className={cn(
                                         "relative px-6 py-3 text-sm font-semibold rounded-full transition-all duration-300 hover:scale-105",
@@ -104,10 +104,10 @@ export function Nav({items}: Readonly<NavProps>) {
                     className="absolute top-20 left-4 right-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl z-50 backdrop-blur-sm">
                     <div className="flex flex-col gap-2 p-6">
                         {items?.map(
-                            (item, index) =>
+                            (item) =>
                                 item.href && (
                                     <Link
-                                        key={index}
+                                        key={item.title}
                                         href={item.href}
                                         onClick={() => setIsMenuOpen(false)}
                                         className={cn(

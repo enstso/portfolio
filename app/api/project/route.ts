@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { IProject, getProjects } from "@/lib/projectService";
+import {NextRequest, NextResponse} from "next/server";
+import {getProjects} from "@/lib/projectService";
 
 export async function GET(req: NextRequest) {
     try {
@@ -12,8 +12,8 @@ export async function GET(req: NextRequest) {
         // Validation des paramètres
         if (page < 1 || limit < 1 || limit > 50) {
             return NextResponse.json(
-                { error: "Invalid pagination parameters" },
-                { status: 400 }
+                {error: "Invalid pagination parameters"},
+                {status: 400}
             );
         }
 
@@ -22,15 +22,15 @@ export async function GET(req: NextRequest) {
 
         if (!validSortBy.includes(sortBy) || !validSortOrder.includes(sortOrder)) {
             return NextResponse.json(
-                { error: "Invalid sort parameters" },
-                { status: 400 }
+                {error: "Invalid sort parameters"},
+                {status: 400}
             );
         }
 
         const skip = (page - 1) * limit;
 
         // Récupérer les projets avec tri et pagination
-        const { projects, total } = await getProjects(skip, limit, sortBy, sortOrder);
+        const {projects, total} = await getProjects(skip, limit, sortBy, sortOrder);
 
         const totalPages = Math.ceil(total / limit);
 
@@ -49,8 +49,8 @@ export async function GET(req: NextRequest) {
     } catch (error) {
         console.error("Error fetching projects:", error);
         return NextResponse.json(
-            { error: "Internal server error" },
-            { status: 500 }
+            {error: "Internal server error"},
+            {status: 500}
         );
     }
 }
