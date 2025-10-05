@@ -23,6 +23,10 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# Generate Prisma client
+RUN npx prisma generate
+
 # This will do the trick, use the corresponding env file for each environment.
 RUN npm run build
 # 3. Production image, copy all the files and run next
