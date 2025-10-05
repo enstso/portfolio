@@ -1,29 +1,72 @@
-name: Deploy to Kubernetes
+name: Build & Deploy
 
 on:
   push:
     branches:
-      - main  # Branche de déploiement (tu peux changer à ta convenance)
+      - '**'
+  workflow_dispatch:
 
 jobs:
-  build_and_deploy:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+  build-and-push:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
-    # Étape 1 : Checkout du code source
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    # Étape 2 : Configurer Docker pour utiliser GitHub Container Registry
-    - name: Log in to GitHub Container Registry
-      uses: docker/login-action@v2
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}  # Utilise l'actor GitHub comme nom d'utilisateur
-        password: ${{ secrets.GITHUB_TOKEN }}  # Utilise un token GitHub pour l'authentification
+      # Create .env file
+      - name: Create .env file
+        run: echo "${{ secrets.ENV_FILE }}" > .env
 
-    # Étape 3 : Construire et pousser l'image Docker vers GHCR
-    - name: Build and push Docker image
-      run: |
-        docker build -t ghcr.io/${{ github.repository }}/portfolio:latest .
-        docker push ghcr.io/${{ github.repository }}/portfolio:latest
+      - name: Log in to DockerHub
+        run: echo "${{ secrets.DOCKERPASSWORD }}" | docker login -u "${{ secrets.DOCKERUSERNAME }}" --password-stdin
+
+      - name: Build Docker images
+        run: |
+          IMAGE_TAG=${{ github.sha }}
+          docker build -t ${{ secrets.DOCKERUSERNAME }}/portfolio:${IMAGE_TAG} ./
+          docker tag ${{ secrets.DOCKERUSERNAME }}/portfolio:${IMAGE_TAG} ${{ secrets.DOCKERUSERNAME }}/portfolio:latest
+
+      - name: Push Docker images
+        run: |
+          docker push ${{ secrets.DOCKERUSERNAME }}/portfolio:${{ github.sha }}
+          docker push ${{ secrets.DOCKERUSERNAME }}/portfolio:latest
+
+  deploy:
+    needs: build-and-push
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    env:
+      REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf "%s\n" "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "$REMOTE_HOST" >> ~/.ssh/known_hosts
+
+      - name: Run remote deployment script
+        run: |
+          ssh -i ~/.ssh/id_ed25519 cipher@"$REMOTE_HOST" "bash '/home/cipher/personal/portfolio/k8s/rePullImage.sh'"

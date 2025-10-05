@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nextjs
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: nextjs
@@ -20,11 +20,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
-          envFrom:
-            - configMapRef:
-                name: portfolio-configmap
-            - secretRef:
-                name: portfolio-secret
 ---
 apiVersion: v1
 kind: Service
