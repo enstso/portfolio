@@ -1,9 +1,13 @@
 import {NextRequest, NextResponse} from "next/server";
 import {getArticleById, IArticle} from "@/lib/articleService";
 
-export async function GET(req: NextRequest, {params}: { params: { id: number } }) {
+export async function GET(req: NextRequest) {
     try {
-        const id = params.id;
+        const url = req.url.split("/").pop();
+        const id = Number(url);
+        if (isNaN(id)) {
+            return NextResponse.json({message: "Invalid ID"}, {status: 400});
+        }
         const article: IArticle | null = await getArticleById(id);
         if (article == null) {
             return NextResponse.json({message: "Not found"}, {status: 401});

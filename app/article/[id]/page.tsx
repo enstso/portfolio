@@ -1,13 +1,12 @@
 import {Button} from "@/components/ui/button"
-
 import {notFound} from "next/navigation"
 
 type ArticlePageProps = {
-    params: { id: string }
+    params: Promise<{ id: string }>
 }
 
-export default function Article({params}: ArticlePageProps) {
-    const {id} = params
+export default async function Article({params}: ArticlePageProps) {
+    const {id} = await params
     if (!id) notFound()
     return (
         <div>
