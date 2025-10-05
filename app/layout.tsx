@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type {Metadata, Viewport} from "next";
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import "./globals.css";
@@ -12,7 +12,6 @@ export const metadata: Metadata = {
     keywords: "IT Analyst, Full Stack Developer, Cloud Architecture, Cybersecurity, React, Angular, .NET, NestJS, Paris",
     authors: [{ name: "Enstso JANVIER" }],
     creator: "Enstso JANVIER",
-    viewport: "width=device-width, initial-scale=1",
     openGraph: {
         title: "Enstso JANVIER - IT Analyst Engineer",
         description: "Professional IT solutions and consulting services",
@@ -20,7 +19,11 @@ export const metadata: Metadata = {
         locale: "en_US",
     },
 };
-
+export const viewport:Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+}
 export default function RootLayout({
                                        children,
                                    }: Readonly<{
