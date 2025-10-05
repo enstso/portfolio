@@ -31,7 +31,6 @@ model Article {
   name        String   @unique
   description String
   content     String
-  photo       String
   date        DateTime
   category    Category @relation(fields: [categoryId], references: [id])
   categoryId  Int

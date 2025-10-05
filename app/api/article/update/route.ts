@@ -1,14 +1,14 @@
-import {NextResponse} from "next/server";
-import {getAllProjectFromGithub} from "@/lib/projectService";
+import { NextResponse} from "next/server";
+import {getAllArticlesFromGithub} from "@/lib/articleService";
 
 export async function GET() {
     try {
-        const projects = await getAllProjectFromGithub();
+        const articles = await getAllArticlesFromGithub();
         return NextResponse.json({
             message: "Database updated successfully",
-            projectsCount: projects.length,
+            articlesCount: articles.length,
             updatedAt: new Date().toISOString()
-        });
+        })
     } catch (e) {
         console.error("Error updating database from GitHub:", e);
 
@@ -17,7 +17,8 @@ export async function GET() {
                 error: "Failed to update database",
                 message: e instanceof Error ? e.message : "Unknown error"
             },
-            {status: 500}
-        );
+            {
+                status: 500
+            });
     }
 }

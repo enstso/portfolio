@@ -6,12 +6,12 @@ interface EducationProps {
   items: EducationItem[];
 }
 
-export default function Education({ items }: EducationProps) {
+export default function Education({ items }: Readonly<EducationProps>) {
   return (
       <div className="space-y-3 sm:space-y-4">
         {items.map((item, index) => (
             <div
-                key={index}
+                key={item.name + index}
                 className={cn(
                     "group p-3 sm:p-4 rounded-lg sm:rounded-xl border border-slate-200 dark:border-slate-700 transition-all duration-300",
                     "bg-white dark:bg-slate-800",
