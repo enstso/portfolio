@@ -2,7 +2,7 @@
 
 # Step 0: Delete existing Kubernetes deployments
 echo "Deleting Kubernetes deployments portfolio"
-kubectl delete deployment portfolio
+kubectl delete deployment nextjs-app
 
 # Step 1: List existing Docker images
 echo "Listing existing Docker images:"
