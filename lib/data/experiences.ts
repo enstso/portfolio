@@ -20,7 +20,7 @@ export const ExperiencesList: ExperienceItem[] = [
       "Active involvement in product strategy: feature ideation, contract definition, and advisory on technology stack and infrastructure decisions.",
       "Design, deployment, and optimization of cloud-native architectures focused on performance, reliability, high availability, and cost efficiency.",
       "Development of an AI-powered solution for the energy renovation sector in France.",
-      "Founder and creator of RenovAI, a mobile application enabling fully automated Energy Performance Diagnosis (DPE) audits.",
+      "Co-Founder of RenovAI, a mobile application enabling fully automated Energy Performance Diagnosis (DPE) audits.",
       "Use of AI to analyze property data, generate compliant energy audits, and automate renovation workflows from diagnosis to recommendations.",
       "Implementation of complex business-driven algorithms designed to scale to millions of users.",
       "Agile/Scrum project management: backlog structuring, feature breakdown, and iterative delivery coordination.",
