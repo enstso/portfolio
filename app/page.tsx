@@ -9,12 +9,12 @@ export default function Home() {
         {
             icon: <Code2 className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600"/>,
             title: "Full-Stack Development",
-            description: "React, Angular, .NET, NestJS",
+            description: "React, Angular, .NET, NestJS, Flask",
         },
         {
             icon: <Cloud className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600"/>,
             title: "Cloud Architecture",
-            description: "Azure, AWS, Kubernetes, Docker",
+            description: "Azure, AWS, IBM Cloud, Kubernetes, Docker",
         },
         {
             icon: <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600"/>,

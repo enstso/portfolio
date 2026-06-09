@@ -91,7 +91,7 @@ export default function Blog() {
             {/* Expected Launch */}
             <div className="mt-10 p-4 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Expected launch: <span className="font-semibold text-slate-900 dark:text-white">Q1 2026</span>
+                Expected launch: <span className="font-semibold text-slate-900 dark:text-white">Q3 2026</span>
               </p>
             </div>
           </div>
