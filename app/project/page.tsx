@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 
 import { AdditionalProjects } from "@/components/projects/additional-projects";
 import { FeaturedProjectCard } from "@/components/projects/featured-project-card";
-import { additionalProjects } from "@/lib/data/additionalProjects";
 import { featuredProjects } from "@/lib/data/featuredProjects";
+import { getAdditionalProjects } from "@/lib/projectService";
 import { siteConfig } from "@/lib/site";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Projects — Software, AI, Data & Cloud",
@@ -19,7 +21,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProjectPage() {
+export default async function ProjectPage() {
+  const additionalProjects = await getAdditionalProjects();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <div className="container mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -54,7 +58,7 @@ export default function ProjectPage() {
               More Projects
             </h2>
             <p className="max-w-3xl text-slate-600 dark:text-slate-400">
-              A curated selection of software, infrastructure, data and controlled security work from the wider project archive.
+              The complete public repository archive, available even when the database or GitHub API is temporarily unavailable.
             </p>
           </div>
           <AdditionalProjects projects={additionalProjects} />

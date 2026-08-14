@@ -34,6 +34,19 @@ export function AdditionalProjects({ projects }: AdditionalProjectsProps) {
     [projects, selectedCategory],
   );
 
+  const categoryCounts = useMemo(
+    () =>
+      Object.fromEntries(
+        projectCategories.map((category) => [
+          category,
+          category === "All"
+            ? projects.length
+            : projects.filter((project) => project.category === category).length,
+        ]),
+      ) as Record<(typeof projectCategories)[number], number>,
+    [projects],
+  );
+
   const totalPages = Math.max(1, Math.ceil(filteredProjects.length / projectsPerPage));
   const visibleProjects = filteredProjects.slice(
     (currentPage - 1) * projectsPerPage,
@@ -71,7 +84,7 @@ export function AdditionalProjects({ projects }: AdditionalProjectsProps) {
                 : "border-slate-200 bg-white text-slate-700 hover:border-blue-300 hover:text-blue-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-blue-600 dark:hover:text-blue-400",
             )}
           >
-            {category}
+            {category} <span className="opacity-75">({categoryCounts[category]})</span>
           </button>
         ))}
       </div>
