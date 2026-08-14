@@ -26,10 +26,8 @@ export default function Education({ items }: Readonly<EducationProps>) {
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    {/* Institution Name - Mobile Truncated */}
                     <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white mb-2 leading-tight">
-                      <span className="sm:hidden">{item.name.length > 25 ? item.name.substring(0, 25) + '...' : item.name}</span>
-                      <span className="hidden sm:inline">{item.name}</span>
+                      {item.name}
                     </h3>
 
                     {/* Degree & Study - Mobile Stack */}
@@ -56,7 +54,9 @@ export default function Education({ items }: Readonly<EducationProps>) {
                       <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600 dark:text-slate-400">
                         <Calendar className="h-2.5 w-2.5 sm:h-3 sm:w-3 flex-shrink-0" />
                         <span className="truncate">
-                          {formatDate(item.startDate)} - {item.endDate === "present" ? "Present" : formatDate(item.endDate)}
+                          <time dateTime={item.startDate}>{formatDate(item.startDate)}</time>
+                          {" — "}
+                          <time dateTime={item.endDate}>{formatDate(item.endDate)}</time>
                         </span>
                       </div>
                     </div>
@@ -80,11 +80,11 @@ export default function Education({ items }: Readonly<EducationProps>) {
   );
 }
 
-function formatDate(date: Date | string): string {
-  if (typeof date === "string") return date;
+function formatDate(date: string): string {
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
-    month: "short"
+    month: "short",
+    timeZone: "UTC",
   };
-  return new Intl.DateTimeFormat("en-US", options).format(date);
+  return new Intl.DateTimeFormat("en-US", options).format(new Date(`${date}T00:00:00Z`));
 }

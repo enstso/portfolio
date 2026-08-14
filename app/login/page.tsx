@@ -1,14 +1,9 @@
-import Link from "next/link";
 import { Metadata } from "next";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { LoginForm } from "@/components/authentication/login-form";
 export const metadata: Metadata = {
   title: "Authentication",
-  description: "Login",
+  description: "Private portfolio administration login.",
+  robots: { index: false, follow: false },
 };
 
 

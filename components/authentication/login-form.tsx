@@ -1,60 +1,52 @@
 "use client";
 
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { postData, urls } from "@/lib/utils";
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
-import { createSession } from "@/app/session";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
 import { PasswordInput } from "@/components/authentication/password-input";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 const loginFormSchema = z.object({
-  username: z
-    .string()
-    .min(2, { message: "Username must be at least 2 characters long." })
-    .max(30, { message: "Username must not exceed 30 characters." }),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters long." }),
-  verif: z.string().min(4, { message: "Verification is incorrect." }),
+  username: z.string().min(2, "Username must be at least 2 characters long.").max(30),
+  password: z.string().min(8, "Password must be at least 8 characters long."),
+  verif: z.string().min(4, "Verification is incorrect."),
 });
 
 type LoginFormValues = z.infer<typeof loginFormSchema>;
 
-const defaultValues: Partial<LoginFormValues> = {
-  username: "",
-  password: "",
-  verif: ""
-};
-
 export function LoginForm() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
-    defaultValues,
+    defaultValues: { username: "", password: "", verif: "" },
   });
 
   async function onSubmit(data: LoginFormValues) {
+    setIsLoading(true);
+    setSubmissionError(null);
     try {
-      setIsLoading(true);
-      const res = await postData(urls.user, data);
+      const response = await fetch("/api/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        setSubmissionError("Authentication failed. Check your credentials and try again.");
+        return;
+      }
       form.reset();
-      await createSession(res.user.username);
-      setTimeout(() => {
-        window.location.href = '/admin';
-      }, 1500);
-    } catch (error) {
-      console.error("Login failed:", error);
+      router.push("/admin");
+      router.refresh();
+    } catch {
+      setSubmissionError("Authentication is temporarily unavailable.");
     } finally {
       setIsLoading(false);
     }
@@ -63,72 +55,28 @@ export function LoginForm() {
   return (
     <Form {...form}>
       <form className="flex flex-col space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-        <div>
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="Enter your username"
-                  />
-                </FormControl>
-                {fieldState.error && (
-                  <FormMessage>{fieldState.error.message}</FormMessage>
-                )}
-              </FormItem>
-            )}
-          />
-        </div>
-        
-        <div>
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormControl>
-                  <PasswordInput
-                    {...field}
-                    placeholder="Enter your password"
-                  />
-                </FormControl>
-                {fieldState.error && (
-                  <FormMessage>{fieldState.error.message}</FormMessage>
-                )}
-              </FormItem>
-            )}
-          />
-        </div>
+        <FormField control={form.control} name="username" render={({ field, fieldState }) => (
+          <FormItem>
+            <FormControl><Input {...field} autoComplete="username" placeholder="Username" /></FormControl>
+            {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+          </FormItem>
+        )} />
+        <FormField control={form.control} name="password" render={({ field, fieldState }) => (
+          <FormItem>
+            <FormControl><PasswordInput {...field} autoComplete="current-password" placeholder="Password" /></FormControl>
+            {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+          </FormItem>
+        )} />
+        <FormField control={form.control} name="verif" render={({ field, fieldState }) => (
+          <FormItem>
+            <FormControl><PasswordInput {...field} autoComplete="off" placeholder="Verification code" /></FormControl>
+            {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+          </FormItem>
+        )} />
 
-        <div>
-          <FormField
-            control={form.control}
-            name="verif"
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="Enter verification"
-                  />
-                </FormControl>
-                {fieldState.error && (
-                  <FormMessage>{fieldState.error.message}</FormMessage>
-                )}
-              </FormItem>
-            )}
-          />
-        </div>
-
+        {submissionError && <p role="alert" className="text-sm text-red-600 dark:text-red-400">{submissionError}</p>}
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? (
-            <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
-          ) : (
-            "Submit"
-          )}
+          {isLoading ? <><LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" /> Signing in…</> : "Sign in"}
         </Button>
       </form>
     </Form>

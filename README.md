@@ -1,52 +1,33 @@
-# Next.js Project Portfolio
+# enstso.com portfolio
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Recruiter- and client-facing portfolio for Enstso JANVIER, built with Next.js, React, TypeScript and Tailwind CSS.
 
-## Getting Started
+The public experience is statically rendered and centers on software engineering, AI and agentic systems, data, cloud/platform engineering, and product-aware technical delivery. Featured and additional project data is curated locally, so public pages do not depend on Prisma, a GitHub token, or a live database.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Verification
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run type-check
+npm run build
+```
 
-## Learn More
+## Environment
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.example` and provide server-only values for authenticated administration. `GITHUB_TOKEN` is optional and is used only by the protected, explicit project-archive synchronization operation.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Public project content lives in:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `lib/data/featuredProjects.ts`
+- `lib/data/additionalProjects.ts`
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## About This Portfolio
-
-This portfolio showcases my professional profile, projects, and blog articles. It serves as a comprehensive platform to highlight my skills, experiences, and accomplishments.
-
-### Features
-
-- **Detailed Project Descriptions**: Offering insights into my technical expertise and problem-solving abilities.
-- **Professional Profile**: Highlighting my skills, experiences, and accomplishments.
-- **Blog Articles**: Sharing knowledge and ideas with the community.
-
----
-
-Thank you for visiting my portfolio to [Enstso.com](https://Enstso.com/)!
+The Blog route currently redirects home and is intentionally excluded from navigation and search indexing until real articles are available.

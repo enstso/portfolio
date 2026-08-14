@@ -1,23 +1,29 @@
-import {NextResponse} from "next/server";
-import {getAllProjectFromGithub} from "@/lib/projectService";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-    try {
-        const projects = await getAllProjectFromGithub();
-        return NextResponse.json({
-            message: "Database updated successfully",
-            projectsCount: projects.length,
-            updatedAt: new Date().toISOString()
-        });
-    } catch (e) {
-        console.error("Error updating database from GitHub:", e);
+import { isAuthenticated } from "@/app/session";
+import { syncProjectsFromGitHub } from "@/lib/projectService";
 
-        return NextResponse.json(
-            {
-                error: "Failed to update database",
-                message: e instanceof Error ? e.message : "Unknown error"
-            },
-            {status: 500}
-        );
-    }
+export async function POST(request: NextRequest) {
+  if (!(await isAuthenticated())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const origin = request.headers.get("origin");
+  if (origin && origin !== request.nextUrl.origin) {
+    return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
+  }
+
+  try {
+    const result = await syncProjectsFromGitHub();
+    return NextResponse.json({
+      message: "Project archive synchronized safely",
+      projectsUpdated: result.updated,
+      updatedAt: new Date().toISOString(),
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Project synchronization failed" },
+      { status: 502 },
+    );
+  }
 }

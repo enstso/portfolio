@@ -1,153 +1,85 @@
-"use server";
-import {getDataGithub} from "./utils";
-import {projectsData} from "./data/projects";
-import {prisma} from "@/prisma/client";
+import "server-only";
 
-export interface IProject {
-    id?: number;
-    name: string;
-    description: string;
-    technologies: string[];
-    url: string;
-    date: Date | string;
-}
+import { fetchGitHubJson } from "@/lib/server/github";
+import { prisma } from "@/prisma/client";
 
-export interface ProjectsResponse {
-    projects: IProject[];
-    total: number;
-}
-
-export const getProjects = async (
-    skip: number = 0,
-    take: number = 10,
-    sortBy: string = "date",
-    sortOrder: string = "desc"
-): Promise<ProjectsResponse> => {
-    try {
-        // Validation des paramètres de tri
-        const validSortFields = ["date", "name"];
-        const validSortOrders = ["asc", "desc"];
-
-        const orderByField = validSortFields.includes(sortBy) ? sortBy : "date";
-        const orderByDirection = validSortOrders.includes(sortOrder) ? sortOrder : "desc";
-
-        // Construction de l'objet orderBy pour Prisma
-        const orderBy = {
-            [orderByField]: orderByDirection
-        };
-
-        // Exécution parallèle des requêtes pour optimiser les performances
-        const [projects, total] = await Promise.all([
-            prisma.project.findMany({
-                orderBy,
-                skip,
-                take,
-                select: {
-                    id: true,
-                    name: true,
-                    description: true,
-                    technologies: true,
-                    url: true,
-                    date: true,
-                }
-            }),
-            prisma.project.count() // Compte total pour la pagination
-        ]);
-
-        return {
-            projects,
-            total
-        };
-    } catch (error) {
-        console.error("Error fetching projects:", error);
-        throw new Error("Failed to fetch projects");
-    }
+type SyncedProject = {
+  name: string;
+  description: string;
+  technologies: string[];
+  url: string;
+  date: Date;
 };
 
-
-export const getAllProjectFromGithub = async (): Promise<any> => {
-    let projects: IProject[] = [];
-
-    try {
-        const repos = await getDataGithub("https://api.github.com/users/Enstso/repos?per_page=1000");
-
-        if (repos.status === "403") {
-            console.warn("GitHub API rate limit exceeded, using cached data");
-        }
-
-        const projectPromises = repos.map(async (project: any) => {
-            try {
-                const techs = await getDataGithub(project.languages_url)
-                    .then((t) => Object.keys(t))
-                    .catch(() => []); // Fallback en cas d'erreur
-
-                return {
-                    name: project.name,
-                    description: project.description
-                        ? project.description.replace(/\r?\n/g, " ").trim()
-                        : "",
-                    technologies: techs,
-                    url: project.html_url,
-                    date: formatDateToYearMonthAsDate(project.created_at) as unknown as string,
-                };
-            } catch (error) {
-                console.error(`Error processing project ${project.name}:`, error);
-                return null;
-            }
-        });
-
-        const resolvedProjects = await Promise.all(projectPromises);
-        projects = resolvedProjects.filter((p): p is IProject => p !== null);
-
-        // Mise à jour uniquement si nécessaire
-        if (hasProjectsChanged(projects, projectsData)) {
-            await updateProjectsDb(projects);
-            return projects;
-        }
-
-    } catch (error) {
-        console.error("Error fetching GitHub projects:", error);
-        projects = projectsData; // Fallback vers les données en cache
-    }
-
-    return projects;
+type GitHubRepository = {
+  name: string;
+  description: string | null;
+  html_url: string;
+  created_at: string;
+  language: string | null;
+  archived: boolean;
+  fork: boolean;
 };
 
-// Fonction utilitaire pour comparer les projets
-const hasProjectsChanged = (newProjects: IProject[], oldProjects: IProject[]): boolean => {
-    if (newProjects.length !== oldProjects.length) return true;
+export async function syncProjectsFromGitHub(): Promise<{ updated: number }> {
+  const payload = await fetchGitHubJson<unknown>(
+    "https://api.github.com/users/Enstso/repos?per_page=100&sort=created&direction=desc",
+  );
+  if (!Array.isArray(payload)) {
+    throw new Error("GitHub returned an unexpected repositories response");
+  }
 
-    const newHash = newProjects.map(p => `${p.name}-${p.description}-${p.technologies.join(',')}`).sort((a, b) => a.localeCompare(b)).join('|');
-    const oldHash = oldProjects.map(p => `${p.name}-${p.description}-${p.technologies.join(',')}`).sort((a, b) => a.localeCompare(b)).join('|');
+  const projects = payload
+    .filter(isGitHubRepository)
+    .filter((repository) => !repository.archived && !repository.fork)
+    .map<SyncedProject>((repository) => ({
+      name: repository.name,
+      description: repository.description?.replace(/\r?\n/g, " ").trim() ?? "",
+      technologies: repository.language ? [repository.language] : [],
+      url: repository.html_url,
+      date: new Date(repository.created_at),
+    }));
 
-    return newHash !== oldHash;
-};
+  if (projects.length === 0) {
+    throw new Error("GitHub returned no valid repositories; the database was not changed");
+  }
 
-async function updateProjectsDb(newProjects: IProject[]) {
-    await prisma.project.deleteMany();
-    for (const project of newProjects) {
-        await prisma.project.create({
-            data: {
-                name: project.name,
-                description: project.description,
-                technologies: project.technologies,
-                url: project.url,
-                date: new Date(project.date),
-            }
-        });
-    }
+  await prisma.$transaction(
+    projects.map((project) =>
+      prisma.project.upsert({
+        where: { name: project.name },
+        update: {
+          description: project.description,
+          technologies: project.technologies,
+          url: project.url,
+          date: new Date(project.date),
+        },
+        create: {
+          name: project.name,
+          description: project.description,
+          technologies: project.technologies,
+          url: project.url,
+          date: new Date(project.date),
+        },
+      }),
+    ),
+  );
+
+  return { updated: projects.length };
 }
 
-function formatDateToYearMonthAsDate(dateString: string): Date {
-    // Conversion de la chaîne en objet Date
-    const date = new Date(dateString);
-
-    // Extraction de l'année et du mois
-    const year = date.getFullYear();
-    const month = date.getMonth(); // Pas besoin d'ajouter 1 ici car Date() utilise les indices de mois naturels (0 = janvier)
-    const day = date.getDate();
-    // Création d'un nouvel objet Date avec l'année et le mois
-    return new Date(year, month, day);
+function isGitHubRepository(value: unknown): value is GitHubRepository {
+  if (!value || typeof value !== "object") return false;
+  const repository = value as Record<string, unknown>;
+  return (
+    typeof repository.name === "string" &&
+    (typeof repository.description === "string" || repository.description === null) &&
+    typeof repository.html_url === "string" &&
+    repository.html_url.startsWith("https://github.com/") &&
+    typeof repository.created_at === "string" &&
+    !Number.isNaN(Date.parse(repository.created_at)) &&
+    (typeof repository.language === "string" || repository.language === null) &&
+    typeof repository.archived === "boolean" &&
+    typeof repository.fork === "boolean"
+  );
 }
-
-

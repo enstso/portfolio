@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {IArticle, getArticles} from "@/lib/articleService";
+import {getArticles} from "@/lib/articleService";
 
 export async function GET(req: NextRequest) {
     try {
@@ -77,16 +77,5 @@ export async function GET(req: NextRequest) {
             {error: "Internal server error"},
             {status: 500}
         );
-    }
-}
-
-export async function POST(req: NextRequest) {
-    try {
-        const article: IArticle = await req.json();
-        if (!article) {
-            return NextResponse.json({message: "Bad Request"}, {status: 401});
-        }
-    } catch {
-        return NextResponse.json({error: "An error occurred"}, {status: 500});
     }
 }
