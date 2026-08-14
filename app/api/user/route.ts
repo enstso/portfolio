@@ -1,18 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
-import { IUser, getUserByCredentials } from "@/lib/userService";
+import { z } from "zod";
 
-export async function POST(req: NextRequest) {
+import { createSession, deleteSession } from "@/app/session";
+import { getUserByCredentials } from "@/lib/userService";
+
+const credentialsSchema = z.object({
+  username: z.string().min(2).max(30),
+  password: z.string().min(8).max(200),
+  verif: z.string().min(4).max(200),
+});
+
+export async function POST(request: NextRequest) {
   try {
-    const userData: IUser = await req.json();
-    const user: IUser | null = await getUserByCredentials(userData);
-    if (user == null) {
-      return NextResponse.json(
-        { error: "Invalid credentials" },
-        { status: 401 }
-      );
+    const parsed = credentialsSchema.safeParse(await request.json());
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid credentials" }, { status: 400 });
     }
-    return NextResponse.json({ message: "Authentication successful", user });
-  } catch (error) {
-    return NextResponse.json({ error: "An error occurred" }, { status: 500 });
+
+    const user = await getUserByCredentials(parsed.data);
+    if (!user) {
+      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+    }
+
+    await createSession(user.username);
+    return NextResponse.json({ message: "Authentication successful" });
+  } catch {
+    return NextResponse.json({ error: "Authentication is unavailable" }, { status: 503 });
   }
+}
+
+export async function DELETE() {
+  await deleteSession();
+  return NextResponse.json({ message: "Session ended" });
 }

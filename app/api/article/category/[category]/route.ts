@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
         }
         const articles: IArticle[] = await getAllArticleByCategory(categoryId);
         if (articles.length == 0) {
-            return NextResponse.json({message: "Not Found"}, {status: 401});
+            return NextResponse.json({message: "Not Found"}, {status: 404});
         }
         return NextResponse.json({message: "success", data: articles});
     } catch {

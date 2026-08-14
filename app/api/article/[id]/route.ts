@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
         }
         const article: IArticle | null = await getArticleById(id);
         if (article == null) {
-            return NextResponse.json({message: "Not found"}, {status: 401});
+            return NextResponse.json({message: "Not found"}, {status: 404});
         }
         return NextResponse.json({message: "success", data: article});
     } catch {

@@ -1,45 +1,46 @@
-"use client";
+import { Github, Linkedin, Mail } from "lucide-react";
 
+import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
-import { SocialMediaItems } from "@/lib/utils";
 
-interface SocialMediaProps {
-  items: SocialMediaItems[];
-}
+type SocialMediaProps = {
+  tone?: "default" | "light";
+  includeEmail?: boolean;
+};
 
-export const SocialMedia = ({ items }: SocialMediaProps) => {
+const links = [
+  { label: "GitHub", href: siteConfig.github, icon: Github },
+  { label: "LinkedIn", href: siteConfig.linkedin, icon: Linkedin },
+] as const;
+
+export function SocialMedia({ tone = "default", includeEmail = true }: SocialMediaProps) {
+  const visibleLinks = includeEmail
+    ? [...links, { label: "Email", href: `mailto:${siteConfig.email}`, icon: Mail }]
+    : links;
+
   return (
-    <div className="flex gap-4">
-      {items?.map(
-        (item, index) =>
-          item.url && (
-            <a
-              key={index}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                "group flex items-center justify-center h-10 w-10 rounded-full border border-muted bg-background transition-colors duration-300",
-                // Mode clair : icône blanche sur fond noir
-                "hover:bg-black hover:border-black hover:text-white",
-                // Mode sombre : icône noire sur fond blanc
-                "dark:hover:bg-white dark:hover:border-white dark:hover:text-black"
-              )}
-            >
-              <item.icon
-                className={cn(
-                  "h-6 w-6 transition-transform duration-300",
-                  // Mode clair : inverse le dessin de l'icône
-                  "group-hover:scale-110 group-hover:fill-white",
-                  // Mode sombre : inverse le dessin de l'icône
-                  "dark:group-hover:fill-black"
-                )}
-                aria-hidden="true"
-              />
-              <span className="sr-only">Go to {item.url}</span>
-            </a>
-          )
-      )}
+    <div className="flex gap-2" aria-label="Professional links">
+      {visibleLinks.map((item) => {
+        const Icon = item.icon;
+        const isExternal = item.href.startsWith("http");
+        return (
+          <a
+            key={item.label}
+            href={item.href}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+            aria-label={item.label}
+            className={cn(
+              "group flex h-10 w-10 items-center justify-center rounded-full border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
+              tone === "light"
+                ? "border-blue-200 bg-blue-700/40 text-white hover:bg-white hover:text-blue-700 focus-visible:ring-white focus-visible:ring-offset-blue-700"
+                : "border-slate-300 bg-white text-slate-700 hover:border-blue-600 hover:bg-blue-600 hover:text-white dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200",
+            )}
+          >
+            <Icon className="h-5 w-5 transition-transform group-hover:scale-110 motion-reduce:transform-none" aria-hidden="true" />
+          </a>
+        );
+      })}
     </div>
   );
-};
+}

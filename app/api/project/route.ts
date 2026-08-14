@@ -1,56 +1,47 @@
-import {NextRequest, NextResponse} from "next/server";
-import {getProjects} from "@/lib/projectService";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-    try {
-        const url = new URL(req.url);
-        const page = parseInt(url.searchParams.get("page") || "1", 10);
-        const limit = parseInt(url.searchParams.get("limit") || "5", 10);
-        const sortBy = url.searchParams.get("sortBy") || "date";
-        const sortOrder = url.searchParams.get("sortOrder") || "desc";
+import { additionalProjects } from "@/lib/data/additionalProjects";
 
-        // Validation des paramètres
-        if (page < 1 || limit < 1 || limit > 50) {
-            return NextResponse.json(
-                {error: "Invalid pagination parameters"},
-                {status: 400}
-            );
-        }
+export function GET(request: NextRequest) {
+  const page = Number.parseInt(request.nextUrl.searchParams.get("page") ?? "1", 10);
+  const limit = Number.parseInt(request.nextUrl.searchParams.get("limit") ?? "6", 10);
+  const sortBy = request.nextUrl.searchParams.get("sortBy") ?? "date";
+  const sortOrder = request.nextUrl.searchParams.get("sortOrder") ?? "desc";
 
-        const validSortBy = ["date", "name"];
-        const validSortOrder = ["asc", "desc"];
+  if (
+    !Number.isInteger(page) ||
+    !Number.isInteger(limit) ||
+    page < 1 ||
+    limit < 1 ||
+    limit > 50 ||
+    !["date", "name"].includes(sortBy) ||
+    !["asc", "desc"].includes(sortOrder)
+  ) {
+    return NextResponse.json({ error: "Invalid query parameters" }, { status: 400 });
+  }
 
-        if (!validSortBy.includes(sortBy) || !validSortOrder.includes(sortOrder)) {
-            return NextResponse.json(
-                {error: "Invalid sort parameters"},
-                {status: 400}
-            );
-        }
+  const direction = sortOrder === "asc" ? 1 : -1;
+  const projects = [...additionalProjects].sort((left, right) => {
+    const comparison =
+      sortBy === "name"
+        ? left.name.localeCompare(right.name)
+        : Date.parse(left.date) - Date.parse(right.date);
+    return comparison * direction;
+  });
+  const start = (page - 1) * limit;
+  const totalPages = Math.max(1, Math.ceil(projects.length / limit));
 
-        const skip = (page - 1) * limit;
-
-        // Récupérer les projets avec tri et pagination
-        const {projects, total} = await getProjects(skip, limit, sortBy, sortOrder);
-
-        const totalPages = Math.ceil(total / limit);
-
-        return NextResponse.json({
-            message: "success",
-            projects,
-            pagination: {
-                currentPage: page,
-                totalPages,
-                totalItems: total,
-                itemsPerPage: limit,
-                hasNextPage: page < totalPages,
-                hasPrevPage: page > 1
-            }
-        });
-    } catch (error) {
-        console.error("Error fetching projects:", error);
-        return NextResponse.json(
-            {error: "Internal server error"},
-            {status: 500}
-        );
-    }
+  return NextResponse.json({
+    message: "success",
+    projects: projects.slice(start, start + limit),
+    source: "curated-static",
+    pagination: {
+      currentPage: page,
+      totalPages,
+      totalItems: projects.length,
+      itemsPerPage: limit,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1,
+    },
+  });
 }

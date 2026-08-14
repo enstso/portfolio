@@ -49,10 +49,11 @@ export function ModeToggle() {
           <Button
               variant="ghost"
               size="icon"
+              aria-label="Choose color theme"
               className={cn(
                   "relative rounded-lg transition-all duration-300",
                   "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700",
-                  "hover:bg-slate-50 dark:hover:bg-slate-750 hover:border-slate-300 dark:hover:border-slate-600",
+              "hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600",
                   "hover:scale-105 hover:shadow-sm",
                   "focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
               )}
