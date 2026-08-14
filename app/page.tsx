@@ -54,39 +54,41 @@ const metrics = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <section className="relative mx-auto max-w-6xl px-4 py-12 text-center sm:px-6 sm:py-16 lg:px-12 lg:py-20">
+      <section className="relative w-full px-4 py-12 text-center sm:px-6 sm:py-16 lg:px-12 lg:py-20">
         <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-r from-blue-600/5 to-transparent" />
 
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-800 shadow-sm dark:bg-blue-900/30 dark:text-blue-200 sm:mb-8 sm:px-4 sm:py-2 sm:text-sm">
-          <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />
-          <span className="hidden sm:inline">Open to opportunities &amp; technical projects</span>
-          <span className="sm:hidden">Open to opportunities</span>
-        </div>
+        <div className="mx-auto flex max-w-6xl flex-col items-center">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-800 shadow-sm dark:bg-blue-900/30 dark:text-blue-200 sm:mb-8 sm:px-4 sm:py-2 sm:text-sm">
+            <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />
+            <span className="hidden sm:inline">Open to opportunities &amp; technical projects</span>
+            <span className="sm:hidden">Open to opportunities</span>
+          </div>
 
-        <h1 className="mb-4 bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-3xl font-bold leading-tight text-transparent dark:from-white dark:via-blue-400 dark:to-white sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
-          IT Engineer &amp; Analyst
-          <span className="mt-2 block text-xl text-slate-600 dark:text-slate-400 sm:text-2xl md:text-3xl lg:text-4xl">
-            Enstso JANVIER
-          </span>
-        </h1>
+          <h1 className="mb-4 w-full max-w-5xl text-balance bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-3xl font-bold leading-tight text-transparent dark:from-white dark:via-blue-400 dark:to-white sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
+            IT Engineer &amp; Analyst
+            <span className="mt-2 block text-xl text-slate-600 dark:text-slate-400 sm:text-2xl md:text-3xl lg:text-4xl">
+              Enstso JANVIER
+            </span>
+          </h1>
 
-        <p className="mx-auto mb-4 max-w-4xl px-2 text-lg font-semibold leading-relaxed text-slate-700 dark:text-slate-200 sm:text-xl md:text-2xl">
-          Building software, AI, data and cloud systems from business requirements to production.
-        </p>
-        <p className="mx-auto mb-8 max-w-3xl px-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base md:text-lg">
-          I combine enterprise software engineering, cloud-native platforms, data processing and applied AI to design reliable, scalable and useful technical solutions.
-        </p>
+          <p className="mb-4 max-w-4xl px-2 text-lg font-semibold leading-relaxed text-slate-700 dark:text-slate-200 sm:text-xl md:text-2xl">
+            Building software, AI, data and cloud systems from business requirements to production.
+          </p>
+          <p className="mb-8 max-w-3xl px-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base md:text-lg">
+            I combine enterprise software engineering, cloud-native platforms, data processing and applied AI to design reliable, scalable and useful technical solutions.
+          </p>
 
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-          {["Enterprise Engineering", "AI · Software · Data · Cloud"].map((label) => (
-            <div
-              key={label}
-              className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 sm:text-sm"
-            >
-              <span className="h-2 w-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600" aria-hidden="true" />
-              {label}
-            </div>
-          ))}
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+            {["Enterprise Engineering", "AI · Software · Data · Cloud"].map((label) => (
+              <div
+                key={label}
+                className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 sm:text-sm"
+              >
+                <span className="h-2 w-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600" aria-hidden="true" />
+                {label}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

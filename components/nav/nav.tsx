@@ -30,10 +30,13 @@ export function Nav({ items }: NavProps) {
 
   return (
     <div className="relative flex w-full items-center justify-between gap-4 border-b-2 border-slate-200 bg-gradient-to-r from-slate-50 to-white py-3 shadow-sm dark:border-slate-700 dark:from-slate-900 dark:to-slate-800 sm:py-4">
-      <nav className="flex w-full items-center justify-between" aria-label="Primary navigation">
+      <nav
+        className="grid w-full grid-cols-[1fr_auto] items-center px-4 md:grid-cols-[1fr_auto_1fr] md:px-8"
+        aria-label="Primary navigation"
+      >
         <Link
           href="/"
-          className="ms-4 flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 md:ms-8"
+          className="flex items-center justify-self-start gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           onClick={() => setIsMenuOpen(false)}
         >
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-800 shadow-md sm:h-10 sm:w-10" aria-hidden="true">
@@ -49,7 +52,7 @@ export function Nav({ items }: NavProps) {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-2 shadow-lg dark:border-slate-700 dark:bg-slate-800 md:flex">
+        <div className="hidden items-center justify-self-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-2 shadow-lg dark:border-slate-700 dark:bg-slate-800 md:flex">
           {items.map((item) => (
             <NavLink key={item.href} item={item} active={pathname === item.href} />
           ))}
@@ -60,7 +63,7 @@ export function Nav({ items }: NavProps) {
           )}
         </div>
 
-        <div className="ms-auto flex items-center gap-2 me-4 md:ms-0 md:me-8">
+        <div className="flex items-center justify-self-end gap-2">
           <ModeToggle />
           <button
             type="button"
