@@ -10,7 +10,7 @@ export type ExperienceItem = {
 export const ExperiencesList: ExperienceItem[] = [
   {
     name: "BNP Paribas Asset Management",
-    jobOccupation: "IT Analyst Engineer (Apprenticeship)",
+    jobOccupation: "IT Analyst Engineer",
     place: "Nanterre, Île-de-France, France",
     startDate: "2024-09-01",
     endDate: "2026-09-01",
