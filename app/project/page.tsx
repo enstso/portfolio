@@ -41,9 +41,6 @@ export default async function ProjectPage() {
             <h2 id="featured-projects-heading" className="mb-3 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
               Featured Projects
             </h2>
-            <p className="max-w-3xl text-slate-600 dark:text-slate-400">
-              Four high-signal case studies, maintained locally so they remain available without a database, GitHub token or external API call.
-            </p>
           </div>
           <div className="space-y-5 sm:space-y-7">
             {featuredProjects.map((project, index) => (
