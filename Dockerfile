@@ -1,5 +1,5 @@
 # syntax=docker.io/docker/dockerfile:1
-FROM node:22-alpine	 AS base
+FROM node:22-alpine AS base
 
 # 1. Install dependencies only when needed
 FROM base AS deps
@@ -51,5 +51,6 @@ USER nextjs
 EXPOSE 3000
 
 ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
-CMD HOSTNAME="0.0.0.0" node server.js
+CMD ["node", "server.js"]

@@ -21,6 +21,10 @@ npm run type-check
 npm run build
 ```
 
+## Deployment
+
+Production is deployed directly from the GitHub repository with Coolify. Coolify builds the application from the root `Dockerfile` and manages deployment configuration and environment variables; no GitHub Actions or Kubernetes cluster is required.
+
 ## Environment
 
 Copy `.env.example` and provide server-only values for authenticated administration. `GITHUB_TOKEN` is optional and is used only by the protected, explicit project-archive synchronization operation.
