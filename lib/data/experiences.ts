@@ -4,10 +4,28 @@ export type ExperienceItem = {
   place: string;
   startDate: string;
   endDate: string | "present";
+  employment?: string;
+  displayDate?: string;
   description: string[];
 };
 
 export const ExperiencesList: ExperienceItem[] = [
+  {
+    name: "Salesforce",
+    jobOccupation: "AI Builder (Emerging Talent)",
+    employment: "Full-time",
+    place: "Paris, France",
+    startDate: "2026-11-01",
+    endDate: "present",
+    displayDate: "Nov 2026 – Present",
+    description: [
+      "Customer-facing AI engineering role focused on enterprise AI solutions.",
+      "Work with customer teams to understand business challenges and translate requirements into technical implementations.",
+      "Design, build, deploy, and iterate on AI-powered solutions using Salesforce technologies, including Agentforce.",
+      "Combine hands-on engineering with technical discovery, stakeholder communication, and solution delivery.",
+      "Contribute to production-oriented AI implementations in cross-functional teams.",
+    ],
+  },
   {
     name: "BNP Paribas Asset Management",
     jobOccupation: "IT Analyst Engineer",

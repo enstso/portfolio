@@ -1,226 +1,184 @@
+import Image from "next/image";
 import Link from "next/link";
-import {
-  Bot,
-  Boxes,
-  CloudCog,
-  Code2,
-  Database,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight, Bot, CloudCog, Code2, ExternalLink, Mail } from "lucide-react";
 
-import { DownloadResume } from "@/components/home/downloadResume";
-import { SocialMedia } from "@/components/home/socialMedia";
 import { featuredProjects } from "@/lib/data/featuredProjects";
+import { ExperiencesList } from "@/lib/data/experiences";
+import { getLatestPublishedArticles, type ArticleSummary } from "@/lib/articleService";
+import { siteConfig } from "@/lib/site";
+
+export const dynamic = "force-dynamic";
 
 const expertise = [
   {
     icon: Code2,
     title: "Software Engineering",
-    description: "C#, .NET, Python, TypeScript, Angular, React, APIs",
+    description: "Production applications and APIs shaped by clear architecture, testing and maintainable delivery.",
+    tools: ".NET · C# · Python · TypeScript · React · Angular",
   },
   {
     icon: Bot,
-    title: "AI & Agentic Systems",
-    description: "LLMs, RAG, LangGraph, LangChain, OCR, NLP",
-  },
-  {
-    icon: Database,
-    title: "Data Engineering",
-    description: "PostgreSQL, data quality, Kafka, Redis, processing pipelines",
+    title: "Agentic AI",
+    description: "LLM applications, RAG, document intelligence and tool-using agents built around reliable workflows.",
+    tools: "LLMs · RAG · Agents · Tool integration · Evaluation",
   },
   {
     icon: CloudCog,
-    title: "Cloud & Platform",
-    description: "Kubernetes, IBM Cloud, Docker, CI/CD, Terraform, observability",
-  },
-  {
-    icon: Boxes,
-    title: "Product & Solution Engineering",
-    description: "Requirements, system design, UML, Agile, technical trade-offs",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Secure Engineering",
-    description: "OWASP, IAM/RBAC, privacy by design, secure APIs & AI workflows",
+    title: "Cloud & Solution Architecture",
+    description: "Cloud-native systems designed for scalability, operational resilience and responsible cost decisions.",
+    tools: "Kubernetes · Containers · CI/CD · System design · FinOps",
   },
 ] as const;
 
 const metrics = [
-  { value: "200+", label: "Enterprise Users" },
-  { value: "~80", label: "Apps in Cloud Transformation" },
-  { value: ">95%", label: "Processing-Time Reduction" },
+  { value: "200+", label: "enterprise users supported" },
+  { value: "~80", label: "applications in cloud transformation" },
+  { value: ">95%", label: "processing-time reduction" },
 ] as const;
 
-export default function Home() {
+export default async function Home() {
+  let latestArticles: ArticleSummary[] = [];
+  try {
+    latestArticles = await getLatestPublishedArticles(3);
+  } catch {
+    // The portfolio remains available when PostgreSQL is temporarily offline.
+  }
+
+  const currentExperiences = ExperiencesList.slice(0, 2);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <section className="relative w-full px-4 py-12 text-center sm:px-6 sm:py-16 lg:px-12 lg:py-20">
-        <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-r from-blue-600/5 to-transparent" />
-
-        <div className="mx-auto flex max-w-6xl flex-col items-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-800 shadow-sm dark:bg-blue-900/30 dark:text-blue-200 sm:mb-8 sm:px-4 sm:py-2 sm:text-sm">
-            <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />
-            <span className="hidden sm:inline">Open to opportunities &amp; technical projects</span>
-            <span className="sm:hidden">Open to opportunities</span>
-          </div>
-
-          <h1 className="mb-4 w-full max-w-5xl text-balance bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-3xl font-bold leading-tight text-transparent dark:from-white dark:via-blue-400 dark:to-white sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
-            IT Engineer &amp; Analyst
-            <span className="mt-2 block text-xl text-slate-600 dark:text-slate-400 sm:text-2xl md:text-3xl lg:text-4xl">
-              Enstso JANVIER
-            </span>
+    <div>
+      <section className="mx-auto grid max-w-7xl gap-12 px-5 pb-20 pt-12 sm:px-8 sm:pt-20 lg:grid-cols-[1.08fr_0.75fr] lg:items-center lg:px-12 lg:pb-28 lg:pt-24">
+        <div>
+          <p className="eyebrow">Software Engineering · Agentic AI · Cloud</p>
+          <h1 className="mt-6 max-w-4xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.055em] text-slate-950 dark:text-white sm:text-6xl lg:text-7xl">
+            Building intelligent systems that solve real-world problems.
           </h1>
-
-          <p className="mb-4 max-w-4xl px-2 text-lg font-semibold leading-relaxed text-slate-700 dark:text-slate-200 sm:text-xl md:text-2xl">
-            Building software, AI, data and cloud systems from business requirements to production.
+          <p className="mt-7 text-lg font-semibold text-slate-900 dark:text-slate-100">Enstso Janvier · Software Engineer &amp; AI Builder</p>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400 sm:text-lg sm:leading-8">
+            I work at the intersection of enterprise software, artificial intelligence and cloud technologies—designing reliable solutions that connect engineering with real business challenges.
           </p>
-          <p className="mb-8 max-w-3xl px-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base md:text-lg">
-            I combine enterprise software engineering, cloud-native platforms, data processing and applied AI to design reliable, scalable and useful technical solutions.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            {["Enterprise Engineering", "AI · Software · Data · Cloud"].map((label) => (
-              <div
-                key={label}
-                className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 sm:text-sm"
-              >
-                <span className="h-2 w-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600" aria-hidden="true" />
-                {label}
-              </div>
-            ))}
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link className="primary-button" href="/project">Explore my work <ArrowRight className="h-4 w-4" /></Link>
+            <Link className="secondary-button" href="/blog">Read my articles</Link>
           </div>
+          <div className="mt-8 flex gap-5 text-sm font-medium text-slate-600 dark:text-slate-400">
+            <a className="text-link" href={siteConfig.github} target="_blank" rel="noreferrer">GitHub</a>
+            <a className="text-link" href={siteConfig.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+
+        <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
+          <div className="absolute -inset-5 -z-10 border border-blue-200/70 dark:border-blue-950" aria-hidden="true" />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-slate-200 shadow-2xl shadow-blue-950/15 dark:bg-slate-800 dark:shadow-black/30">
+            <Image
+              src="/images/enstso-portrait.webp"
+              alt="Professional portrait of Enstso Janvier"
+              fill
+              priority
+              sizes="(min-width: 1024px) 38vw, (min-width: 640px) 70vw, 92vw"
+              className="object-cover object-center"
+            />
+          </div>
+          <p className="mt-4 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500 dark:text-slate-500">
+            <span>Paris, France</span><span>Engineering → Impact</span>
+          </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-12" aria-labelledby="expertise-heading">
-        <div className="mb-8 text-center sm:mb-12">
-          <h2 id="expertise-heading" className="mb-3 text-2xl font-bold text-slate-900 dark:text-white sm:mb-4 sm:text-3xl">
-            Core Expertise
-          </h2>
-          <p className="text-base text-slate-600 dark:text-slate-400 sm:text-lg">
-            From problem framing and system design to delivery, operation and improvement.
-          </p>
+      <section className="border-y border-slate-200/80 bg-white/55 dark:border-slate-800 dark:bg-slate-950/30" aria-labelledby="work-heading">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+          <div className="grid gap-8 md:grid-cols-[0.7fr_1.3fr] md:items-end">
+            <div><p className="eyebrow">Selected work</p><h2 id="work-heading" className="section-title mt-4">Systems built around the problem—not the trend.</h2></div>
+            <p className="max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400 md:justify-self-end">Applied AI, production software and architecture decisions translated into useful workflows.</p>
+          </div>
+          <div className="mt-14 divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
+            {featuredProjects.slice(0, 3).map((project, index) => (
+              <article key={project.slug} className="grid gap-5 py-8 md:grid-cols-[5rem_1fr_1fr_auto] md:items-start md:gap-8">
+                <p className="font-mono text-sm text-blue-600 dark:text-blue-400">0{index + 1}</p>
+                <div><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{project.category}</p><h3 className="mt-2 text-xl font-semibold tracking-tight text-slate-950 dark:text-white">{project.name}</h3></div>
+                <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">{project.description}</p>
+                <Link className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:underline dark:text-blue-300" href={`/project#${project.slug}`}>Case overview <ArrowRight className="h-4 w-4" /></Link>
+              </article>
+            ))}
+          </div>
+          <Link className="secondary-button mt-8" href="/project">View all projects <ArrowRight className="h-4 w-4" /></Link>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28" aria-labelledby="expertise-heading">
+        <p className="eyebrow">Core expertise</p>
+        <h2 id="expertise-heading" className="section-title mt-4 max-w-3xl">Three disciplines, one delivery mindset.</h2>
+        <div className="mt-14 grid border-y border-slate-200 dark:border-slate-800 md:grid-cols-3 md:divide-x md:divide-slate-200 md:dark:divide-slate-800">
           {expertise.map((item) => {
             const Icon = item.icon;
-            return (
-              <article
-                key={item.title}
-                className="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:border-blue-300 hover:shadow-lg motion-reduce:transform-none dark:border-slate-700 dark:bg-slate-800 dark:hover:border-blue-600 sm:rounded-2xl sm:p-6"
-              >
-                <div className="flex items-start gap-3 sm:gap-4">
-                  <div className="flex-shrink-0 rounded-lg bg-blue-50 p-2 transition-colors group-hover:bg-blue-100 dark:bg-blue-900/30 dark:group-hover:bg-blue-900/50 sm:rounded-xl sm:p-3">
-                    <Icon className="h-6 w-6 text-blue-600 sm:h-8 sm:w-8" aria-hidden="true" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="mb-1 font-semibold text-slate-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 sm:mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs leading-relaxed text-slate-600 dark:text-slate-400 sm:text-sm">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              </article>
-            );
+            return <article key={item.title} className="border-b border-slate-200 py-8 last:border-b-0 dark:border-slate-800 md:border-b-0 md:px-8 md:first:pl-0 md:last:pr-0">
+              <Icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              <h3 className="mt-6 text-xl font-semibold text-slate-950 dark:text-white">{item.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">{item.description}</p>
+              <p className="mt-6 font-mono text-xs leading-5 text-slate-500 dark:text-slate-500">{item.tools}</p>
+            </article>;
           })}
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-12" aria-labelledby="featured-work-heading">
-        <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 id="featured-work-heading" className="mb-3 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
-              Featured Work
-            </h2>
-            <p className="max-w-2xl text-slate-600 dark:text-slate-400">
-              Selected systems spanning agent engineering, enterprise workflows, product delivery and privacy-oriented document AI.
-            </p>
-          </div>
-          <Link
-            href="/project"
-            className="w-fit font-semibold text-blue-600 underline-offset-4 hover:underline focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-blue-400"
-          >
-            View all projects →
-          </Link>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2 sm:gap-6">
-          {featuredProjects.map((project) => (
-            <article
-              key={project.slug}
-              className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:border-blue-300 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800 dark:hover:border-blue-600 sm:rounded-2xl sm:p-6"
-            >
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
-                {project.category}
-              </p>
-              <h3 className="mb-3 text-lg font-bold text-slate-900 dark:text-white sm:text-xl">
-                {project.name}
-              </h3>
-              <p className="mb-4 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                {project.description}
-              </p>
-              <div className="mb-4 flex flex-wrap gap-2">
-                {project.technologies.slice(0, 6).map((technology) => (
-                  <span key={technology} className="rounded-full border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-800 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
-                    {technology}
-                  </span>
-                ))}
+      <section className="bg-[#0a0f1b] text-white" aria-labelledby="impact-heading">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+          <div className="grid gap-14 lg:grid-cols-[0.75fr_1.25fr]">
+            <div>
+              <p className="eyebrow text-blue-400">Experience &amp; impact</p>
+              <h2 id="impact-heading" className="mt-4 text-balance text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">Enterprise context. Hands-on engineering.</h2>
+              <div className="mt-10 grid grid-cols-3 gap-4 border-t border-slate-700 pt-7">
+                {metrics.map((metric) => <div key={metric.value}><p className="text-2xl font-semibold text-blue-300 sm:text-3xl">{metric.value}</p><p className="mt-2 text-xs leading-5 text-slate-400">{metric.label}</p></div>)}
               </div>
-              {project.metric && (
-                <p className="mb-4 text-sm font-semibold text-slate-800 dark:text-slate-200">
-                  {project.metric}
-                </p>
-              )}
-              <Link
-                href={`/project#${project.slug}`}
-                className="w-fit text-sm font-semibold text-blue-600 underline-offset-4 hover:underline focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-blue-400"
-              >
-                View details →
-              </Link>
-            </article>
-          ))}
+            </div>
+            <div className="border-l border-slate-700 pl-6 sm:pl-10">
+              {currentExperiences.map((experience, index) => (
+                <article key={experience.name} className="relative pb-10 last:pb-0">
+                  <span className="absolute -left-[1.86rem] top-1.5 h-2 w-2 bg-blue-400 sm:-left-[2.86rem]" aria-hidden="true" />
+                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-blue-300">{experience.displayDate ?? "Current"}</p>
+                  <h3 className="mt-2 text-xl font-semibold">{experience.jobOccupation}</h3>
+                  <p className="mt-1 text-sm text-slate-400">{experience.name} · {experience.place}</p>
+                  <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">{experience.description[0]}</p>
+                  {index === 1 && <p className="mt-3 text-sm leading-6 text-slate-400">{experience.description[3]}</p>}
+                </article>
+              ))}
+              <Link href="/about" className="mt-9 inline-flex items-center gap-2 text-sm font-semibold text-blue-300 hover:text-white">Full experience <ArrowRight className="h-4 w-4" /></Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-slate-100 to-blue-50 px-4 py-12 dark:from-slate-800 dark:to-slate-900 sm:px-6 sm:py-16 lg:px-12" aria-labelledby="impact-heading">
-        <div className="mx-auto max-w-4xl">
-          <h2 id="impact-heading" className="mb-8 text-center text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
-            Engineering Impact
-          </h2>
-          <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-3 sm:gap-8">
-            {metrics.map((metric) => (
-              <article key={metric.label} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:rounded-2xl sm:p-6">
-                <p className="mb-1 text-2xl font-bold text-blue-600 sm:mb-2 sm:text-3xl">{metric.value}</p>
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-400 sm:text-base">{metric.label}</p>
+      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28" aria-labelledby="writing-heading">
+        <div className="flex flex-col gap-5 border-b border-slate-200 pb-8 dark:border-slate-800 sm:flex-row sm:items-end sm:justify-between">
+          <div><p className="eyebrow">Latest writing</p><h2 id="writing-heading" className="section-title mt-4">Notes from the work.</h2></div>
+          <Link className="text-link text-sm font-semibold" href="/blog">All articles</Link>
+        </div>
+        {latestArticles.length ? (
+          <div className="divide-y divide-slate-200 dark:divide-slate-800">
+            {latestArticles.map((article) => (
+              <article key={article.id} className="grid gap-4 py-7 sm:grid-cols-[10rem_1fr_auto] sm:items-center">
+                <div><p className="eyebrow normal-case tracking-normal">{article.category.name}</p><time className="mt-2 block text-xs text-slate-500" dateTime={(article.publishedAt ?? article.date).toISOString()}>{formatDate(article.publishedAt ?? article.date)} · {article.readingTime} min</time></div>
+                <div><h3 className="text-lg font-semibold text-slate-950 dark:text-white">{article.name}</h3><p className="mt-1 line-clamp-1 text-sm text-slate-600 dark:text-slate-400">{article.description}</p></div>
+                <Link className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 dark:text-blue-300" href={`/blog/${article.slug}`}>Read <ArrowRight className="h-4 w-4" /></Link>
               </article>
             ))}
           </div>
-        </div>
+        ) : (
+          <div className="py-10"><p className="max-w-xl text-sm leading-6 text-slate-600 dark:text-slate-400">Long-form technical articles will appear here as they are published. The writing system is ready for software, cloud and applied AI deep dives.</p></div>
+        )}
       </section>
 
-      <section className="mx-auto max-w-4xl px-4 py-12 text-center sm:px-6 sm:py-16 lg:px-12" aria-labelledby="contact-heading">
-        <div className="rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white shadow-2xl sm:rounded-3xl sm:p-8">
-          <h2 id="contact-heading" className="mb-3 text-xl font-bold sm:mb-4 sm:text-2xl md:text-3xl">
-            Interested in working together?
-          </h2>
-          <p className="mx-auto mb-6 max-w-2xl text-base text-blue-100 sm:mb-8 sm:text-lg">
-            Explore my projects, review my experience or get in touch to discuss software, AI, data and cloud opportunities.
-          </p>
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/project"
-              className="inline-flex h-10 items-center justify-center rounded-lg bg-white px-5 text-sm font-semibold text-blue-700 shadow-sm transition hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-700"
-            >
-              View Projects
-            </Link>
-            <DownloadResume variant="light" />
-            <SocialMedia tone="light" />
-          </div>
+      <section className="border-t border-slate-200 bg-blue-50/70 dark:border-slate-800 dark:bg-blue-950/20" aria-labelledby="contact-heading">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-8 md:grid-cols-[1fr_auto] md:items-center lg:px-12 lg:py-20">
+          <div><p className="eyebrow">Start a conversation</p><h2 id="contact-heading" className="section-title mt-4">Let’s turn a complex problem into a clear technical path.</h2><p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">Software engineering, AI-powered products, architecture and business-oriented technical collaboration.</p></div>
+          <a className="primary-button md:justify-self-end" href={`mailto:${siteConfig.email}`}><Mail className="h-4 w-4" /> Email Enstso <ExternalLink className="h-3.5 w-3.5" /></a>
         </div>
       </section>
     </div>
   );
+}
+
+function formatDate(date: Date) {
+  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(date);
 }
