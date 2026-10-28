@@ -1,17 +1,78 @@
-# enstso.com portfolio
+# enstso.com
 
-Recruiter- and client-facing portfolio for Enstso JANVIER, built with Next.js, React, TypeScript and Tailwind CSS.
+Personal engineering portfolio and technical writing platform for Enstso Janvier. The application uses Next.js App Router, TypeScript, Tailwind CSS, PostgreSQL and Prisma, and remains compatible with Docker standalone output and Coolify.
 
-The public experience is statically rendered and centers on software engineering, AI and agentic systems, data, cloud/platform engineering, and product-aware technical delivery. Featured and additional project data is curated locally, so public pages do not depend on Prisma, a GitHub token, or a live database.
+## What is included
+
+- Editorial portfolio pages for Home, Work and About
+- Responsive light and dark themes
+- Public technical writing at `/blog` and `/blog/[slug]`
+- Secure Markdown rendering with syntax highlighting, code copy and tables of contents
+- Protected browser-based article studio at `/admin/articles`
+- Draft, private preview, publish, edit, unpublish and delete lifecycle
+- Published-article metadata, `BlogPosting` structured data, sitemap entries and RSS
+- Static portfolio fallbacks when PostgreSQL is unavailable
+
+Legacy `/article/[id]` links redirect to the corresponding published slug. Drafts never appear in public article queries, the sitemap or RSS.
 
 ## Local development
 
-```bash
-npm install
-npm run dev
-```
+1. Install dependencies:
 
-Open [http://localhost:3000](http://localhost:3000).
+   ```bash
+   npm install
+   ```
+
+2. Copy `.env.example` to `.env.local` and provide server-only values.
+
+3. Apply reviewed migrations to the configured PostgreSQL database:
+
+   ```bash
+   npm run db:migrate
+   ```
+
+4. Start the application:
+
+   ```bash
+   npm run dev
+   ```
+
+Open [http://localhost:3000](http://localhost:3000). Existing admin credentials stored in PostgreSQL continue to work at `/login`.
+
+## Environment variables
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `DATABASE_URL` | Yes for writing/admin | PostgreSQL connection used by Prisma |
+| `JWT_SECRET_KEY` | Yes for admin | Long random secret used to sign secure session cookies |
+| `GITHUB_TOKEN` | No | Protected project archive synchronization only |
+
+Do not expose these values through `NEXT_PUBLIC_` variables.
+
+## Database migration safety
+
+The migration in `prisma/migrations/20261028230000_article_publishing` is additive. It:
+
+- adds publication fields, ownership and stable slugs;
+- assigns deterministic slugs to legacy articles;
+- keeps every legacy article in `DRAFT` state;
+- adds indexes and the suggested article categories;
+- does not delete or reset existing data.
+
+Review and back up the production database before applying a migration. Use `prisma migrate deploy` (or `npm run db:migrate`) in production. Do not use `prisma migrate reset` or `prisma db push` against production.
+
+## Coolify deployment
+
+Coolify should continue building from the root `Dockerfile`. The application keeps `output: "standalone"`; no Vercel-specific service or persistent container filesystem is required.
+
+Recommended deployment sequence:
+
+1. Back up PostgreSQL.
+2. Add `npm run db:migrate` as a Coolify pre-deploy command using the production `DATABASE_URL`.
+3. Build and deploy the Docker image.
+4. Verify `/blog`, `/admin/articles` and one published article.
+
+The build runs `prisma generate` but does not require a live database. Article images use validated persistent external HTTP(S) URLs; uploads are intentionally not written into the container.
 
 ## Verification
 
@@ -21,17 +82,13 @@ npm run type-check
 npm run build
 ```
 
-## Deployment
+## Content sources
 
-Production is deployed directly from the GitHub repository with Coolify. Coolify builds the application from the root `Dockerfile` and manages deployment configuration and environment variables; no GitHub Actions or Kubernetes cluster is required.
-
-## Environment
-
-Copy `.env.example` and provide server-only values for authenticated administration. `GITHUB_TOKEN` is optional and is used only by the protected, explicit project-archive synchronization operation.
-
-Public project content lives in:
+Curated portfolio content remains in:
 
 - `lib/data/featuredProjects.ts`
 - `lib/data/additionalProjects.ts`
+- `lib/data/experiences.ts`
+- `lib/data/skills.ts`
 
-The Blog route currently redirects home and is intentionally excluded from navigation and search indexing until real articles are available.
+Published writing lives in PostgreSQL and changes without a Git commit or deployment.
