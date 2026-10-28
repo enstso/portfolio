@@ -1,81 +1,30 @@
-import {NextRequest, NextResponse} from "next/server";
-import {getArticles} from "@/lib/articleService";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-    try {
-        const url = new URL(req.url);
-        const page = parseInt(url.searchParams.get("page") || "1", 10);
-        const limit = parseInt(url.searchParams.get("limit") || "10", 10);
-        const sortBy = url.searchParams.get("sortBy") || "date";
-        const sortOrder = url.searchParams.get("sortOrder") || "desc";
-        const categoryId = url.searchParams.get("categoryId");
+import { getPublicArticles } from "@/lib/articleService";
 
-        // Validation des paramètres de pagination
-        if (page < 1 || limit < 1 || limit > 100) {
-            return NextResponse.json(
-                {error: "Invalid pagination parameters. Page must be >= 1, limit must be between 1 and 100"},
-                {status: 400}
-            );
-        }
+export async function GET(request: NextRequest) {
+  const page = Number(request.nextUrl.searchParams.get("page") ?? "1");
+  const limit = Number(request.nextUrl.searchParams.get("limit") ?? "10");
+  const search = request.nextUrl.searchParams.get("search")?.slice(0, 100) ?? "";
+  const category = request.nextUrl.searchParams.get("category")?.slice(0, 100) ?? "";
 
-        // Validation des paramètres de tri
-        const validSortBy = ["date", "name", "categoryId"];
-        const validSortOrder = ["asc", "desc"];
+  if (!Number.isInteger(page) || page < 1 || !Number.isInteger(limit) || limit < 1 || limit > 20) {
+    return NextResponse.json({ error: "Invalid pagination parameters" }, { status: 400 });
+  }
 
-        if (!validSortBy.includes(sortBy) || !validSortOrder.includes(sortOrder)) {
-            return NextResponse.json(
-                {error: "Invalid sort parameters. sortBy must be 'date', 'name', or 'categoryId'. sortOrder must be 'asc' or 'desc'"},
-                {status: 400}
-            );
-        }
-
-        // Validation du categoryId si fourni
-        let parsedCategoryId: number | undefined;
-        if (categoryId) {
-            parsedCategoryId = parseInt(categoryId, 10);
-            if (isNaN(parsedCategoryId) || parsedCategoryId < 1) {
-                return NextResponse.json(
-                    {error: "Invalid categoryId parameter. Must be a positive integer"},
-                    {status: 400}
-                );
-            }
-        }
-
-        const skip = (page - 1) * limit;
-
-        // Récupérer les articles avec tri, pagination et filtres
-        const {articles, total} = await getArticles(
-            skip,
-            limit,
-            sortBy,
-            sortOrder,
-            parsedCategoryId
-        );
-
-        const totalPages = Math.ceil(total / limit);
-
-        return NextResponse.json({
-            message: "success",
-            articles,
-            pagination: {
-                currentPage: page,
-                totalPages,
-                totalItems: total,
-                itemsPerPage: limit,
-                hasNextPage: page < totalPages,
-                hasPrevPage: page > 1
-            },
-            filters: {
-                sortBy,
-                sortOrder,
-                categoryId: parsedCategoryId || null
-            }
-        });
-    } catch (error) {
-        console.error("Error fetching articles:", error);
-        return NextResponse.json(
-            {error: "Internal server error"},
-            {status: 500}
-        );
-    }
+  try {
+    const result = await getPublicArticles({ page, pageSize: limit, search, category });
+    return NextResponse.json({
+      message: "success",
+      articles: result.articles,
+      pagination: {
+        currentPage: page,
+        totalPages: Math.ceil(result.total / limit),
+        totalItems: result.total,
+        itemsPerPage: limit,
+      },
+    });
+  } catch {
+    return NextResponse.json({ error: "Articles are temporarily unavailable" }, { status: 503 });
+  }
 }

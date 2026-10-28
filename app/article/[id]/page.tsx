@@ -1,17 +1,14 @@
-import {Button} from "@/components/ui/button"
-import {notFound} from "next/navigation"
+import { notFound, permanentRedirect } from "next/navigation";
 
-type ArticlePageProps = {
-    params: Promise<{ id: string }>
-}
+import { getPublishedArticleById } from "@/lib/articleService";
 
-export default async function Article({params}: ArticlePageProps) {
-    const {id} = await params
-    if (!id) notFound()
-    return (
-        <div>
-            <h1>Article</h1>
-            <Button>Click me {id}</Button>
-        </div>
-    )
+export const dynamic = "force-dynamic";
+
+export default async function LegacyArticle({ params }: { params: Promise<{ id: string }> }) {
+  const { id: rawId } = await params;
+  const id = Number(rawId);
+  if (!Number.isInteger(id) || id < 1) notFound();
+  const article = await getPublishedArticleById(id).catch(() => null);
+  if (!article) notFound();
+  permanentRedirect(`/blog/${article.slug}`);
 }
