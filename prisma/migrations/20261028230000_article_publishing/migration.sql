@@ -3,9 +3,29 @@ CREATE TYPE "ArticleStatus" AS ENUM ('DRAFT', 'PUBLISHED');
 
 -- Keep legacy-only columns compatible with the current Prisma models without
 -- dropping any historical data.
-ALTER TABLE "Category" ALTER COLUMN "type" SET DEFAULT 'ARTICLE';
-ALTER TABLE "Article" ALTER COLUMN "photo" SET DEFAULT '';
-ALTER TABLE "Project" ALTER COLUMN "categoryId" DROP NOT NULL;
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = 'Category' AND column_name = 'type'
+  ) THEN
+    EXECUTE 'ALTER TABLE "Category" ALTER COLUMN "type" SET DEFAULT ''ARTICLE''';
+  END IF;
+
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = 'Article' AND column_name = 'photo'
+  ) THEN
+    EXECUTE 'ALTER TABLE "Article" ALTER COLUMN "photo" SET DEFAULT ''''';
+  END IF;
+
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = 'Project' AND column_name = 'categoryId'
+  ) THEN
+    EXECUTE 'ALTER TABLE "Project" ALTER COLUMN "categoryId" DROP NOT NULL';
+  END IF;
+END $$;
 
 ALTER TABLE "Article"
   ADD COLUMN "slug" TEXT,
@@ -36,8 +56,8 @@ ALTER TABLE "Article"
   FOREIGN KEY ("authorId") REFERENCES "User"("id")
   ON DELETE SET NULL ON UPDATE CASCADE;
 
-INSERT INTO "Category" ("name", "type")
-SELECT category_name, 'ARTICLE'::"Type"
+INSERT INTO "Category" ("name")
+SELECT category_name
 FROM (VALUES
   ('Artificial Intelligence'),
   ('Agentic AI'),
