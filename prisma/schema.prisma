@@ -14,28 +14,48 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
+  id       Int       @id @default(autoincrement())
   username String
   password String
   verif    String
+  articles Article[]
 }
 
 model Category {
   id       Int       @id @default(autoincrement())
   name     String
   articles Article[]
+
+  @@index([name])
 }
 
 model Article {
-  id          Int      @id @default(autoincrement())
-  name        String   @unique
-  description String
-  content     String
-  date        DateTime
-  category    Category @relation(fields: [categoryId], references: [id])
-  categoryId  Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            Int           @id @default(autoincrement())
+  name          String        @unique
+  slug          String        @unique
+  description   String
+  content       String
+  date          DateTime
+  status        ArticleStatus @default(DRAFT)
+  publishedAt   DateTime?
+  coverImage    String?
+  readingTime   Int           @default(1)
+  previousSlugs String[]      @default([])
+  category      Category      @relation(fields: [categoryId], references: [id])
+  categoryId    Int
+  author        User?         @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  authorId      Int?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([status, publishedAt])
+  @@index([categoryId, status])
+  @@index([authorId])
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
 }
 
 model Project {

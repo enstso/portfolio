@@ -9,58 +9,34 @@ import { siteConfig } from "@/lib/site";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Projects — Software, AI, Data & Cloud",
-  description:
-    "Featured and selected engineering projects by Enstso JANVIER across software, agentic AI, data, cloud platforms and secure engineering.",
+  title: "Work — Software, Agentic AI & Cloud",
+  description: "Selected engineering work by Enstso Janvier across enterprise software, agentic AI, document intelligence and cloud platforms.",
   alternates: { canonical: "/project" },
-  openGraph: {
-    title: `Projects | ${siteConfig.shortTitle}`,
-    description:
-      "Selected software, AI, data, cloud and secure-engineering projects, presented with their architecture and measurable outcomes.",
-    url: "/project",
-  },
+  openGraph: { title: `Work | ${siteConfig.shortTitle}`, description: "Selected engineering projects presented through their problems, decisions and supported outcomes.", url: "/project" },
 };
 
 export default async function ProjectPage() {
   const additionalProjects = await getAdditionalProjects();
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="container mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <header className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
-          <h1 className="mb-4 bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-3xl font-bold text-transparent dark:from-white dark:via-blue-400 dark:to-white sm:text-4xl md:text-5xl">
-            Projects
-          </h1>
-          <p className="text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
-            Curated engineering work across enterprise software, agentic AI, data processing, cloud platforms and privacy-oriented systems.
-          </p>
-        </header>
+    <div>
+      <header className="mx-auto grid max-w-7xl gap-10 px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:px-12 lg:pb-24 lg:pt-24">
+        <div><p className="eyebrow">Selected engineering work</p><h1 className="mt-5 text-balance text-5xl font-semibold leading-[1.02] tracking-[-0.055em] text-slate-950 dark:text-white sm:text-6xl">From ambiguous problem to working system.</h1></div>
+        <p className="max-w-xl text-base leading-7 text-slate-600 dark:text-slate-400 lg:justify-self-end">Projects across enterprise software, agentic AI, document intelligence and cloud platforms—focused on architecture decisions, production constraints and useful outcomes.</p>
+      </header>
 
-        <section className="mx-auto mb-16 max-w-6xl sm:mb-20" aria-labelledby="featured-projects-heading">
-          <div className="mb-7 sm:mb-9">
-            <h2 id="featured-projects-heading" className="mb-3 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
-              Featured Projects
-            </h2>
-          </div>
-          <div className="space-y-5 sm:space-y-7">
-            {featuredProjects.map((project, index) => (
-              <FeaturedProjectCard key={project.slug} project={project} index={index + 1} />
-            ))}
-          </div>
-        </section>
+      <section className="border-t border-slate-200 dark:border-slate-800" aria-labelledby="featured-projects-heading">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+          <p className="eyebrow">Case overviews</p><h2 id="featured-projects-heading" className="section-title mt-4">Featured projects</h2>
+          <div className="mt-12 border-y border-slate-200 dark:border-slate-800">{featuredProjects.map((project, index) => <FeaturedProjectCard key={project.slug} project={project} index={index + 1} />)}</div>
+        </div>
+      </section>
 
-        <section className="mx-auto max-w-5xl" aria-labelledby="additional-projects-heading">
-          <div className="mb-7 sm:mb-9">
-            <h2 id="additional-projects-heading" className="mb-3 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
-              More Projects
-            </h2>
-            <p className="max-w-3xl text-slate-600 dark:text-slate-400">
-              The complete public repository archive, available even when the database or GitHub API is temporarily unavailable.
-            </p>
-          </div>
+      <section className="border-t border-slate-200 bg-white/50 dark:border-slate-800 dark:bg-slate-950/20" aria-labelledby="additional-projects-heading">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+          <div className="mb-10 grid gap-5 md:grid-cols-[1fr_1fr] md:items-end"><div><p className="eyebrow">Repository archive</p><h2 id="additional-projects-heading" className="section-title mt-4">More projects</h2></div><p className="text-sm leading-6 text-slate-600 dark:text-slate-400 md:justify-self-end">A broader archive of public work, available even if external services are temporarily offline.</p></div>
           <AdditionalProjects projects={additionalProjects} />
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

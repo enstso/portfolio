@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 import { createSession, deleteSession } from "@/app/session";
+import { isRequestBodyTooLarge, isSameOrigin } from "@/lib/server/request-security";
 import { getUserByCredentials } from "@/lib/userService";
 
 const credentialsSchema = z.object({
@@ -11,6 +12,12 @@ const credentialsSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  if (!isSameOrigin(request)) {
+    return NextResponse.json({ error: "Request origin is not allowed" }, { status: 403 });
+  }
+  if (isRequestBodyTooLarge(request, 10_000)) {
+    return NextResponse.json({ error: "Request is too large" }, { status: 413 });
+  }
   try {
     const parsed = credentialsSchema.safeParse(await request.json());
     if (!parsed.success) {
@@ -29,7 +36,10 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function DELETE() {
+export async function DELETE(request: NextRequest) {
+  if (!isSameOrigin(request)) {
+    return NextResponse.json({ error: "Request origin is not allowed" }, { status: 403 });
+  }
   await deleteSession();
   return NextResponse.json({ message: "Session ended" });
 }

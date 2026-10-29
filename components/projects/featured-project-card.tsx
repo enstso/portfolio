@@ -1,79 +1,14 @@
-import { CheckCircle2, ExternalLink, LockKeyhole } from "lucide-react";
+import { ArrowUpRight, Check, LockKeyhole } from "lucide-react";
 
 import type { FeaturedProject } from "@/lib/data/featuredProjects";
 
-type FeaturedProjectCardProps = {
-  project: FeaturedProject;
-  index: number;
-};
-
-export function FeaturedProjectCard({ project, index }: FeaturedProjectCardProps) {
+export function FeaturedProjectCard({ project, index }: { project: FeaturedProject; index: number }) {
   const projectUrl = project.externalUrl ?? project.githubUrl;
-
   return (
-    <article
-      id={project.slug}
-      className="scroll-mt-28 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:border-blue-300 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800 dark:hover:border-blue-600 sm:rounded-2xl sm:p-7"
-    >
-      <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-            {String(index).padStart(2, "0")} · {project.category}
-          </p>
-          <h3 className="text-xl font-bold leading-tight text-slate-900 dark:text-white sm:text-2xl">
-            {project.name}
-          </h3>
-        </div>
-        {project.private && (
-          <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600 dark:border-slate-600 dark:bg-slate-700/60 dark:text-slate-300">
-            <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />
-            Private case study
-          </span>
-        )}
-      </div>
-
-      <p className="mb-5 max-w-4xl leading-relaxed text-slate-600 dark:text-slate-400">
-        {project.description}
-      </p>
-
-      <ul className="mb-5 grid gap-2 text-sm text-slate-700 dark:text-slate-300 md:grid-cols-2">
-        {project.highlights.map((highlight) => (
-          <li key={highlight} className="flex items-start gap-2.5 leading-relaxed">
-            <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-            <span>{highlight}</span>
-          </li>
-        ))}
-      </ul>
-
-      <div className="mb-5 flex flex-wrap gap-2">
-        {project.technologies.map((technology) => (
-          <span key={technology} className="rounded-full border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-800 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
-            {technology}
-          </span>
-        ))}
-      </div>
-
-      <div className="flex flex-col gap-3 border-t border-slate-200 pt-5 dark:border-slate-700 sm:flex-row sm:items-center sm:justify-between">
-        {project.metric ? (
-          <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
-            {project.metric}
-          </p>
-        ) : (
-          <span />
-        )}
-
-        {projectUrl && (
-          <a
-            href={projectUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex w-fit items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-800"
-          >
-            View project
-            <ExternalLink className="h-4 w-4" aria-hidden="true" />
-          </a>
-        )}
-      </div>
+    <article id={project.slug} className="scroll-mt-28 border-b border-slate-200 py-10 last:border-b-0 dark:border-slate-800 lg:grid lg:grid-cols-[7rem_0.9fr_1.1fr] lg:gap-10 lg:py-14">
+      <p className="font-mono text-sm font-semibold text-blue-600 dark:text-blue-400">{String(index).padStart(2, "0")}</p>
+      <div className="mt-4 lg:mt-0"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{project.category}</p><h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white sm:text-3xl">{project.name}</h3>{project.period && <p className="mt-3 font-mono text-xs uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">{project.period}</p>}{project.private && <p className="mt-4 inline-flex items-center gap-2 text-xs font-medium text-slate-500"><LockKeyhole className="h-3.5 w-3.5" /> Private case study</p>}{project.metric && <p className="mt-6 border-l-2 border-blue-500 pl-4 text-sm font-semibold leading-6 text-slate-800 dark:text-slate-200">{project.metric}</p>}</div>
+      <div className="mt-7 lg:mt-0"><p className="text-sm leading-7 text-slate-600 dark:text-slate-400">{project.description}</p><h4 className="mt-7 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Engineering decisions</h4><ul className="mt-4 space-y-3">{project.highlights.map((highlight) => <li key={highlight} className="flex items-start gap-3 text-sm leading-6 text-slate-700 dark:text-slate-300"><Check className="mt-1 h-4 w-4 shrink-0 text-blue-600 dark:text-blue-400" /> {highlight}</li>)}</ul><div className="mt-7 flex flex-wrap gap-2">{project.technologies.map((technology) => <span key={technology} className="border border-slate-300 px-2.5 py-1 font-mono text-[11px] text-slate-600 dark:border-slate-700 dark:text-slate-400">{technology}</span>)}</div>{projectUrl && <a href={projectUrl} target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:underline focus-ring dark:text-blue-300">View project <ArrowUpRight className="h-4 w-4" /></a>}</div>
     </article>
   );
 }

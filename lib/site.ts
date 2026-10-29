@@ -1,9 +1,9 @@
 export const siteConfig = {
-  name: "Enstso JANVIER",
-  title: "Enstso JANVIER — IT Engineer & Analyst | Software, AI, Data & Cloud",
-  shortTitle: "Enstso JANVIER — IT Engineer & Analyst",
+  name: "Enstso Janvier",
+  title: "Enstso Janvier — Software Engineer | Agentic AI & Cloud Solutions",
+  shortTitle: "Enstso Janvier — Software Engineer",
   description:
-    "IT Engineer & Analyst building software, AI, data and cloud solutions from business requirements to production. Experience in enterprise software, Kubernetes, applied AI, data processing and solution engineering.",
+    "Software Engineer and AI Builder working across enterprise software, agentic AI and cloud technologies to solve real business challenges.",
   url: "https://enstso.com",
   email: "enstso@outlook.fr",
   resumePath: "/resumeEnstsoJanvier.pdf",
@@ -13,6 +13,7 @@ export const siteConfig = {
 
 export const primaryNavigation = [
   { title: "Home", href: "/" },
+  { title: "Work", href: "/project" },
+  { title: "Writing", href: "/blog" },
   { title: "About", href: "/about" },
-  { title: "Projects", href: "/project" },
 ] as const;

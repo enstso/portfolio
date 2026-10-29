@@ -3,6 +3,7 @@ export type FeaturedProject = {
   name: string;
   category: string;
   description: string;
+  period?: string;
   highlights: string[];
   technologies: string[];
   metric?: string;
@@ -62,13 +63,23 @@ export const featuredProjects: FeaturedProject[] = [
     name: "GUIA",
     category: "Applied AI · Software · Product Engineering",
     description:
-      "AI-powered mobile platform supporting energy-performance and renovation audit workflows through structured data collection, RAG/LLM assistance, OCR, document analysis and image processing.",
+      "Co-founded GUIA, an AI-powered mobile application designed to automate Energy Performance Diagnosis (DPE) audit workflows and support the generation of compliant renovation reports.",
+    period: "Nov 2025 – Present",
     highlights: [
-      "Connects a React Native Expo client to NestJS, Flask and REST API services.",
-      "Supports property-data collection, DPE workflows, OCR, document analysis and RAG/LLM assistance.",
-      "Translates requirements into specifications, UML, architecture and backlog decisions across scalability, reliability, security, cost and UX.",
+      "Contributed to product strategy, technical architecture and full-stack development, combining React Native Expo, NestJS, Flask, REST APIs, LLM/RAG workflows, OCR, document analysis and image processing.",
+      "Designed AI-guided features for property data collection, DPE calculations, photo-based diagnostic assistance and automated audit support, reducing image processing time from approximately 2 minutes to 15 seconds.",
+      "Translated business requirements into technical specifications, UML diagrams, backlog items and scalable product architecture, with a focus on automation, reliability, user experience and long-term scalability.",
     ],
-    technologies: ["React Native", "NestJS", "Flask", "RAG", "OCR", "REST APIs"],
+    technologies: [
+      "React Native Expo",
+      "NestJS",
+      "Flask",
+      "REST APIs",
+      "LLM / RAG",
+      "OCR",
+      "Document Analysis",
+      "Image Processing",
+    ],
     metric:
       "Image-processing workflow reduced from ~2 minutes to ~15 seconds — 87.5% reduction",
     private: true,

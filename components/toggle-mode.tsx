@@ -14,11 +14,7 @@ import {
 
 export function ModeToggle() {
   const { setTheme, theme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
-
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = React.useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot)
 
   if (!mounted) {
     return (
@@ -91,4 +87,16 @@ export function ModeToggle() {
         </DropdownMenuContent>
       </DropdownMenu>
   )
+}
+
+function subscribe() {
+  return () => undefined
+}
+
+function getClientSnapshot() {
+  return true
+}
+
+function getServerSnapshot() {
+  return false
 }

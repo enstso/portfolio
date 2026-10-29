@@ -1,5 +1,11 @@
-import {NextResponse} from "next/server";
+import { NextResponse } from "next/server";
 
-export function GET() {
-    return NextResponse.json({message: "Category endpoint is under construction"});
+import { getPublishedCategoryNames } from "@/lib/articleService";
+
+export async function GET() {
+  try {
+    return NextResponse.json({ categories: await getPublishedCategoryNames() });
+  } catch {
+    return NextResponse.json({ categories: [] });
+  }
 }

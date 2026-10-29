@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Award, Briefcase, Code2, GraduationCap } from "lucide-react";
+import { Award, Briefcase, GraduationCap } from "lucide-react";
 
 import Education from "@/components/about/education";
 import Experiences from "@/components/about/experiences";
@@ -10,85 +10,56 @@ import { skillsItems } from "@/lib/data/skills";
 
 export const metadata: Metadata = {
   title: "About — Experience & Capabilities",
-  description:
-    "Enstso JANVIER's software engineering, applied AI, data, cloud-platform experience, education and current professional learning.",
+  description: "Enstso Janvier's software engineering journey, enterprise experience, applied AI capabilities, cloud background and education.",
   alternates: { canonical: "/about" },
 };
 
-const certifications = [
-  { name: "MOOC ANSSI", status: "Completed" },
-  { name: "Certified Kubernetes Administrator (CKA)", status: "In progress" },
-  { name: "Microsoft Azure Fundamentals (AZ-900)", status: "In progress" },
-] as const;
+const certifications = {
+  completed: [{ name: "MOOC ANSSI", detail: "Cybersecurity fundamentals" }],
+  inProgress: [
+    { name: "Certified Kubernetes Administrator (CKA)", detail: "In progress" },
+    { name: "Microsoft Azure Fundamentals (AZ-900)", detail: "In progress" },
+  ],
+} as const;
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="container mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <header className="mx-auto mb-12 max-w-4xl text-center sm:mb-16">
-          <h1 className="mb-4 bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-3xl font-bold text-transparent dark:from-white dark:via-blue-400 dark:to-white sm:mb-6 sm:text-4xl md:text-5xl">
-            Professional Profile
-          </h1>
-          <p className="px-2 text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
-            Technical-functional profile combining software engineering, applied AI, data and cloud-native systems. I work from requirements and system design through implementation, testing, deployment and continuous improvement.
-          </p>
-          <p className="mt-3 px-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400 sm:text-base">
-            My strongest work sits at the intersection of engineering execution, product understanding and scalable technical solutions.
-          </p>
-        </header>
-
-        <div className="mx-auto max-w-5xl space-y-12 sm:space-y-16">
-          <AboutSection icon={Code2} title="Skills & Capabilities">
-            <Skills list={skillsItems} />
-          </AboutSection>
-
-          <AboutSection icon={Briefcase} title="Professional Experience">
-            <Experiences items={ExperiencesList} />
-          </AboutSection>
-
-          <AboutSection icon={GraduationCap} title="Education">
-            <Education items={EducationList} />
-          </AboutSection>
-
-          <AboutSection icon={Award} title="Certifications & Learning">
-            <div className="grid gap-3 sm:grid-cols-3 sm:gap-4">
-              {certifications.map((certification) => (
-                <article key={certification.name} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-                  <h3 className="mb-2 font-semibold text-slate-900 dark:text-white">
-                    {certification.name}
-                  </h3>
-                  <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${certification.status === "Completed" ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300" : "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"}`}>
-                    {certification.status}
-                  </span>
-                </article>
-              ))}
-            </div>
-          </AboutSection>
+    <div>
+      <header className="mx-auto grid max-w-7xl gap-10 px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-12 lg:pb-24 lg:pt-24">
+        <div><p className="eyebrow">About Enstso</p><h1 className="mt-5 text-balance text-5xl font-semibold leading-[1.02] tracking-[-0.055em] text-slate-950 dark:text-white sm:text-6xl">Engineering with context, curiosity and accountability.</h1></div>
+        <div className="self-end border-l border-blue-300 pl-6 dark:border-blue-900 sm:pl-8">
+          <p className="text-lg leading-8 text-slate-700 dark:text-slate-300">I am a software engineer and AI builder with an enterprise engineering background and a growing specialization in agentic AI, cloud systems and solution delivery.</p>
+          <p className="mt-5 text-base leading-7 text-slate-600 dark:text-slate-400">My work starts with understanding the business problem, then moves through architecture, implementation, testing and production realities. I value systems that are useful, explainable and maintainable.</p>
+          <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-slate-500"><span>Paris, France</span><span>English · French</span><span>Enterprise + Product</span></div>
         </div>
-      </div>
+      </header>
+
+      <AboutSection icon={Briefcase} eyebrow="Journey" title="Professional experience" description="A path from full-stack and infrastructure work to enterprise cloud systems and customer-facing AI engineering.">
+        <Experiences items={ExperiencesList} />
+      </AboutSection>
+
+      <AboutSection icon={Award} eyebrow="Capabilities" title="Technical range, organized by outcome" description="The toolkit matters; how it is applied to architecture, delivery and operations matters more.">
+        <Skills list={skillsItems} />
+      </AboutSection>
+
+      <AboutSection icon={GraduationCap} eyebrow="Foundation" title="Education" description="Formal software, cybersecurity and engineering study supporting continued hands-on learning.">
+        <Education items={EducationList} />
+      </AboutSection>
+
+      <section className="border-t border-slate-200 bg-white/50 dark:border-slate-800 dark:bg-slate-950/20">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
+          <p className="eyebrow">Certifications &amp; learning</p>
+          <div className="mt-8 grid gap-10 md:grid-cols-2">
+            <div><h2 className="text-lg font-semibold text-slate-950 dark:text-white">Completed</h2><div className="mt-4 border-t border-slate-200 dark:border-slate-800">{certifications.completed.map((item) => <div key={item.name} className="flex justify-between gap-4 border-b border-slate-200 py-4 dark:border-slate-800"><span className="font-medium">{item.name}</span><span className="text-sm text-emerald-700 dark:text-emerald-400">{item.detail}</span></div>)}</div></div>
+            <div><h2 className="text-lg font-semibold text-slate-950 dark:text-white">In progress</h2><div className="mt-4 border-t border-slate-200 dark:border-slate-800">{certifications.inProgress.map((item) => <div key={item.name} className="flex justify-between gap-4 border-b border-slate-200 py-4 dark:border-slate-800"><span className="font-medium">{item.name}</span><span className="text-sm text-amber-700 dark:text-amber-400">{item.detail}</span></div>)}</div></div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
 
-type AboutSectionProps = {
-  icon: typeof Code2;
-  title: string;
-  children: React.ReactNode;
-};
-
-function AboutSection({ icon: Icon, title, children }: AboutSectionProps) {
-  const headingId = title.toLowerCase().replaceAll(" ", "-").replace("&", "and");
-  return (
-    <section aria-labelledby={headingId}>
-      <div className="mb-6 flex items-center gap-3 px-2 sm:mb-8 sm:gap-4">
-        <div className="flex-shrink-0 rounded-lg bg-blue-600 p-2 shadow-sm sm:p-3">
-          <Icon className="h-5 w-5 text-white sm:h-6 sm:w-6" aria-hidden="true" />
-        </div>
-        <h2 id={headingId} className="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
-          {title}
-        </h2>
-      </div>
-      {children}
-    </section>
-  );
+function AboutSection({ icon: Icon, eyebrow, title, description, children }: { icon: typeof Briefcase; eyebrow: string; title: string; description: string; children: React.ReactNode }) {
+  const id = title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  return <section className="border-t border-slate-200 dark:border-slate-800" aria-labelledby={id}><div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24"><div className="mb-12 grid gap-6 md:grid-cols-[0.8fr_1.2fr]"><div><div className="flex items-center gap-3"><Icon className="h-5 w-5 text-blue-600 dark:text-blue-400" /><p className="eyebrow">{eyebrow}</p></div><h2 id={id} className="section-title mt-4">{title}</h2></div><p className="max-w-2xl self-end text-sm leading-6 text-slate-600 dark:text-slate-400 md:justify-self-end">{description}</p></div>{children}</div></section>;
 }

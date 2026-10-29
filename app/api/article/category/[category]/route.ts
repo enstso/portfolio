@@ -1,19 +1,17 @@
-import {IArticle, getAllArticleByCategory} from "@/lib/articleService";
-import {NextRequest, NextResponse} from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-    try {
-        const url = req.url.split("/").pop();
-        const categoryId = Number(url);
-        if (isNaN(categoryId)) {
-            return NextResponse.json({message: "Invalid category ID"}, {status: 400});
-        }
-        const articles: IArticle[] = await getAllArticleByCategory(categoryId);
-        if (articles.length == 0) {
-            return NextResponse.json({message: "Not Found"}, {status: 404});
-        }
-        return NextResponse.json({message: "success", data: articles});
-    } catch {
-        return NextResponse.json({error: "An error occured"}, {status: 500});
-    }
+import { getAllArticleByCategory } from "@/lib/articleService";
+
+export async function GET(_request: Request, { params }: { params: Promise<{ category: string }> }) {
+  const { category: rawCategory } = await params;
+  const categoryId = Number(rawCategory);
+  if (!Number.isInteger(categoryId) || categoryId < 1) {
+    return NextResponse.json({ message: "Invalid category ID" }, { status: 400 });
+  }
+  try {
+    const articles = await getAllArticleByCategory(categoryId);
+    return NextResponse.json({ message: "success", data: articles });
+  } catch {
+    return NextResponse.json({ error: "Articles are temporarily unavailable" }, { status: 503 });
+  }
 }

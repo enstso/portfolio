@@ -9,32 +9,26 @@ import { primaryNavigation, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: {
-    default: siteConfig.title,
-    template: `%s | ${siteConfig.name}`,
-  },
+  title: { default: siteConfig.title, template: `%s | ${siteConfig.name}` },
   description: siteConfig.description,
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     shortcut: "/icon.svg",
   },
   keywords: [
-    "Software Engineering",
-    "AI Engineer",
-    "Generative AI",
-    "AI Agents",
-    "RAG",
-    "Data Engineering",
-    "Cloud",
+    "Software Engineer",
+    "Agentic AI",
+    "AI Builder",
+    "Enterprise Software",
+    "Cloud Architecture",
     "Kubernetes",
     ".NET",
+    "TypeScript",
     "Python",
-    "Solution Engineering",
     "Paris",
   ],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
-  alternates: { canonical: "/" },
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
@@ -52,55 +46,42 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-};
+export const viewport: Viewport = { width: "device-width", initialScale: 1, colorScheme: "light dark" };
 
 const personStructuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: siteConfig.name,
   url: siteConfig.url,
-  jobTitle: "IT Engineer & Analyst",
+  jobTitle: "Software Engineer and AI Builder",
   sameAs: [siteConfig.github, siteConfig.linkedin],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
-      <body className={`${GeistSans.className} ${GeistMono.variable} bg-slate-50 antialiased dark:bg-slate-900`}>
+      <body className={`${GeistSans.className} ${GeistMono.variable} min-w-80 antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <a
-            href="#main-content"
-            className="fixed left-4 top-3 z-[100] -translate-y-20 rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white transition-transform focus:translate-y-0"
-          >
-            Skip to content
-          </a>
-          <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur-lg dark:border-slate-800 dark:bg-slate-900/90">
-            <div className="h-16 sm:h-20">
-              <Nav items={primaryNavigation} />
-            </div>
+          <a className="skip-link" href="#main-content">Skip to content</a>
+          <header className="site-header">
+            <Nav items={primaryNavigation} />
           </header>
-          <main id="main-content" className="min-h-screen">
-            {children}
-          </main>
-          <footer className="bg-slate-100 py-6 text-slate-600 dark:bg-slate-800 dark:text-slate-400 sm:py-8">
-            <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-center sm:flex-row sm:px-6 sm:text-left">
-              <p className="text-sm sm:text-base">
-                &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
-              </p>
-              <div className="flex items-center gap-4 text-sm font-medium">
-                <a className="hover:text-blue-600 hover:underline focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:text-blue-400" href={siteConfig.github} target="_blank" rel="noopener noreferrer">
-                  GitHub
-                </a>
-                <a className="hover:text-blue-600 hover:underline focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:text-blue-400" href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer">
-                  LinkedIn
-                </a>
-                <a className="hover:text-blue-600 hover:underline focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:text-blue-400" href={`mailto:${siteConfig.email}`}>
-                  Email
-                </a>
+          <main id="main-content" className="min-h-[70vh]">{children}</main>
+          <footer className="border-t border-slate-200/80 bg-white/60 dark:border-slate-800 dark:bg-[#0a0f1b]/70">
+            <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 sm:px-8 md:grid-cols-[1fr_auto] md:items-end lg:px-12">
+              <div>
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">ENSTSO.</p>
+                <p className="mt-3 max-w-md text-sm leading-6 text-slate-600 dark:text-slate-400">
+                  Engineering intelligent, reliable systems for real business problems.
+                </p>
+                <p className="mt-4 text-xs text-slate-500 dark:text-slate-500">© {new Date().getFullYear()} {siteConfig.name}</p>
               </div>
+              <nav aria-label="Social links" className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-slate-700 dark:text-slate-300">
+                <a className="text-link" href={siteConfig.github} target="_blank" rel="noreferrer">GitHub</a>
+                <a className="text-link" href={siteConfig.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+                <a className="text-link" href={`mailto:${siteConfig.email}`}>Email</a>
+                <a className="text-link" href="/feed.xml">RSS</a>
+              </nav>
             </div>
           </footer>
           <script
