@@ -47,6 +47,7 @@ RUN adduser -S nextjs -u 1001
 
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
+COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
 COPY --from=prod-deps --chown=nextjs:nodejs /app/node_modules ./node_modules
 
 # Automatically leverage output traces to reduce image size
@@ -62,6 +63,6 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# Prisma applies only migrations that are not yet recorded in the target
-# database, then hands PID 1 to the Next.js server.
-CMD ["sh", "-c", "./node_modules/.bin/prisma migrate deploy && exec node server.js"]
+# Verify and baseline a pre-Migrate portfolio database when necessary, apply
+# pending migrations, then hand PID 1 to the Next.js server.
+CMD ["sh", "-c", "node scripts/migrate-production.mjs && exec node server.js"]

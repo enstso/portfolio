@@ -71,7 +71,7 @@ Recommended deployment sequence:
 2. Build and deploy the Docker image. The production container runs `prisma migrate deploy` before starting Next.js, applying only migrations that have not yet been recorded in the target database.
 3. Verify `/blog`, `/admin/articles` and one published article.
 
-The runtime image includes the Prisma CLI and `prisma/migrations` specifically for this startup migration step. A failed migration prevents the new application container from becoming ready instead of starting against an incompatible schema.
+The runtime image includes the Prisma CLI and `prisma/migrations` specifically for this startup migration step. If an existing portfolio database predates Prisma Migrate, startup first verifies it against the reviewed legacy schema, records the `0_init` baseline, and then applies the additive article migration. Any schema mismatch aborts startup instead of baselining an unknown database. A failed migration prevents the new application container from becoming ready instead of starting against an incompatible schema.
 
 The build runs `prisma generate` but does not require a live database. Article images use validated persistent external HTTP(S) URLs; uploads are intentionally not written into the container.
 
