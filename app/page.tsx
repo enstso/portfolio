@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Bot, CloudCog, Code2, ExternalLink, Mail } from "lucide-react";
+import { ArrowRight, Bot, Boxes, CloudCog, ExternalLink, Mail } from "lucide-react";
 
 import { featuredProjects } from "@/lib/data/featuredProjects";
 import { ExperiencesList } from "@/lib/data/experiences";
@@ -11,28 +11,28 @@ export const dynamic = "force-dynamic";
 
 const expertise = [
   {
-    icon: Code2,
-    title: "Software Engineering",
-    description: "Production applications and APIs shaped by clear architecture, testing and maintainable delivery.",
-    tools: ".NET · C# · Python · TypeScript · React · Angular",
+    icon: Boxes,
+    title: "Product & Solution Engineering",
+    description: "Connecting business requirements with technical execution through product thinking, functional analysis, solution design and collaborative delivery.",
+    tools: "Requirements · Functional analysis · Solution design · Delivery",
   },
   {
     icon: Bot,
-    title: "Agentic AI",
-    description: "LLM applications, RAG, document intelligence and tool-using agents built around reliable workflows.",
-    tools: "LLMs · RAG · Agents · Tool integration · Evaluation",
+    title: "Agentic AI & Intelligent Systems",
+    description: "Designing AI-powered applications and intelligent workflows that turn emerging technologies into practical business solutions.",
+    tools: "LLM applications · RAG · Agents · Orchestration · AI integration",
   },
   {
     icon: CloudCog,
-    title: "Cloud & Solution Architecture",
-    description: "Cloud-native systems designed for scalability, operational resilience and responsible cost decisions.",
-    tools: "Kubernetes · Containers · CI/CD · System design · FinOps",
+    title: "Software, Cloud & Architecture",
+    description: "Building scalable, reliable software and cloud-native systems, from architecture and implementation to deployment and operational improvement.",
+    tools: ".NET · Python · APIs · Kubernetes · CI/CD · System design",
   },
 ] as const;
 
 const metrics = [
   { value: "200+", label: "enterprise users supported" },
-  { value: "~100", label: "applications in cloud transformation" },
+  { value: "100+", label: "applications in cloud transformation" },
   { value: ">95%", label: "processing-time reduction" },
 ] as const;
 
@@ -50,17 +50,17 @@ export default async function Home() {
     <div>
       <section className="mx-auto grid max-w-7xl gap-12 px-5 pb-20 pt-12 sm:px-8 sm:pt-20 lg:grid-cols-[1.08fr_0.75fr] lg:items-center lg:px-12 lg:pb-28 lg:pt-24">
         <div>
-          <p className="eyebrow">Software Engineering · Agentic AI · Cloud</p>
+          <p className="eyebrow">AI Builder · Product &amp; Solution Engineering</p>
           <h1 className="mt-6 max-w-4xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.055em] text-slate-950 dark:text-white sm:text-6xl lg:text-7xl">
-            Building intelligent systems that solve real-world problems.
+            Turning complex business challenges into intelligent solutions.
           </h1>
-          <p className="mt-7 text-lg font-semibold text-slate-900 dark:text-slate-100">Enstso J · Software Engineer &amp; AI Builder</p>
+          <p className="mt-7 text-lg font-semibold text-slate-900 dark:text-slate-100">Enstso J · AI Builder @ Salesforce</p>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400 sm:text-lg sm:leading-8">
-            I work at the intersection of enterprise software, artificial intelligence and cloud technologies—designing reliable solutions that connect engineering with real business challenges.
+            I combine product thinking, business analysis and hands-on engineering to design, build and deliver intelligent solutions that create real business value.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="primary-button" href="/project">Explore my work <ArrowRight className="h-4 w-4" /></Link>
-            <Link className="secondary-button" href="/blog">Read my articles</Link>
+            <Link className="primary-button" href="/project">Explore My Work <ArrowRight className="h-4 w-4" /></Link>
+            <Link className="secondary-button" href="/blog">Read My Articles</Link>
           </div>
           <div className="mt-8 flex gap-5 text-sm font-medium text-slate-600 dark:text-slate-400">
             <a className="text-link" href={siteConfig.github} target="_blank" rel="noreferrer">GitHub</a>
@@ -81,7 +81,7 @@ export default async function Home() {
             />
           </div>
           <p className="mt-4 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500 dark:text-slate-500">
-            <span>Paris, France</span><span>Engineering → Impact</span>
+            <span>Paris, France</span><span>Product × Technology × Business</span>
           </p>
         </div>
       </section>
@@ -90,7 +90,7 @@ export default async function Home() {
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
           <div className="grid gap-8 md:grid-cols-[0.7fr_1.3fr] md:items-end">
             <div><p className="eyebrow">Selected work</p><h2 id="work-heading" className="section-title mt-4">Systems built around the problem—not the trend.</h2></div>
-            <p className="max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400 md:justify-self-end">Applied AI, production software and architecture decisions translated into useful workflows.</p>
+            <p className="max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400 md:justify-self-end">Business needs translated into useful products, intelligent workflows and reliable technical systems.</p>
           </div>
           <div className="mt-14 divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
             {featuredProjects.slice(0, 3).map((project, index) => (
@@ -108,7 +108,7 @@ export default async function Home() {
 
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28" aria-labelledby="expertise-heading">
         <p className="eyebrow">Core expertise</p>
-        <h2 id="expertise-heading" className="section-title mt-4 max-w-3xl">Three disciplines, one delivery mindset.</h2>
+        <h2 id="expertise-heading" className="section-title mt-4 max-w-3xl">Product, technology and business—connected through delivery.</h2>
         <div className="mt-14 grid border-y border-slate-200 dark:border-slate-800 md:grid-cols-3 md:divide-x md:divide-slate-200 md:dark:divide-slate-800">
           {expertise.map((item) => {
             const Icon = item.icon;
@@ -127,7 +127,7 @@ export default async function Home() {
           <div className="grid gap-14 lg:grid-cols-[0.75fr_1.25fr]">
             <div>
               <p className="eyebrow text-blue-400">Experience &amp; impact</p>
-              <h2 id="impact-heading" className="mt-4 text-balance text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">Enterprise context. Hands-on engineering.</h2>
+              <h2 id="impact-heading" className="mt-4 text-balance text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">Enterprise context. Product awareness. Hands-on engineering.</h2>
               <div className="mt-10 grid grid-cols-3 gap-4 border-t border-slate-700 pt-7">
                 {metrics.map((metric) => <div key={metric.value}><p className="text-2xl font-semibold text-blue-300 sm:text-3xl">{metric.value}</p><p className="mt-2 text-xs leading-5 text-slate-400">{metric.label}</p></div>)}
               </div>
@@ -151,7 +151,7 @@ export default async function Home() {
 
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28" aria-labelledby="writing-heading">
         <div className="flex flex-col gap-5 border-b border-slate-200 pb-8 dark:border-slate-800 sm:flex-row sm:items-end sm:justify-between">
-          <div><p className="eyebrow">Latest writing</p><h2 id="writing-heading" className="section-title mt-4">Notes from the work.</h2></div>
+          <div><p className="eyebrow">Latest writing</p><h2 id="writing-heading" className="section-title mt-4">Notes from product and engineering work.</h2></div>
           <Link className="text-link text-sm font-semibold" href="/blog">All articles</Link>
         </div>
         {latestArticles.length ? (
@@ -165,13 +165,13 @@ export default async function Home() {
             ))}
           </div>
         ) : (
-          <div className="py-10"><p className="max-w-xl text-sm leading-6 text-slate-600 dark:text-slate-400">Long-form technical articles will appear here as they are published. The writing system is ready for software, cloud and applied AI deep dives.</p></div>
+          <div className="py-10"><p className="max-w-xl text-sm leading-6 text-slate-600 dark:text-slate-400">Long-form articles will appear here as they are published, covering engineering insights, architecture decisions, AI systems and product thinking.</p></div>
         )}
       </section>
 
       <section className="border-t border-slate-200 bg-blue-50/70 dark:border-slate-800 dark:bg-blue-950/20" aria-labelledby="contact-heading">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-8 md:grid-cols-[1fr_auto] md:items-center lg:px-12 lg:py-20">
-          <div><p className="eyebrow">Start a conversation</p><h2 id="contact-heading" className="section-title mt-4">Let’s turn a complex problem into a clear technical path.</h2><p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">Software engineering, AI-powered products, architecture and business-oriented technical collaboration.</p></div>
+          <div><p className="eyebrow">Start a conversation</p><h2 id="contact-heading" className="section-title mt-4">Let’s turn a complex problem into a clear solution path.</h2><p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">Product and solution engineering, intelligent systems, architecture and business-oriented technical collaboration.</p></div>
           <a className="primary-button md:justify-self-end" href={`mailto:${siteConfig.email}`}><Mail className="h-4 w-4" /> Email Enstso <ExternalLink className="h-3.5 w-3.5" /></a>
         </div>
       </section>

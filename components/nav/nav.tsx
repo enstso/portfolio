@@ -26,7 +26,7 @@ export function Nav({ items }: { items: readonly NavItem[] }) {
       <Link href="/" className="group inline-flex items-center gap-3 rounded-sm focus-ring" aria-label="Enstso J, home">
         <span className="font-mono text-base font-bold tracking-[0.13em] text-slate-950 dark:text-white">ENSTSO<span className="text-blue-600 dark:text-blue-400">.</span></span>
         <span className="hidden h-4 w-px bg-slate-300 dark:bg-slate-700 sm:block" aria-hidden="true" />
-        <span className="hidden text-xs text-slate-500 dark:text-slate-400 sm:block">Software Engineer · AI Builder</span>
+        <span className="hidden text-xs text-slate-500 dark:text-slate-400 sm:block">AI Builder · Product &amp; Solution Engineering</span>
       </Link>
 
       <nav className="hidden items-center gap-1 md:flex" aria-label="Primary navigation">

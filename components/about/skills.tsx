@@ -18,7 +18,8 @@ import { cn } from "@/lib/utils";
 
 const categoryIcons: Record<string, LucideIcon> = {
   "Software Engineering": Code2,
-  "AI & Agentic Systems": Bot,
+  "Agentic AI & Intelligent Systems": Bot,
+  "Software, Cloud & Architecture": CloudCog,
   "Data Engineering": Database,
   "Cloud & Platform": CloudCog,
   "Product & Solution Engineering": Boxes,
