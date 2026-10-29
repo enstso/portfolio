@@ -45,6 +45,7 @@ export const featuredProjects: FeaturedProject[] = [
       "AI-Assisted Software Engineering · Agent Engineering · Developer Tooling",
     description:
       "A reusable development framework created to make AI-assisted engineering faster and more consistent. It gives Claude Code and OpenAI Codex shared, validated standards for software delivery, AI-agent creation and multi-agent orchestration.",
+    period: "Apr 2025 – Present",
     highlights: [
       "Encodes software architecture, secure-development, robustness, code-quality and design-pattern guidance—not simply faster code generation.",
       "Reuses components, testing patterns and project-specific engineering conventions across agent setups and tool integrations.",
