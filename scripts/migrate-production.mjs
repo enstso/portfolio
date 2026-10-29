@@ -37,22 +37,42 @@ if (!deploymentOutput.includes("P3005")) {
 }
 
 console.log("Existing database detected without Prisma migration history.");
-console.log("Verifying that it exactly matches the legacy portfolio schema...");
+console.log("Verifying it against the reviewed legacy portfolio schemas...");
 
-const schemaCheck = runPrisma([
-  "migrate",
-  "diff",
-  "--from-schema-datasource",
+const legacySchemas = [
   "prisma/legacy-schema.prisma",
-  "--to-schema-datamodel",
-  "prisma/legacy-schema.prisma",
-  "--exit-code",
-]);
+  "prisma/legacy-schema-with-extras.prisma",
+];
 
-if (schemaCheck.status !== 0) {
+let schemaMatches = false;
+let lastSchemaCheck;
+for (const schema of legacySchemas) {
+  const schemaCheck = runPrisma(
+    [
+      "migrate",
+      "diff",
+      "--from-schema-datasource",
+      schema,
+      "--to-schema-datamodel",
+      schema,
+      "--exit-code",
+    ],
+    { echo: false },
+  );
+  lastSchemaCheck = schemaCheck;
+  if (schemaCheck.status === 0) {
+    console.log(`Matched reviewed legacy schema: ${schema}`);
+    schemaMatches = true;
+    break;
+  }
+}
+
+if (!schemaMatches) {
+  if (lastSchemaCheck?.stdout) process.stdout.write(lastSchemaCheck.stdout);
+  if (lastSchemaCheck?.stderr) process.stderr.write(lastSchemaCheck.stderr);
   exitWith(
-    schemaCheck,
-    "The existing database does not match the reviewed legacy schema. Refusing to baseline automatically.",
+    lastSchemaCheck ?? { status: 1 },
+    "The existing database does not match a reviewed legacy schema. Refusing to baseline automatically.",
   );
 }
 
