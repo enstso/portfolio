@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Enstso Janvier — Software Engineer, Agentic AI and Cloud Solutions";
+export const alt = "Enstso J — Software Engineer, Agentic AI and Cloud Solutions";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

@@ -23,7 +23,7 @@ export function Nav({ items }: { items: readonly NavItem[] }) {
 
   return (
     <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:h-18 sm:px-8 lg:px-12">
-      <Link href="/" className="group inline-flex items-center gap-3 rounded-sm focus-ring" aria-label="Enstso Janvier, home">
+      <Link href="/" className="group inline-flex items-center gap-3 rounded-sm focus-ring" aria-label="Enstso J, home">
         <span className="font-mono text-base font-bold tracking-[0.13em] text-slate-950 dark:text-white">ENSTSO<span className="text-blue-600 dark:text-blue-400">.</span></span>
         <span className="hidden h-4 w-px bg-slate-300 dark:bg-slate-700 sm:block" aria-hidden="true" />
         <span className="hidden text-xs text-slate-500 dark:text-slate-400 sm:block">Software Engineer · AI Builder</span>

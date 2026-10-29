@@ -10,7 +10,7 @@ import { skillsItems } from "@/lib/data/skills";
 
 export const metadata: Metadata = {
   title: "About — Experience & Capabilities",
-  description: "Enstso Janvier's software engineering journey, enterprise experience, applied AI capabilities, cloud background and education.",
+  description: "Enstso J's software engineering journey, enterprise experience, applied AI capabilities, cloud background and education.",
   alternates: { canonical: "/about" },
 };
 

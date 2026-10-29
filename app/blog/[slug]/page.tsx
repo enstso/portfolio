@@ -73,7 +73,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-xs text-slate-500">
             <time dateTime={publishedAt.toISOString()}>{formatDate(publishedAt)}</time>
             <span className="inline-flex items-center gap-1.5"><Clock3 className="h-3.5 w-3.5" /> {article.readingTime} min read</span>
-            <span>By Enstso Janvier</span>
+            <span>By Enstso J</span>
           </div>
         </div>
       </header>

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description: "Technical deep dives, architecture decisions and lessons from building software, cloud systems and AI-powered solutions.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Writing & Insights | Enstso Janvier",
+    title: "Writing & Insights | Enstso J",
     description: "Technical deep dives across software engineering, agentic AI, cloud and architecture.",
     url: "/blog",
   },
@@ -140,7 +140,7 @@ function ArticleCover({ article }: { article: ArticleSummary }) {
     // eslint-disable-next-line @next/next/no-img-element
     return <img src={article.coverImage} alt="" className="h-full min-h-72 w-full object-cover" loading="lazy" />;
   }
-  return <div className="flex min-h-72 items-end bg-[linear-gradient(145deg,#172554,#0a0f1b_58%,#2563eb)] p-9"><p className="max-w-xs font-mono text-sm leading-6 text-blue-100">{article.category.name}<br />Engineering notes by Enstso Janvier</p></div>;
+  return <div className="flex min-h-72 items-end bg-[linear-gradient(145deg,#172554,#0a0f1b_58%,#2563eb)] p-9"><p className="max-w-xs font-mono text-sm leading-6 text-blue-100">{article.category.name}<br />Engineering notes by Enstso J</p></div>;
 }
 
 function EmptyState({ title, description }: { title: string; description: string }) {

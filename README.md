@@ -1,6 +1,6 @@
 # enstso.com
 
-Personal engineering portfolio and technical writing platform for Enstso Janvier. The application uses Next.js App Router, TypeScript, Tailwind CSS, PostgreSQL and Prisma, and remains compatible with Docker standalone output and Coolify.
+Personal engineering portfolio and technical writing platform for Enstso J. The application uses Next.js App Router, TypeScript, Tailwind CSS, PostgreSQL and Prisma, and remains compatible with Docker standalone output and Coolify.
 
 ## What is included
 

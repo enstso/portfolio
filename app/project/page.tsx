@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Work — Software, Agentic AI & Cloud",
-  description: "Selected engineering work by Enstso Janvier across enterprise software, agentic AI, document intelligence and cloud platforms.",
+  description: "Selected engineering work by Enstso J across enterprise software, agentic AI, document intelligence and cloud platforms.",
   alternates: { canonical: "/project" },
   openGraph: { title: `Work | ${siteConfig.shortTitle}`, description: "Selected engineering projects presented through their problems, decisions and supported outcomes.", url: "/project" },
 };
