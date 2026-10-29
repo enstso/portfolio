@@ -20,6 +20,7 @@ export const featuredProjects: FeaturedProject[] = [
     category: "Agentic AI · Enterprise Workflows",
     description:
       "Agentic AI platform designed for social-housing workflows. The system analyzes meeting transcripts, identifies renovation or acquisition decisions, generates structured summaries and orchestrates follow-up actions.",
+    period: "Nov 2025 – Jan 2026",
     collaborators: ["Amadou Diallo"],
     highlights: [
       "Uses n8n for deterministic integrations and straightforward automation.",
@@ -66,7 +67,7 @@ export const featuredProjects: FeaturedProject[] = [
     category: "Applied AI · Software · Product Engineering",
     description:
       "Co-founded GUIA, an AI-powered mobile application designed to automate Energy Performance Diagnosis (DPE) audit workflows and support the generation of compliant renovation reports.",
-    period: "Nov 2025 – Present",
+    period: "Nov 2025 – Jul 2026",
     collaborators: ["Amadou Diallo"],
     highlights: [
       "Contributed to product strategy, technical architecture and full-stack development, combining React Native Expo, NestJS, Flask, REST APIs, LLM/RAG workflows, OCR, document analysis and image processing.",

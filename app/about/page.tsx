@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Award, Briefcase, GraduationCap } from "lucide-react";
+import { Award, Briefcase, GraduationCap, HeartHandshake } from "lucide-react";
 
 import Education from "@/components/about/education";
 import Experiences from "@/components/about/experiences";
@@ -22,6 +22,22 @@ const certifications = {
   ],
 } as const;
 
+const volunteering = {
+  role: "Volunteer Speaker & Tech Mentor",
+  organization: "Independent Volunteering",
+  field: "Education",
+  period: "Sep 2026 – Present",
+  summary:
+    "Volunteering as a guest speaker and mentor in high schools, vocational programs (BTS), and higher education institutions to inspire students, promote equal opportunities, and support their academic and professional development.",
+  contributions: [
+    "Sharing my academic and professional journey, including my experience in software engineering and work-study programs.",
+    "Introducing students to careers in technology, software development, cloud computing, and artificial intelligence.",
+    "Encouraging students to pursue higher education and explore career opportunities in tech.",
+    "Providing practical guidance on resume writing, LinkedIn profile optimization, and internship and apprenticeship applications.",
+    "Engaging in discussions, answering questions, and offering career advice to help students build confidence and shape their professional goals.",
+  ],
+} as const;
+
 export default function About() {
   return (
     <div>
@@ -36,6 +52,23 @@ export default function About() {
 
       <AboutSection icon={Briefcase} eyebrow="Journey" title="Professional experience" description="A path from full-stack and infrastructure work to enterprise cloud systems and customer-facing AI engineering.">
         <Experiences items={ExperiencesList} />
+      </AboutSection>
+
+      <AboutSection icon={HeartHandshake} eyebrow="Community" title="Volunteering & mentorship" description="Sharing practical experience to help students understand technology careers, build confidence and access new opportunities.">
+        <article className="border-y border-slate-200 py-8 dark:border-slate-800 lg:grid lg:grid-cols-[12rem_0.8fr_1.2fr] lg:gap-10">
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-blue-600 dark:text-blue-400">{volunteering.period}</p>
+          <div className="mt-4 lg:mt-0">
+            <h3 className="text-xl font-semibold text-slate-950 dark:text-white">{volunteering.role}</h3>
+            <p className="mt-2 font-medium text-slate-700 dark:text-slate-300">{volunteering.organization}</p>
+            <p className="mt-2 text-xs uppercase tracking-[0.1em] text-slate-500">{volunteering.field}</p>
+          </div>
+          <div className="mt-6 lg:mt-0">
+            <p className="text-sm leading-7 text-slate-600 dark:text-slate-400">{volunteering.summary}</p>
+            <ul className="mt-6 grid gap-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+              {volunteering.contributions.map((contribution) => <li key={contribution} className="flex items-start gap-3"><span className="mt-2.5 h-1 w-1 shrink-0 bg-blue-600 dark:bg-blue-400" /><span>{contribution}</span></li>)}
+            </ul>
+          </div>
+        </article>
       </AboutSection>
 
       <AboutSection icon={Award} eyebrow="Capabilities" title="Technical range, organized by outcome" description="The toolkit matters; how it is applied to architecture, delivery and operations matters more.">
