@@ -1,6 +1,12 @@
 -- Extend the legacy article table without publishing any existing content.
 CREATE TYPE "ArticleStatus" AS ENUM ('DRAFT', 'PUBLISHED');
 
+-- Keep legacy-only columns compatible with the current Prisma models without
+-- dropping any historical data.
+ALTER TABLE "Category" ALTER COLUMN "type" SET DEFAULT 'ARTICLE';
+ALTER TABLE "Article" ALTER COLUMN "photo" SET DEFAULT '';
+ALTER TABLE "Project" ALTER COLUMN "categoryId" DROP NOT NULL;
+
 ALTER TABLE "Article"
   ADD COLUMN "slug" TEXT,
   ADD COLUMN "status" "ArticleStatus" NOT NULL DEFAULT 'DRAFT',
@@ -30,8 +36,8 @@ ALTER TABLE "Article"
   FOREIGN KEY ("authorId") REFERENCES "User"("id")
   ON DELETE SET NULL ON UPDATE CASCADE;
 
-INSERT INTO "Category" ("name")
-SELECT category_name
+INSERT INTO "Category" ("name", "type")
+SELECT category_name, 'ARTICLE'::"Type"
 FROM (VALUES
   ('Artificial Intelligence'),
   ('Agentic AI'),
