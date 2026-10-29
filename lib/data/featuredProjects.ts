@@ -95,6 +95,7 @@ export const featuredProjects: FeaturedProject[] = [
     category: "Document AI · OCR · Privacy by Design",
     description:
       "A document-processing solution designed for teams that need AI-assisted extraction without exposing sensitive data by default. It handles text, PDFs and images locally, then detects protected information before any optional external LLM processing.",
+    period: "Jan 2026 – Present",
     highlights: [
       "Processes text, PDF and image inputs with local OCR and extraction.",
       "Detects PII and sensitive data through regex and NER before redaction, removal or safe-summary workflows.",
