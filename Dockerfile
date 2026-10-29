@@ -18,6 +18,13 @@ RUN \
   fi
 
 
+# Keep only production dependencies for the runtime image. Prisma remains a
+# production dependency because the container applies migrations on startup.
+FROM deps AS prod-deps
+WORKDIR /app
+RUN npm prune --omit=dev
+
+
 # 2. Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
@@ -39,6 +46,8 @@ RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 
 COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
+COPY --from=prod-deps --chown=nextjs:nodejs /app/node_modules ./node_modules
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
@@ -53,4 +62,6 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+# Prisma applies only migrations that are not yet recorded in the target
+# database, then hands PID 1 to the Next.js server.
+CMD ["sh", "-c", "./node_modules/.bin/prisma migrate deploy && exec node server.js"]

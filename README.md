@@ -68,9 +68,10 @@ Coolify should continue building from the root `Dockerfile`. The application kee
 Recommended deployment sequence:
 
 1. Back up PostgreSQL.
-2. Add `npm run db:migrate` as a Coolify pre-deploy command using the production `DATABASE_URL`.
-3. Build and deploy the Docker image.
-4. Verify `/blog`, `/admin/articles` and one published article.
+2. Build and deploy the Docker image. The production container runs `prisma migrate deploy` before starting Next.js, applying only migrations that have not yet been recorded in the target database.
+3. Verify `/blog`, `/admin/articles` and one published article.
+
+The runtime image includes the Prisma CLI and `prisma/migrations` specifically for this startup migration step. A failed migration prevents the new application container from becoming ready instead of starting against an incompatible schema.
 
 The build runs `prisma generate` but does not require a live database. Article images use validated persistent external HTTP(S) URLs; uploads are intentionally not written into the container.
 
