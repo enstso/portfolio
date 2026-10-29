@@ -96,7 +96,7 @@ export default async function Home() {
             {featuredProjects.slice(0, 3).map((project, index) => (
               <article key={project.slug} className="grid gap-5 py-8 md:grid-cols-[5rem_1fr_1fr_auto] md:items-start md:gap-8">
                 <p className="font-mono text-sm text-blue-600 dark:text-blue-400">0{index + 1}</p>
-                <div><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{project.category}</p><h3 className="mt-2 text-xl font-semibold tracking-tight text-slate-950 dark:text-white">{project.name}</h3>{project.period && <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">{project.period}</p>}</div>
+                <div><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{project.category}</p><h3 className="mt-2 text-xl font-semibold tracking-tight text-slate-950 dark:text-white">{project.name}</h3>{project.period && <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">{project.period}</p>}{project.collaborators && <p className="mt-2 text-xs font-medium text-slate-600 dark:text-slate-300">Built with {project.collaborators.join(", ")}</p>}</div>
                 <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">{project.description}</p>
                 <Link className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:underline dark:text-blue-300" href={`/project#${project.slug}`}>Case overview <ArrowRight className="h-4 w-4" /></Link>
               </article>

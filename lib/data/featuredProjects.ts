@@ -4,6 +4,7 @@ export type FeaturedProject = {
   category: string;
   description: string;
   period?: string;
+  collaborators?: string[];
   highlights: string[];
   technologies: string[];
   metric?: string;
@@ -19,6 +20,7 @@ export const featuredProjects: FeaturedProject[] = [
     category: "Agentic AI · Enterprise Workflows",
     description:
       "Agentic AI platform designed for social-housing workflows. The system analyzes meeting transcripts, identifies renovation or acquisition decisions, generates structured summaries and orchestrates follow-up actions.",
+    collaborators: ["Amadou Diallo"],
     highlights: [
       "Uses n8n for deterministic integrations and straightforward automation.",
       "Combines LangChain business agents with LangGraph orchestration and workflow state.",
@@ -65,6 +67,7 @@ export const featuredProjects: FeaturedProject[] = [
     description:
       "Co-founded GUIA, an AI-powered mobile application designed to automate Energy Performance Diagnosis (DPE) audit workflows and support the generation of compliant renovation reports.",
     period: "Nov 2025 – Present",
+    collaborators: ["Amadou Diallo"],
     highlights: [
       "Contributed to product strategy, technical architecture and full-stack development, combining React Native Expo, NestJS, Flask, REST APIs, LLM/RAG workflows, OCR, document analysis and image processing.",
       "Designed AI-guided features for property data collection, DPE calculations, photo-based diagnostic assistance and automated audit support, reducing image processing time from approximately 2 minutes to 15 seconds.",
