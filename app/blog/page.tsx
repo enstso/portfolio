@@ -12,11 +12,11 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Writing & Insights",
-  description: "Technical deep dives, architecture decisions and lessons from building software, cloud systems and AI-powered solutions.",
+  description: "Engineering insights, architecture decisions, AI systems, product thinking and lessons from turning business needs into technical solutions.",
   alternates: { canonical: "/blog" },
   openGraph: {
     title: "Writing & Insights | Enstso J",
-    description: "Technical deep dives across software engineering, agentic AI, cloud and architecture.",
+    description: "Insights across product and solution engineering, agentic AI, software and cloud architecture.",
     url: "/blog",
   },
 };
@@ -61,7 +61,7 @@ export default async function Blog({ searchParams }: BlogPageProps) {
           <h1 className="mt-5 text-balance text-5xl font-semibold tracking-[-0.055em] text-slate-950 dark:text-white sm:text-6xl">Writing &amp; Insights</h1>
         </div>
         <p className="max-w-xl text-base leading-7 text-slate-600 dark:text-slate-400 md:justify-self-end">
-          Thoughts, technical deep dives, architecture decisions and lessons learned from building software, cloud systems and AI-powered solutions.
+          Engineering insights, architecture decisions, AI systems, product thinking and lessons learned from turning complex needs into practical solutions.
         </p>
       </header>
 

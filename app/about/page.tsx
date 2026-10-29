@@ -9,8 +9,8 @@ import { ExperiencesList } from "@/lib/data/experiences";
 import { skillsItems } from "@/lib/data/skills";
 
 export const metadata: Metadata = {
-  title: "About — Experience & Capabilities",
-  description: "Enstso J's software engineering journey, enterprise experience, applied AI capabilities, cloud background and education.",
+  title: "About — Product, AI & Solution Engineering",
+  description: "Enstso J is an AI Builder at Salesforce with a product- and solution-oriented approach spanning business analysis, software engineering, agentic AI and cloud architecture.",
   alternates: { canonical: "/about" },
 };
 
@@ -42,15 +42,15 @@ export default function About() {
   return (
     <div>
       <header className="mx-auto grid max-w-7xl gap-10 px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-12 lg:pb-24 lg:pt-24">
-        <div><p className="eyebrow">About Enstso</p><h1 className="mt-5 text-balance text-5xl font-semibold leading-[1.02] tracking-[-0.055em] text-slate-950 dark:text-white sm:text-6xl">Engineering with context, curiosity and accountability.</h1></div>
+        <div><p className="eyebrow">About Enstso</p><h1 className="mt-5 text-balance text-5xl font-semibold leading-[1.02] tracking-[-0.055em] text-slate-950 dark:text-white sm:text-6xl">Connecting product, technology and business.</h1></div>
         <div className="self-end border-l border-blue-300 pl-6 dark:border-blue-900 sm:pl-8">
-          <p className="text-lg leading-8 text-slate-700 dark:text-slate-300">I am a software engineer and AI builder with an enterprise engineering background and a growing specialization in agentic AI, cloud systems and solution delivery.</p>
-          <p className="mt-5 text-base leading-7 text-slate-600 dark:text-slate-400">My work starts with understanding the business problem, then moves through architecture, implementation, testing and production realities. I value systems that are useful, explainable and maintainable.</p>
-          <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-slate-500"><span>Paris, France</span><span>English · French</span><span>Enterprise + Product</span></div>
+          <p className="text-lg leading-8 text-slate-700 dark:text-slate-300">I&apos;m an AI Builder and product- and solution-oriented technology professional working at the intersection of engineering, artificial intelligence and business.</p>
+          <p className="mt-5 text-base leading-7 text-slate-600 dark:text-slate-400">My approach combines a strong engineering foundation with product thinking, business and functional analysis, solution architecture and collaborative delivery. From discovery and requirements through implementation, integration, deployment and continuous improvement, I focus on technology that creates practical, measurable value.</p>
+          <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-slate-500"><span>Paris, France</span><span>AI Builder @ Salesforce</span><span>Product × Technology × Business</span></div>
         </div>
       </header>
 
-      <AboutSection icon={Briefcase} eyebrow="Journey" title="Professional experience" description="A path from full-stack and infrastructure work to enterprise cloud systems and customer-facing AI engineering.">
+      <AboutSection icon={Briefcase} eyebrow="Journey" title="Professional experience" description="A path from full-stack and infrastructure work to enterprise cloud systems and customer-facing AI solution delivery.">
         <Experiences items={ExperiencesList} />
       </AboutSection>
 
@@ -71,7 +71,7 @@ export default function About() {
         </article>
       </AboutSection>
 
-      <AboutSection icon={Award} eyebrow="Capabilities" title="Technical range, organized by outcome" description="The toolkit matters; how it is applied to architecture, delivery and operations matters more.">
+      <AboutSection icon={Award} eyebrow="Capabilities" title="Capabilities, organized by outcome" description="Technical depth connected to requirements, product decisions, architecture, delivery and operations.">
         <Skills list={skillsItems} />
       </AboutSection>
 

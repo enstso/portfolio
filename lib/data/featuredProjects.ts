@@ -19,13 +19,13 @@ export const featuredProjects: FeaturedProject[] = [
     name: "AI Patrimoine",
     category: "Agentic AI · Enterprise Workflows",
     description:
-      "Agentic AI platform designed for social-housing workflows. The system analyzes meeting transcripts, identifies renovation or acquisition decisions, generates structured summaries and orchestrates follow-up actions.",
+      "AI Patrimoine addresses the need to turn social-housing meeting transcripts into actionable renovation and acquisition follow-up. The agentic platform identifies decisions, creates structured summaries and orchestrates next steps with human validation.",
     period: "Nov 2025 – Jan 2026",
     collaborators: ["Amadou Diallo"],
     highlights: [
-      "Uses n8n for deterministic integrations and straightforward automation.",
-      "Combines LangChain business agents with LangGraph orchestration and workflow state.",
-      "Includes human-in-the-loop validation, access control, observability and execution-cost monitoring.",
+      "Structured the workflow around business decisions, follow-up actions and human validation rather than unconstrained AI output.",
+      "Selected n8n for deterministic integrations, with LangChain business agents and LangGraph for orchestration and workflow state.",
+      "Designed access control, observability and execution-cost monitoring into the solution approach.",
     ],
     technologies: [
       "LangGraph",
@@ -44,7 +44,8 @@ export const featuredProjects: FeaturedProject[] = [
     category:
       "AI-Assisted Software Engineering · Agent Engineering · Developer Tooling",
     description:
-      "Reusable AI engineering skills designed for Claude Code and OpenAI Codex to accelerate software development, AI-agent creation and multi-agent orchestration while reusing validated engineering standards and implementation patterns.",
+      "A reusable development framework created to make AI-assisted engineering faster and more consistent. It gives Claude Code and OpenAI Codex shared, validated standards for software delivery, AI-agent creation and multi-agent orchestration.",
+    period: "Apr 2025 – Present",
     highlights: [
       "Encodes software architecture, secure-development, robustness, code-quality and design-pattern guidance—not simply faster code generation.",
       "Reuses components, testing patterns and project-specific engineering conventions across agent setups and tool integrations.",
@@ -66,7 +67,7 @@ export const featuredProjects: FeaturedProject[] = [
     name: "GUIA",
     category: "Applied AI · Software · Product Engineering",
     description:
-      "Co-founded GUIA, an AI-powered mobile application designed to automate Energy Performance Diagnosis (DPE) audit workflows and support the generation of compliant renovation reports.",
+      "Co-founded GUIA to reduce manual work across Energy Performance Diagnosis (DPE) audits. The AI-powered mobile product guides property data collection and supports the generation of compliant renovation reports.",
     period: "Nov 2025 – Jul 2026",
     collaborators: ["Amadou Diallo"],
     highlights: [
@@ -93,7 +94,7 @@ export const featuredProjects: FeaturedProject[] = [
     name: "Privacy-Preserving OCR & Document AI API",
     category: "Document AI · OCR · Privacy by Design",
     description:
-      "Privacy-oriented document-processing API for text, PDFs and images. It performs local extraction/OCR and detects sensitive information before optional external LLM processing.",
+      "A document-processing solution designed for teams that need AI-assisted extraction without exposing sensitive data by default. It handles text, PDFs and images locally, then detects protected information before any optional external LLM processing.",
     highlights: [
       "Processes text, PDF and image inputs with local OCR and extraction.",
       "Detects PII and sensitive data through regex and NER before redaction, removal or safe-summary workflows.",

@@ -1,9 +1,9 @@
 export const siteConfig = {
   name: "Enstso J",
-  title: "Enstso J — Software Engineer | Agentic AI & Cloud Solutions",
-  shortTitle: "Enstso J — Software Engineer",
+  title: "Enstso J — AI Builder | Product & Solution Engineering",
+  shortTitle: "Enstso J — AI Builder @ Salesforce",
   description:
-    "Software Engineer and AI Builder working across enterprise software, agentic AI and cloud technologies to solve real business challenges.",
+    "AI Builder at Salesforce connecting product thinking, business analysis and hands-on engineering across agentic AI, software and cloud architecture.",
   url: "https://enstso.com",
   email: "enstso@outlook.fr",
   github: "https://github.com/Enstso/",

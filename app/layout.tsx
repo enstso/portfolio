@@ -16,9 +16,14 @@ export const metadata: Metadata = {
     shortcut: "/icon.svg",
   },
   keywords: [
-    "Software Engineer",
-    "Agentic AI",
     "AI Builder",
+    "Product Engineering",
+    "Solution Engineering",
+    "Agentic AI",
+    "Enterprise AI",
+    "Business Analysis",
+    "Technical Project Management",
+    "Software Engineering",
     "Enterprise Software",
     "Cloud Architecture",
     "Kubernetes",
@@ -53,7 +58,7 @@ const personStructuredData = {
   "@type": "Person",
   name: siteConfig.name,
   url: siteConfig.url,
-  jobTitle: "Software Engineer and AI Builder",
+  jobTitle: "AI Builder at Salesforce",
   sameAs: [siteConfig.github, siteConfig.linkedin],
 };
 
@@ -72,7 +77,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <div>
                 <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">ENSTSO.</p>
                 <p className="mt-3 max-w-md text-sm leading-6 text-slate-600 dark:text-slate-400">
-                  Engineering intelligent, reliable systems for real business problems.
+                  Connecting product thinking, business needs and technical engineering to deliver intelligent solutions.
                 </p>
                 <p className="mt-4 text-xs text-slate-500 dark:text-slate-500">© {new Date().getFullYear()} {siteConfig.name}</p>
               </div>
