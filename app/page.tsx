@@ -54,7 +54,7 @@ export default async function Home() {
           <h1 className="mt-6 max-w-4xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.055em] text-slate-950 dark:text-white sm:text-6xl lg:text-7xl">
             Building intelligent systems that solve real-world problems.
           </h1>
-          <p className="mt-7 text-lg font-semibold text-slate-900 dark:text-slate-100">Enstso Janvier · Software Engineer &amp; AI Builder</p>
+          <p className="mt-7 text-lg font-semibold text-slate-900 dark:text-slate-100">Enstso J · Software Engineer &amp; AI Builder</p>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400 sm:text-lg sm:leading-8">
             I work at the intersection of enterprise software, artificial intelligence and cloud technologies—designing reliable solutions that connect engineering with real business challenges.
           </p>
@@ -73,7 +73,7 @@ export default async function Home() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-slate-200 shadow-2xl shadow-blue-950/15 dark:bg-slate-800 dark:shadow-black/30">
             <Image
               src="/images/enstso-portrait.webp"
-              alt="Professional portrait of Enstso Janvier"
+              alt="Professional portrait of Enstso J"
               fill
               priority
               sizes="(min-width: 1024px) 38vw, (min-width: 640px) 70vw, 92vw"
